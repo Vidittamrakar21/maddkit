@@ -1,10 +1,25 @@
 import React from 'react'
 import '../App.css'
+import RotatingText from './RotatingText'
 
 export default function Navbar() {
   return (
     <>
-    <div className='fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[#E11B23] text-white'>FREE SHIPPING ON ORDERS OVER ₹1999</div>
+    <div className='fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[#E11B23] text-white'>
+      {/* FREE SHIPPING ON ORDERS OVER ₹1999 */}
+      <RotatingText
+  texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
+  mainClassName="px-2 sm:px-2 md:px-3   text-white text-[1rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+  staggerFrom={"last"}
+  initial={{ y: "100%" }}
+  animate={{ y: 0 }}
+  exit={{ y: "-120%" }}
+  staggerDuration={0.025}
+  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+  transition={{ type: "spring", damping: 30, stiffness: 500 }}
+  rotationInterval={2000}
+/>
+    </div>
     <nav className='w-[100%] h-[70px] z-50 bg-[white] b fixed top-[33px]  shadow-lg flex items-center justify-between'>
         <img src="logo2.png"  className='h-[60px] w-[150px] ml-8' alt="" />
         {/* <h1 className='font text-[#E11B23] text-[25px] ml-8'>MADDKIT</h1> */}
