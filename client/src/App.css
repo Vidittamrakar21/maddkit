@@ -21,3 +21,18 @@
   font-weight: 500;
   font-style: normal;
 }
+
+.bgimg{
+  background-image: url('../public/rope2.png');
+  background-position: top;
+  background-size: cover;
+}
+
+.imgcat1{
+  background-image: url('../public/img1.jpg');
+  background-position: top;
+  background-size: cover;
+  height: 95%;
+  width: 15%;
+  z-index: 10;
+}

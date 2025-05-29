@@ -6,8 +6,8 @@ export default function Navbar() {
     <>
     <div className='fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[#E11B23] text-white'>FREE SHIPPING ON ORDERS OVER ₹1999</div>
     <nav className='w-[100%] h-[70px] z-50 bg-[white] b fixed top-[33px]  shadow-lg flex items-center justify-between'>
-        {/* <img src="logo2.png"  className='h-[60px] w-[150px] ml-8' alt="" /> */}
-        <h1 className='font text-[#E11B23] text-[25px] ml-8'>MADDKIT</h1>
+        <img src="logo2.png"  className='h-[60px] w-[150px] ml-8' alt="" />
+        {/* <h1 className='font text-[#E11B23] text-[25px] ml-8'>MADDKIT</h1> */}
 
 
 
