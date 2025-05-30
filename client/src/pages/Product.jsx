@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactImageMagnify from 'react-image-magnify';
 import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Card from '../components/Card';
+import { color } from 'framer-motion';
 
 
 
@@ -14,8 +15,8 @@ import Card from '../components/Card';
 export default function Product() {
 
     const [activeIMGS, setActiveIMGS] = useState(['img1.jpg','img7.jpg'])
-    const [activeColors, setActiveColors] = useState(['red','yellow','cyan'])
-    const [activeState, setActiveState] = useState(activeColors[0])
+    const [activeColors, setActiveColors] = useState([])
+    const [activeState, setActiveState] = useState('black')
     const [active, setActive] = useState('img1.jpg')
 
     const [value, setValue] = React.useState(0);
@@ -25,6 +26,10 @@ export default function Product() {
       console.log(newValue);
     };
 
+    useEffect(()=>{
+        const clrs = [{color: 'black'},{color:'#E11B23'},{color:'#119411'}];
+        setActiveColors(clrs)
+    },[])
     
   
 
@@ -74,9 +79,9 @@ export default function Product() {
     <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 '>Colors</h2>
     <div className='flex items-center justify-evenly h-[40px]  w-[120px] cursor-pointer'>
         
-        {activeColors.map((color, index)=>(
-             <div onClick={()=>setActiveState(color)} key={index} className={`h-[35px] w-[35px]  rounded-[100%] shadow-lg flex items-center justify-center ${activeState === color?'border border-[#3f3e3e]':''} `}>
-             <div className={`h-[30px] w-[30px]  bg-[${color}] rounded-[100%] `}></div>
+        {activeColors.map((clr, index)=>(
+             <div onClick={()=>setActiveState(clr.color)} key={index} className={`h-[35px] w-[35px]  rounded-[100%] shadow-lg flex items-center justify-center ${activeState === clr.color?'border border-[#3f3e3e]':''} `}>
+             <div className={`h-[30px] w-[30px]  bg-[${clr.color}] rounded-[100%] `}></div>
              </div>
         ))}
        
