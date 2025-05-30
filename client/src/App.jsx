@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cart from './pages/Cart';
+import Product from './pages/Product';
 import './App.css'
 
 
@@ -18,6 +19,10 @@ function App() {
     {
       path: '/cart',
       element: <Cart/>
+    }, 
+    {
+      path: '/product',
+      element: <Product/>
     }, 
  
     

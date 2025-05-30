@@ -7,6 +7,7 @@ import '../App.css'
 import RotatingText from '../components/RotatingText';
 import ScrollVelocity from '../components/ScrollVelocity';
 import Ballpit from '../components/Ballpit';
+import FadeContent from '../components/Fadecontent';
 
 export default function Home() {
 
@@ -80,30 +81,48 @@ export default function Home() {
 
         </div>
         <div className='w-[50%] h-[700px]  flex items-center flex-wrap justify-center text-[white]  font-[600]  text-[1.5rem]  '>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img1.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute '>Backdrop Bliss</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}> 
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img10.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Light It Up</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img11.webp" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Message Pop</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img7.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Fun & Fillers</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Party Gear</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Game Zone</h1>
         </div>
+        </FadeContent>
 
         </div>
         
@@ -128,34 +147,51 @@ export default function Home() {
           <h1 className='text-[black] text-[2rem] font-[600] mt-[150px]'>Curated Celebrations, Ready to Go.</h1>
           <h1 className='text-[black] text-[1.3rem] font-[500] mt-5'>Expertly designed kits for every occasion.</h1>
 
-          <button className='h-[45px] shadow-lg w-[130px] rounded-md bg-[black] mt-[150px]  text-white'>Explore All</button>
+          <button className='h-[45px] shadow-lg w-[180px] rounded-md bg-[black] mt-[150px]  text-white'>Explore Pre-Built Kits</button>
 
         </div>
         <div className='w-[50%] h-[700px]  flex items-center flex-wrap justify-center text-[white]  font-[600]  text-[1.5rem]  '>
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img1.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute '>Backdrop Bliss</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}> 
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img10.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Light It Up</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img11.webp" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Message Pop</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img7.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Fun & Fillers</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Party Gear</h1>
         </div>
+        </FadeContent>
+
+        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
         <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
           <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
           <h1 className='absolute'>Game Zone</h1>
         </div>
+        </FadeContent>
 
         </div>
         

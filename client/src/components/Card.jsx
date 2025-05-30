@@ -1,8 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import FadeContent from './Fadecontent';
 
 export default function Card({img, title, price, ogprice, off}) {
+  const navigate = useNavigate();
+
+  function navigateProduct(){
+    window.location.href = '/product'
+ }
+
   return (
-    <div className='w-[300px]  select-none  m-2'> 
+    <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
+      <div onClick={navigateProduct}  className='w-[300px]  select-none  m-2'> 
     <div className='relative top-10 flex items-center justify-between '>
     <div className=' text-white bg-[#E11B23] h-[30px] w-[70px] rounded-md ml-3 flex items-center justify-center'>
     <h1 className=''>{off}% off</h1>
@@ -15,8 +24,13 @@ export default function Card({img, title, price, ogprice, off}) {
     <img src={img} className='h-[300px] w-[300px] rounded-t-xl ' alt="" />
     
     <h1 className='mt-2'>{title}...</h1>
+    <div className='text-white w-[45px] h-[28px] rounded-md bg-[#119411] flex items-center justify-center'>
+                <h5 className='text-[14px]'>3.9</h5>
+                <h3 className='text-[white] text-[15px] ml-1'>★</h3>
+            </div>
     <h3 className='text-[18px] mt-2 text-[green] font-[600]'><span className='line-through text-[14px] text-[gray]'>₹{ogprice}</span> &nbsp;&nbsp;₹{price}</h3>
     <button className='h-[40px] w-[300px] rounded-lg bg-[#E11B23] text-white mt-3'>Add to cart</button>
     </div>
+    </FadeContent>
   )
 }

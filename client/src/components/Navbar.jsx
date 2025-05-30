@@ -1,11 +1,17 @@
 import React from 'react'
 import '../App.css'
 import RotatingText from './RotatingText'
+// import { useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
+ 
+  function navigateHome(){
+    window.location.href = '/'
+ }
+
   return (
     <>
-    <div className='fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[#E11B23] text-white'>
+    <div className=' select-none fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[#E11B23] text-white'>
       {/* FREE SHIPPING ON ORDERS OVER ₹1999 */}
       <RotatingText
   texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
@@ -20,8 +26,8 @@ export default function Navbar() {
   rotationInterval={2000}
 />
     </div>
-    <nav className='w-[100%] h-[70px] z-50 bg-[white] b fixed top-[33px]  shadow-lg flex items-center justify-between'>
-        <img src="logo2.png"  className='h-[60px] w-[150px] ml-8' alt="" />
+    <nav className=' select-none w-[100%] h-[70px] z-50 bg-[white] b fixed top-[33px]  shadow-lg flex items-center justify-between'>
+        <img onClick={navigateHome} src="logo2.png"  className='h-[60px] w-[150px] ml-8' alt="" />
         {/* <h1 className='font text-[#E11B23] text-[25px] ml-8'>MADDKIT</h1> */}
 
 
