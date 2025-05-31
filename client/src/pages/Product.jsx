@@ -38,7 +38,7 @@ export default function Product() {
         <div className='w-[100%] mt-[103px] flex items-start justify-start'>
             <div className='w-[40%]  min-h-[800px] flex items-end mr-[50px] justify-start flex-col '>
                 {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
-                <div className='h-[500px] w-[500px] mt-5 '>
+                <div className='h-[500px] w-[500px] mt-5 border-[3px] border-black'>
 
                 
                 <ReactImageMagnify enlargedImagePosition='beside' lensStyle={{height:'400px', width:'400px', overflow:'hidden'}} enlargedImageContainerStyle={{backgroundColor:"white",  zIndex: '30'}}  enlargedImageContainerDimensions={{width: '180%', height: '150%'}}  {...{
@@ -67,9 +67,12 @@ export default function Product() {
             <div className='w-[40%] min-h-[800px]  flex items-start justify-start flex-col'>
 
             <h1 className='mt-5 text-[2rem]  font-[600]'>Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans</h1>
-            <div className='text-white w-[60px] h-[28px] rounded-md bg-[#119411] flex items-center justify-center'>
-                <h3>3.9</h3>
-                <h3 className='text-[white] text-[18px] ml-2'>★</h3>
+            <div className='text-white w-[70px] h-[28px] mt-2 flex items-center justify-center'>
+                {/* <h5 className='text-[14px]'>3.9</h5> */}
+                <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+                <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+                <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+                <h3 className='text-[black] text-[18px] ml-1'>★</h3>
             </div>
     <h3 className='text-[2rem] mt-2  text-[black] font-[600] '><span className='line-through text-[18px] text-[gray]'>₹399</span> &nbsp;₹255 </h3>
     <h3 className='text-[20px]  text-[green] font-[600] '>39% Off</h3>
@@ -88,7 +91,7 @@ export default function Product() {
        
     </div>
 
-    <button className='h-[40px] w-[300px] rounded-lg bg-[#E11B23] text-white mt-[30px] shadow-md'>Add to cart</button>
+    <button className='h-[40px] w-[300px] rounded-lg bg-[#F8FF95] text-black mt-[30px] border-[3px] border-black text-[18px] font-[600] shadow-md'>Add to cart</button>
 
     <div className='flex items-center justify-center mt-5 cursor-pointer'>
     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#4F5B66" class="bi bi-balloon-heart" viewBox="0 0 16 16">
@@ -165,12 +168,12 @@ Lightweight, durable, and reusable banner for multiple celebrations</p>
 
 
         <div className='w-[100%] min-h-[500px]  flex items-center justify-start flex-col'>
-        <section className='w-[70%] h-[50px] flex items-center justify-start  mt-[60px]'>
+        <section className='w-[85%] h-[50px] flex items-center justify-start  mt-[100px]'>
 
-        <h1 className='text-[25px] text-[#E11B23] font-[600] '>Related Products</h1>
-        </section>
+<h1 className='text-[25px] text-[black] font-[600] '>Related Products</h1>
+</section>  
 
-        <section className='w-[70%]   min-h-[500px] flex items-start justify-evenly flex-wrap   mt-[20px]'>
+        <section className='w-[80%]   min-h-[500px] flex items-start justify-evenly flex-wrap   mt-[20px]'>
 
         <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper'} off={39}/>
         <Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding, Baby'} off={39}/>

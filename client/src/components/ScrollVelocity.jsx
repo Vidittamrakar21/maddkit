@@ -8,6 +8,7 @@ import {
   useVelocity,
   useAnimationFrame,
 } from "framer-motion";
+import '../App.css'
 
 function useElementWidth(ref) {
   const [width, setWidth] = useState(0);
@@ -118,7 +119,7 @@ export const ScrollVelocity = ({
         style={parallaxStyle}
       >
         <motion.div
-          className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[3rem] md:leading-[3rem]   text-[#B20505]`}
+          className={`${scrollerClassName} flex whitespace-nowrap text-center font4  text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[3rem] md:leading-[3rem]   text-[black] `}
           style={{ x, ...scrollerStyle }}
         >
           {spans}

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kapakana:wght@300..400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 *{
   margin: 0;
@@ -35,4 +35,46 @@
   height: 95%;
   width: 15%;
   z-index: 10;
+}
+
+.back2{
+  background: #EAFFEB;
+  background: linear-gradient(180deg, rgba(234, 255, 235, 1) 20%, rgba(149, 185, 255, 1) 80%);
+}
+
+.font3{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font4{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.box1{
+  /* background: #f0d58b;
+  background: linear-gradient(333deg, rgba(240, 213, 139, 1) 0%, rgba(252, 135, 25, 1) 80%); */
+  /* background: #ffbe85;
+background: linear-gradient(333deg, rgba(255, 190, 133, 1) 10%, rgba(255, 103, 15, 1) 80%); */
+background: #22C1C3;
+background: linear-gradient(333deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+}
+
+.box2{
+  /* background: #9df08b;
+background: linear-gradient(333deg, rgba(157, 240, 139, 1) 0%, rgba(64, 161, 85, 1) 80%); */
+/* background: #ff8585;
+background: linear-gradient(320deg, rgba(255, 133, 133, 1) 10%, rgba(255, 15, 15, 1) 80%); */
+background: #EEAECA;
+background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.box3{
+  /* background: #8bb3f0;
+  background: linear-gradient(333deg, rgba(139, 179, 240, 1) 0%, rgba(25, 63, 252, 1) 80%); */
+  background: #ffbe85;
+background: linear-gradient(333deg, rgba(255, 190, 133, 1) 10%, rgba(114, 226, 255, 1) 80%);
 }
