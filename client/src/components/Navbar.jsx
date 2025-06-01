@@ -39,7 +39,7 @@ export default function Navbar() {
         </div>
         </div>
 
-        <div className='sm:w-[300px] w-[140px]   h-[60px]  flex items-center justify-evenly '>
+        <div className='sm:w-[300px] w-[140px]  mr-2  h-[60px]  flex items-center justify-evenly '>
 
          <div className='flex items-center justify-center hover:bg-[#DFDFDF] sm:w-[150px] w-[40px]   h-[35px] rounded-[25px]'>
          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#4F5B66" class="bi bi-person-fill" viewBox="0 0 16 16">

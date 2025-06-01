@@ -59,7 +59,7 @@ export default function Home() {
         </section> */}
 
 
-<section className='w-[90%] sm:h-[700px] h-[80dvh] select-none  border-[3px] border-[black] mt-[40px] bg-[#ffe7e7]   rounded-xl flex items-center justify-between flex-col overflow-hidden'>
+<section className='w-[90%] sm:h-[700px] h-[700px] select-none  border-[3px] border-[black] mt-[40px] bg-[#ffe7e7]   rounded-xl flex items-center justify-between flex-col overflow-hidden'>
         <div className='w-[100%] h-[500px] sm:h-[300px]  border-black flex items-center justify-center flex-col'>
             <h1 className='font3 sm:text-[6rem] text-[3.7rem] text-center text-black p-3'>Craft Moments That Last A Lifetime</h1>
             <h1 className='text-[black] sm:text-[1.6rem] text-[1.1rem] font-[500] mt-3 p-3'>Your celebration, your story—beautifully told with Maddkit.</h1>
@@ -67,7 +67,7 @@ export default function Home() {
             {/* <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] relative top-[50px] w-[250px] text-[2rem] rounded-md font3  border-[2px] border-[white] text-white bg-[#00B3E3]'>Build your kit now</button> */}
         </div>
 
-        <div className='w-[100%] sm:h-[400px] h-[200px]  sm:overflow-hidden overflow-x-scroll  flex sm:items-center sm:justify-evenly items-start justify-start '>
+        <div className='w-[100%] sm:h-[400px]  h-[200px]  sm:overflow-hidden overflow-x-scroll overflow-y-hidden  flex sm:items-center sm:justify-evenly items-start justify-start '>
             <div className='box1 sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-white'>
               <h1 className='sm:text-[1.5rem] text-[1.3rem] font-[600]'>Birthday</h1>
             </div>
