@@ -8,6 +8,8 @@ import RotatingText from '../components/RotatingText';
 import ScrollVelocity from '../components/ScrollVelocity';
 import Ballpit from '../components/Ballpit';
 import FadeContent from '../components/Fadecontent';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Home() {
 
@@ -18,6 +20,22 @@ export default function Home() {
             confetti({particleCount:210, spread:100})
         },1500)
     },[])
+
+
+    const ref = useRef(null);
+   
+    const { scrollYProgress } = useScroll({
+      target: ref,
+      offset: ["start end", "end start"], // optional offsets
+    });
+ 
+  
+    // Translate Y based on scroll progress
+    const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+    
+
+    // Rotate from -10deg to +10deg based on scroll
+  const rotate = useTransform(scrollYProgress, [0, 1], [15, -15]);
 
   return (
     <div className='mt-[103px] w-[100%] flex items-center justify-start flex-col'>
@@ -59,15 +77,49 @@ export default function Home() {
         </section> */}
 
 
-<section className='w-[90%] sm:h-[700px] h-[700px] select-none  border-[3px] border-[black] mt-[40px] bg-[#ffe7e7]   rounded-xl flex items-center justify-between flex-col overflow-hidden'>
-        <div className='w-[100%] h-[500px] sm:h-[300px]  border-black flex items-center justify-center flex-col'>
+<section className='w-[90%] sm:h-[700px]  h-[750px] select-none  border-[3px] border-[black] mt-[40px] bg-[#ffe7e7]   rounded-xl flex items-center justify-start flex-col overflow-hidden'>
+
+
+
+<div className='w-[90%] h-[200px] flex items-center justify-between'>
+<div ref={ref} className='' style={{ height: "150px", background: "" }}>
+        <motion.div
+          style={{
+            rotate,
+            width: "150px",
+            height: "150px",
+        
+          }}
+        >
+         <img src="party-hat.png" alt="" />
+        </motion.div>
+      </div>
+<div ref={ref} className='' style={{ height: "150px", background: "" }}>
+        <motion.div
+          style={{
+            rotate,
+            width: "250px",
+            height: "250px",
+        
+          }}
+        >
+         <img src="garland (1).png" alt="" />
+        </motion.div>
+      </div>
+</div>
+
+      <div className='w-[100%]  z-30 h-[500px] sm:h-[300px]  border-black flex items-center justify-evenly flex-col'>
             <h1 className='font3 sm:text-[6rem] text-[3.7rem] text-center text-black p-3'>Craft Moments That Last A Lifetime</h1>
-            <h1 className='text-[black] sm:text-[1.6rem] text-[1.1rem] font-[500] mt-3 p-3'>Your celebration, your story—beautifully told with Maddkit.</h1>
+            <h1 className='text-[black] sm:text-[1.6rem] text-[1.1rem] font-[500]  p-3'>Your celebration, your story—beautifully told with Maddkit.</h1>
 
-            {/* <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] relative top-[50px] w-[250px] text-[2rem] rounded-md font3  border-[2px] border-[white] text-white bg-[#00B3E3]'>Build your kit now</button> */}
+            <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] text-shadow-md relative top-[10px] w-[250px] text-[2rem] rounded-md font3  border-[4px] border-[black] text-white shadow-xl bg-[#00B3E3] hover:bg-[#00b2e39f] '>Build your kit now</button>
         </div>
+     
 
-        <div className='w-[100%] sm:h-[400px]  h-[200px]  sm:overflow-hidden overflow-x-scroll overflow-y-hidden  flex sm:items-center sm:justify-evenly items-start justify-start '>
+     
+        
+
+        {/* <div className='w-[100%] sm:h-[400px]  h-[200px]  sm:overflow-hidden overflow-x-scroll overflow-y-hidden  flex sm:items-center sm:justify-evenly items-start justify-start '>
             <div className='box1 sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-white'>
               <h1 className='sm:text-[1.5rem] text-[1.3rem] font-[600]'>Birthday</h1>
             </div>
@@ -84,7 +136,55 @@ export default function Home() {
               <h1 className='sm:text-[1.5rem] text-[1.3rem] font-[600]'>New Arrivals</h1>
             </div>
          
-        </div>
+        </div> */}
+
+
+          <div className='w-[90%] h-[200px] flex items-center justify-between'>
+          
+
+
+
+<div ref={ref} className='sm:h-[200px] h-[100px]' style={{   }}>
+        <motion.div
+        className='sm:h-[200px] h-[100px] w-[100px] sm:w-[200px]'
+          style={{
+            rotate,
+           
+        
+          }}
+        >
+         <img src="confetti (1).png" alt="" />
+        </motion.div>
+      </div>
+
+<div ref={ref} className='sm:h-[200px] h-[150px]' style={{  }}>
+        <motion.div
+          className='sm:h-[200px] h-[150px] w-[150px] sm:w-[200px]'
+          style={{
+            y,
+           
+        
+          }}
+        >
+         <img src="disco-ball.png" alt="" />
+        </motion.div>
+      </div>
+
+      <div ref={ref} className='sm:h-[200px] h-[100px] ' style={{  }}>
+        <motion.div
+        className='sm:h-[200px] h-[100px] w-[100px] sm:w-[200px]'
+          style={{
+            rotate,
+            
+        
+          }}
+        >
+         <img src="confetti.png" alt="" />
+        </motion.div>
+      </div>
+          </div>
+
+      
 
     
         </section> 
@@ -162,6 +262,13 @@ export default function Home() {
         </section> */}
 
 
+<div ref={ref} style={{ height: "300px", background: "" }}>
+        <motion.div  style={{ y }} className="h-[350px] w-[350px]">
+          <img src="balloons (1).png" alt="" />
+        </motion.div>
+      </div>
+
+
 <section className='w-[90%] rounded-xl  sm:h-[550px]   select-none   flex items-center flex-wrap justify-evenly   mt-9 '>
         <div className='flex items-start sm:justify-evenly justify-start sm:overflow-hidden overflow-x-scroll'>
         <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper'} off={39}/>
@@ -187,7 +294,7 @@ export default function Home() {
               <div className='w-[200px] h-[200px] ml-3 p-2'>
               <h1 className='text-[1rem] font-[400] text-black ml-2'>Planning a Party? We’ve Got You Covered!</h1>
               <h1 className='text-[1rem] font-[400] text-black ml-2'>MaddKit ensures every event is magical, stress-free, and unforgettable.</h1>
-              <h1 className='text-[1.3rem] font-[600] text-black ml-2'>Build Your Kit Now !</h1>
+              <h1 className='text-[1.3rem] font-[600] text-black ml-2'>Build Your Kit Now!</h1>
               </div>
             </div>
             </div>     
@@ -200,11 +307,13 @@ export default function Home() {
     
     <section className='w-[100%] h-[100px] overflow-hidden sm:mt-[150px] mt-[50px]'>
     <ScrollVelocity
-  texts={[' Your celebration, your story—beautifully told with Maddkit. ', ' Transforming Gatherings into Unforgettable Memories. ']} 
+  texts={['" Your celebration, your story—beautifully told with Maddkit. "', '" Transforming Gatherings into Unforgettable Memories. "']} 
   velocity={100} 
   className="custom-scroll-text"
 />
     </section>
+
+    
 
 
     <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[100px] mt-[50px]'>
@@ -217,32 +326,32 @@ export default function Home() {
     <section className='w-[90%] rounded-xl  h-[320px]   select-none   flex sm:items-center items-center justify-start sm:overflow-hidden overflow-x-scroll overflow-y-hidden sm:justify-evenly   mt-[20px] '>
               
         <div className='h-[300px] shadow-lg box2 border-[3px] border-[black] w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img1.jpg" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="disco-ball.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Backdrop Bliss</button>
         </div>
 
         <div className='h-[300px]  shadow-lg box2 border-[3px] border-[black] w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img10.jpg" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="garland.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Light It Up</button>
         </div>
 
         <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img11.webp" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="garland (1).png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Message Pop</button>
         </div>
 
         <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img7.jpg" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="balloons.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Fun & Fillers</button>
         </div>
 
         <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img13.jpg" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="carnival-mask.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Party Gear</button>
         </div>
 
         <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="img1.jpg" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
+          <img src="party-whistle.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
           <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Game Zone</button>
         </div>
 
