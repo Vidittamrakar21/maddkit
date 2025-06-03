@@ -78,3 +78,93 @@ background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 23
   background: #ffbe85;
 background: linear-gradient(333deg, rgba(255, 190, 133, 1) 10%, rgba(114, 226, 255, 1) 80%);
 }
+
+
+.gallery-container {
+  width: 85%;
+  padding: 20px;
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if you use modern browsers */
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -15px; /* gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 15px; /* gutter size */
+  background-clip: padding-box;
+}
+
+.gallery-image {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.gallery-image:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+.btn-grad {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 15px 40px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;     
+   font-weight: 500;       
+   /* box-shadow: 0 0 20px #eee; */
+   border-radius: 10px;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+
+
+
+@media only screen and (max-width:600px){
+  .gallery-container {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .my-masonry-grid {
+    display: -webkit-box; /* Not needed if you use modern browsers */
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: -10px; /* gutter size offset */
+    width: auto;
+  }
+  
+  .my-masonry-grid_column {
+    padding-left: 10px; /* gutter size */
+    background-clip: padding-box;
+  }
+  
+  .gallery-image {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .gallery-image:hover {
+    transform: scale(1.03);
+  }
+  
+}

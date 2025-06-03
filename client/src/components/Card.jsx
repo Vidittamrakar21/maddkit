@@ -35,7 +35,7 @@ export default function Card({img, title, price, ogprice, off}) {
 
 
     <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
-      <div onClick={navigateProduct}  className='sm:w-[300px] w-[200px]  select-none  m-2  '> 
+      <div onClick={navigateProduct}  className='sm:w-[300px] w-[200px]  select-none  m-2  rounded-xl bg-[white]'> 
     <div className='relative top-10 flex items-center justify-between '>
     <div className=' text-white bg-[black] h-[30px] w-[70px] rounded-md ml-3 flex items-center justify-center'>
     <h1 className=''>{off}% off</h1>

@@ -35,10 +35,10 @@ export default function Product() {
 
   return (
     <div className=' w-[100%] select-none flex items-center justify-start flex-col '>
-        <div className='w-[100%] mt-[103px] flex sm:flex-row flex-col items-start justify-start'>
+        <div className='w-[100%] mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
             <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
                 {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
-                <div className='sm:h-[500px] h-[300px] sm:w-[500px] w-[300px] mt-5 border-[3px] border-black'>
+                <div className='sm:h-[500px] h-[300px] sm:w-[500px] w-[300px] mt-5 '>
 
                 
                 <ReactImageMagnify enlargedImagePosition='beside' lensStyle={{height:'400px', width:'400px', overflow:'hidden'}} enlargedImageContainerStyle={{backgroundColor:"white",  zIndex: '30'}}  enlargedImageContainerDimensions={{width: '180%', height: '150%'}}  {...{
@@ -91,7 +91,7 @@ export default function Product() {
        
     </div>
      <div className='w-[100%] h-[45px] flex sm:justify-start items-center justify-center'>
-    <button className='h-[40px]   w-[300px] rounded-lg bg-[#F8FF95] text-black mt-[30px] border-[3px] border-black text-[18px] font-[600] shadow-md'>Add to cart</button>
+    <button className='h-[40px]   w-[300px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff69]  text-black mt-[30px] border-[3px] border-black text-[18px] font-[600] shadow-md'>Add to cart</button>
     </div>   
 
     <div className='flex items-center justify-center mt-9 cursor-pointer  ml-4 sm:ml-0'>
@@ -187,6 +187,8 @@ Lightweight, durable, and reusable banner for multiple celebrations</p>
         
         </section>
         </div>
+        <br />
+        <br />
         <br />
         <br />
         <br />
