@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <>
-    <div className=' select-none fixed w-[100%] z-50 h-[33px] flex top-0 items-center justify-center bg-[black] text-white'>
+    <div className=' select-none fixed w-[100%] z-40  h-[33px] flex top-0 items-center justify-center bg-[black] text-white'>
     
       <RotatingText
   texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
@@ -26,7 +26,7 @@ export default function Navbar() {
   rotationInterval={2000}
 />
     </div>
-    <nav className=' select-none w-[100%] border-b-[3px] border-b-[black] h-[80px] z-50 bg-[white]  fixed top-[33px]   shadow-lg flex items-center justify-between'>
+    <nav className=' select-none w-[100%] border-b-[3px] z-40 border-b-[black] h-[80px]  bg-[white]  fixed top-[33px]   shadow-lg flex items-center justify-between'>
         <div className='flex items-center justify-center '>
         <img onClick={navigateHome} src="logo2.png"  className='sm:h-[60px] h-[50px] sm:w-[150px] w-[110px] sm:ml-8 ml-2' alt="" />
         {/* <h1 className='font text-[#E11B23] text-[25px] ml-8'>MADDKIT</h1> */}

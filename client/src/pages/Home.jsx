@@ -11,15 +11,19 @@ import FadeContent from '../components/Fadecontent';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Masonry from 'react-masonry-css';
+import QuizCard from '../components/QuizCard';
 
 export default function Home() {
 
-    const [party, onparty] = useState(false);
+    const [quizstate, setquizstate] = useState(false);
 
     useEffect(()=>{
         setTimeout(()=>{
             confetti({particleCount:210, spread:100})
+            setquizstate(true);
         },1500)
+       
+        
     },[])
 
 
@@ -98,10 +102,16 @@ export default function Home() {
       src: 'party-whistle.png'
     },
   ]
+
+  function updateState(){
+    setquizstate(false)
+  }
   
  
   return (
     <div className='mt-[103px] w-[100%] flex items-center justify-start flex-col'>
+
+      <QuizCard state={quizstate} updatestate={updateState}/>
 
 {/* <div style={{position: 'relative', overflow: 'hidden', minHeight: '500px', maxHeight: '500px', width: '100%'}}>
   <Ballpit
