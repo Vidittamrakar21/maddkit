@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
+import BuildKit from './pages/BuildKit';
 import './App.css'
 
 
@@ -23,6 +24,10 @@ function App() {
     {
       path: '/product',
       element: <Product/>
+    }, 
+    {
+      path: '/build-kit',
+      element: <BuildKit/>
     }, 
  
     
