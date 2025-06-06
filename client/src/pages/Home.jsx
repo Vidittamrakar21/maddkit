@@ -188,7 +188,7 @@ export default function Home() {
             <h1 className='text-[black] sm:text-[1.6rem] text-[1.1rem] font-[500]  p-3'>Your celebration, your story—beautifully told with Maddkit.</h1>
 
             {/* <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] text-shadow-md relative top-[10px] w-[250px] text-[2rem] rounded-md font3  border-[4px] border-[black] text-white shadow-xl bg-[#00B3E3] hover:bg-[#00b2e39f] '>Build your kit now</button> */}
-            <button onClick={()=>{navigate('/build-kit')}} className='h-[50px]  w-[250px] btn-grad shadow-xl '>Build your kit now</button>
+            <button onClick={()=>{window.location.href = '/build-kit'}} className='h-[50px]  w-[250px] btn-grad shadow-xl '>Build your kit now</button>
         </div>
      
 

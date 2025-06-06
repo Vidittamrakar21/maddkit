@@ -152,8 +152,8 @@ const QuizCard = ({state, updatestate}) => {
 
   return (<>
         {state === true ? 
-            <div className="min-h-screen select-none w-[100%] fixed flex items-center justify-center bg-[#3b3b3b69] backdrop-blur-sm z-50 px-4">
-            <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-xl space-y-4">
+            <div className="min-h-screen select-none w-[100%] fixed   flex items-start justify-center bg-[#3b3b3b69] backdrop-blur-sm z-50 px-4">
+            <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-xl space-y-4 relative top-[40px] ">
               
                {start === false?
                <>
