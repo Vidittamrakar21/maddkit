@@ -7,6 +7,7 @@ import Cart from './pages/Cart';
 import Product from './pages/Product';
 import BuildKit from './pages/BuildKit';
 import './App.css'
+import './index.css'
 
 
 
@@ -42,7 +43,7 @@ function App() {
       <>
         <Navbar/>
         <RouterProvider router={router}/>
-        <Footer/>
+        {/* <Footer/> */}
       </>
     
   )

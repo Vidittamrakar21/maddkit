@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kapakana:wght@300..400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Trocchi&display=swap');
+
+@font-face {
+  font-family: 'tropika';
+  src: url('/fonts/Tropika.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 *{
   margin: 0;
@@ -52,6 +60,12 @@
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: italic;
+}
+
+.font5{
+  font-family: "Trocchi", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .box1{
@@ -112,26 +126,36 @@ background: linear-gradient(333deg, rgba(255, 190, 133, 1) 10%, rgba(114, 226, 2
 
 
 
-.btn-grad {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+.btn-grad {background-image: linear-gradient(to right, #FDFC47 0%, #24FE41  51%, #FDFC47  100%)}
 .btn-grad {
-   margin: 10px;
-   padding: 15px 40px;
+   /* margin: 10px; */
+   /* padding: 15px 45px; */
    text-align: center;
    text-transform: uppercase;
    transition: 0.5s;
    background-size: 200% auto;
-   color: white;     
-   font-weight: 500;       
-   /* box-shadow: 0 0 20px #eee; */
+   /* color: white;             */
+   box-shadow: 0 0 20px #eee;
    border-radius: 10px;
    display: block;
  }
 
  .btn-grad:hover {
    background-position: right center; /* change the direction of the change here */
-   color: #fff;
+   /* color: #fff; */
    text-decoration: none;
  }
+
+ .doodle {
+  /* background-image: url('../public/tl.webp');
+  background-position: center;
+  background-size: contain;
+  background-color: rgba(236, 236, 236, 0.5);
+  background-blend-mode: overlay; */
+
+ /* background-color: #ED1C28; */
+ }
+ 
 
 
 

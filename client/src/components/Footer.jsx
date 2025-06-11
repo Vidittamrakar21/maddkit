@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-   <footer className='h-[450px] w-[100%] bg-[#A7B8E2] text-black border-t-[3px] border-t-black flex items-center justify-start'>
+   <footer className='h-[450px] w-[100%] rotate-2 bg-[#A7B8E2] text-black border-t-[3px] border-t-black flex items-center justify-start'>
    <div className='flex items-start justify-start flex-col sm:w-[200px] w-[100px] h-[280px] sm:ml-9 ml-3'>
    <img src="logo2.png" className='sm:h-[90px] h-[40px] sm:w-[190px]  w-[80px]' alt="" />
     {/* <p>we’re your personal celebration partner. By creating a *personalized event calendar* for you, we help you stay ahead of your celebrations. From reminding you of important dates to suggesting the perfect props and decorations, MaddKit ensures every event is magical, stress-free, and unforgettable.</p> */}

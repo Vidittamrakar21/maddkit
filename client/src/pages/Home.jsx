@@ -4,15 +4,20 @@ import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import Card from '../components/Card';
 import '../App.css'
+import '../index.css'
 import RotatingText from '../components/RotatingText';
 import ScrollVelocity from '../components/ScrollVelocity';
 import Ballpit from '../components/Ballpit';
 import FadeContent from '../components/Fadecontent';
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform , AnimatePresence} from "framer-motion";
 import { useRef } from "react";
 import Masonry from 'react-masonry-css';
 import QuizCard from '../components/QuizCard';
 import { useNavigate } from 'react-router-dom';
+// import { CarouselSpacing } from '@/components/Carousel';
+import { useInView } from "react-intersection-observer";
+import Carousel from '@/components/Carousel';
+// import { motion } from 'framer-motion';
 
 export default function Home() {
 
@@ -108,431 +113,332 @@ export default function Home() {
   function updateState(){
     setquizstate(false)
   }
+
+  const balloonImages = [
+    '/check2.png',
+    '/con4.png',
+    // '/balloon3.png',
+  ];
+
+  const content = [
+    {title : "Premade Party Kits",
+      sub1: "Too Busy To Plan? Tap A Kit & Celebrate",
+      sub2: "Pre-styled party kits.",
+      sub3: "Just click and unwrap the magic.",
+      but: "SHOP NOW"
+    },
+    {title : "Custom Party Kits",
+      sub1: "Build It Your Way. Pick ,Mix, Party.",
+      sub2: "Customize every element.",
+      sub3: "Your party, your story.",
+      but: "BUILD NOW"
+    }
+  ]
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % balloonImages.length);
+    }, 4000); // Change every 4 seconds
+    return () => clearInterval(timer);
+  }, []);
   
+
+  const { f, inView } = useInView({
+    triggerOnce: false, // Animates every time it comes into view
+    threshold: 0.5, // Adjust visibility threshold
+  });
+
+
+  const [animate, setAnimate] = useState(0);
+
+
+
+
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
  
   return (
-    <div className='mt-[103px] w-[100%] flex items-center justify-start flex-col'>
+    <div className='mt-[103px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
+      
+      {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
 
-      <QuizCard state={quizstate} updatestate={updateState}/>
+     <button onClick={scrollToTop} className='w-[50px] fixed bottom-5 flex text-white items-center justify-evenly flex-col right-11 z-50 h-[80px] rounded-[30px] bg-[#ED1C28]'>
+     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+      </svg>
+      Top
+      </button>
 
-{/* <div style={{position: 'relative', overflow: 'hidden', minHeight: '500px', maxHeight: '500px', width: '100%'}}>
-  <Ballpit
-    count={100}
-    gravity={0.7}
-    friction={0.8}
-    wallBounce={0.95}
-    followCursor={true}
-  />
-</div> */}
+<section className='w-[80%] sm:w-[100%] sm:h-[100dvh]  h-[450px] select-none   bg-[#ED1C28]  flex items-start sm:justify-center justify-end sm:flex-row flex-col-reverse  overflow-hidden'>
 
-        {/* <section className='w-[90%] h-[800px]  mt-[40px] back2 border-[4px] border-[black] rounded-xl flex items-center justify-start overflow-hidden'>
-        <img src="back1.jpg" className='w-[35%] h-[95%] ml-3 rounded-xl ' alt="" />
-        <div className='h-[600px] w-[23%]  flex items-center justify-evenly flex-col ml-3'>
-        <img src="back2.jpg" className='h-[47%] w-[100%] rounded-xl' alt="" />
-        <img src="back3.jpg" className='h-[47%] w-[100%] rounded-xl ' alt="" />
-        </div>
-        <div className='h-[600px] w-[35%]  flex items-center justify-center flex-col ml-8'>
-        <RotatingText
-  texts={['Craft Moments That',' Last a Lifetime.']}
-  mainClassName="px-2 sm:px-3 md:px-4  font3 text-black text-[6rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-  staggerFrom={"last"}
-  initial={{ y: "100%" }}
-  animate={{ y: 0 }}
-  exit={{ y: "-120%" }}
-  staggerDuration={0.025}
-  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-  transition={{ type: "spring", damping: 30, stiffness: 400 }}
-  rotationInterval={2000}
-/>
-            <h1 className='font3 text-[6rem] text-center text-black'>Craft Moments That Last A Lifetime</h1>
-            <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] relative top-[50px] w-[250px] text-[2rem] rounded-md font3  border-[2px] border-[white] text-white bg-[#00B3E3]'>Build your kit now</button>
-        </div>
-
-    
-        </section> */}
-
-
-<section className='w-[90%] sm:h-[700px]  h-[750px] select-none  border-[3px] border-[black] mt-[40px] bg-[#ffe7e7]   rounded-xl flex items-center justify-start flex-col overflow-hidden'>
-
-
-
-<div className='w-[90%] h-[200px] flex items-center justify-between'>
-<div ref={ref} className='' style={{ height: "150px", background: "" }}>
-        <motion.div
-          style={{
-            rotate,
-            width: "150px",
-            height: "150px",
-        
-          }}
-        >
-         <img src="party-hat.png" alt="" />
-        </motion.div>
-      </div>
-<div ref={ref} className='' style={{ height: "150px", background: "" }}>
-        <motion.div
-          style={{
-            rotate,
-            width: "250px",
-            height: "250px",
-        
-          }}
-        >
-         <img src="garland (1).png" alt="" />
-        </motion.div>
-      </div>
-</div>
-
-      <div className='w-[100%]  z-30 h-[500px] sm:h-[300px]  border-black flex items-center justify-evenly flex-col'>
-            <h1 className='font3 sm:text-[6rem] text-[3.7rem] text-center text-black p-3'>Craft Moments That Last A Lifetime</h1>
-            <h1 className='text-[black] sm:text-[1.6rem] text-[1.1rem] font-[500]  p-3'>Your celebration, your story—beautifully told with Maddkit.</h1>
-
-            {/* <button onClick={()=>{confetti({particleCount:210, spread:100})}} className='h-[50px] text-shadow-md relative top-[10px] w-[250px] text-[2rem] rounded-md font3  border-[4px] border-[black] text-white shadow-xl bg-[#00B3E3] hover:bg-[#00b2e39f] '>Build your kit now</button> */}
-            <button onClick={()=>{window.location.href = '/build-kit'}} className='h-[50px]  w-[250px] btn-grad shadow-xl '>Build your kit now</button>
-        </div>
-     
-
-     
-        
-
-        {/* <div className='w-[100%] sm:h-[400px]  h-[200px]  sm:overflow-hidden overflow-x-scroll overflow-y-hidden  flex sm:items-center sm:justify-evenly items-start justify-start '>
-            <div className='box1 sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-white'>
-              <h1 className='sm:text-[1.5rem] text-[1.3rem] font-[600]'>Birthday</h1>
-            </div>
-            <div className='bg-white sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-black'>
-              <h1 className='sm:text-[1.5rem] text-[1.3rem]  font-[600]'>Anniversary</h1>
-            </div>
-            <div className='box2 sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-white'>
-              <h1 className='sm:text-[1.5rem] text-[1.3rem]  font-[600]'>Baby Shower</h1>
-            </div>
-            <div className='bg-white sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-black'>
-              <h1 className='sm:text-[1.5rem] text-[1.3rem]  font-[600]'>Bachelorette</h1>
-            </div>
-            <div className='box3 sm:h-[250px] h-[150px] m-3 border-[3px] border-[black] sm:w-[250px] min-w-[150px] shadow-lg sm:rounded-[55px] rounded-[35px] flex items-center justify-center text-white'>
-              <h1 className='sm:text-[1.5rem] text-[1.3rem] font-[600]'>New Arrivals</h1>
-            </div>
-         
-        </div> */}
-
-
-          <div className='w-[90%] h-[200px] flex items-center justify-between'>
+      <div className='w-[100%] sm:w-[50%]  z-30 h-[200px] p-3  sm:h-[100%] relative top-[180px]  flex items-start ml-[80px] justify-start flex-col'>
           
 
-
-
-<div ref={ref} className='sm:h-[200px] h-[100px]' style={{   }}>
-        <motion.div
-        className='sm:h-[200px] h-[100px] w-[100px] sm:w-[200px]'
-          style={{
-            rotate,
-           
-        
-          }}
+<       motion.h1
+          key={index + 1}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1.2 }}
+          transition={{ duration: 0.3, delay: 0 }}
+          className='font-custom sm:text-[6rem] text-[3.0rem] text-center text-white p-3'
         >
-         <img src="confetti (1).png" alt="" />
-        </motion.div>
-      </div>
+         {content[index].title}
+        </motion.h1>
 
-<div ref={ref} className='sm:h-[200px] h-[150px]' style={{  }}>
-        <motion.div
-          className='sm:h-[200px] h-[150px] w-[150px] sm:w-[200px]'
-          style={{
-            y,
-           
-        
-          }}
+        <motion.p
+         key={index + 2}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1.2 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+           className='font5 text-[white] sm:text-[1.6rem] text-[1rem] font-[500] sm:p-3 '
         >
-         <img src="disco-ball.png" alt="" />
-        </motion.div>
-      </div>
+          {content[index].sub1}
+        </motion.p>
 
-      <div ref={ref} className='sm:h-[200px] h-[100px] ' style={{  }}>
+        <div className='flex items-start justify-start  mt-9 w-[100%] h-[50px]'>
         <motion.div
-        className='sm:h-[200px] h-[100px] w-[100px] sm:w-[200px]'
-          style={{
-            rotate,
-            
-        
-          }}
+        key={index + 3}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1.2 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
         >
-         <img src="confetti.png" alt="" />
+          <button className='h-[50px]  w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+          {content[index].but}
+          </button>
         </motion.div>
-      </div>
-          </div>
 
-      
+        <motion.p
+        key={index+ 4}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1.2 }}
+          transition={{ duration: 0.3, delay: 0.9 }}
+          className=' text-[white] sm:text-[1.2rem] text-[1rem] font-[500] ml-[70px]'
+        >
+           {content[index].sub2}
+           <br />
+           {content[index].sub3}
 
-    
-        </section> 
-
-        {/* <section className='w-[70%] h-[50px] flex items-center justify-center flex-col mt-[30px]'>
-
-        <h1 className='text-[25px] text-[#E11B23] font-[600]'>Planning a Party? We’ve Got You Covered! 🎈</h1>
-        <h2 className='text-[18px] text-[#E11B23] '>MaddKit ensures every event is magical, stress-free, and unforgettable.</h2>
-       
-        </section> */}
-
-      
-
-        {/* <section className='w-[70%] h-[50px] flex items-center justify-start  mt-[50px]'>
-
-        <h1 className='text-[25px] text-[#E11B23] font-[600] '>Categories</h1>
-        </section> */}
-
-      
-      {/* <section className='w-[90%] rounded-xl bg-[#ffdedf] h-[750px]   select-none   flex items-center flex-wrap justify-evenly   mt-9 '>
-        <div className='w-[30%]  h-[700px] flex items-start justify-start flex-col'>
-          <h1 className='text-[black] text-[2rem] font-[600] mt-[150px]'>Discover Best Party Essentials</h1>
-          <h1 className='text-[black] text-[1.3rem] font-[500] mt-5'>Your celebration, your story—beautifully told with Maddkit.</h1>
-
-          <button className='h-[45px] shadow-lg w-[130px] rounded-md bg-[black] mt-[150px]  text-white'>Explore All</button>
-
+        </motion.p>
         </div>
-        <div className='w-[50%] h-[700px]  flex items-center flex-wrap justify-center text-[white]  font-[600]  text-[1.5rem]  '>
 
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img1.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute '>Backdrop Bliss</h1>
-        </div>
-        </FadeContent>
-
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}> 
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img10.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute'>Light It Up</h1>
-        </div>
-        </FadeContent>
-
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img11.webp" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute'>Message Pop</h1>
-        </div>
-        </FadeContent>
-
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img7.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute'>Fun & Fillers</h1>
-        </div>
-        </FadeContent>
-
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute'>Party Gear</h1>
-        </div>
-        </FadeContent>
-
-        <FadeContent blur={false} duration={2000} easing="ease-out" initialOpacity={0}>
-        <div className='rounded-lg w-[250px] h-[300px] z-20 m-4  bg-[white] shadow-lg p-3 flex items-center justify-center hover:scale-105 hover:ease-in-out hover:transition-all'>
-          <img src="img13.jpg" className='h-[97%] w-[97%] brightness-75 rounded-lg' alt="" />
-          <h1 className='absolute'>Game Zone</h1>
-        </div>
-        </FadeContent>
 
         </div>
         
-       
-        </section> */}
+       <div className='h-[100%]  w-[50%] flex items-center justify-center overflow-hidden'>
 
-
-<div ref={ref} style={{ height: "300px", background: "" }}>
-        <motion.div  style={{ y }} className="h-[350px] w-[350px]">
-          <img src="balloons (1).png" alt="" />
-        </motion.div>
-      </div>
-
-      
-      
-
-
-<section className='w-[90%] rounded-xl  sm:h-[550px]   select-none   flex items-center flex-wrap justify-evenly'>
-       
-        <div className='box2 border-[3px] sm:mt-0 mt-[50px] border-[black] h-[430px] w-[300px] shadow-lg rounded-[45px] p-5 flex items-center justify-center text-white'>
-              <h1 className='text-[3.4rem] text-wrap break-words font-[600]'>Expertly designed kits for every occasion.</h1>
-            </div>
-
-         <div className='flex items-start justify-center flex-col'>  
-        <div className='box3 border-[3px] sm:mt-0 mt-[50px] border-[black] h-[200px] w-[300px] shadow-lg rounded-[45px] flex-col p-5 flex items-center justify-center text-white'>
-              <h1 className='text-[1.6rem] font-[600]'>Curated Celebrations, Ready to Go.</h1>
-              <button className='h-[45px] shadow-lg w-[180px] rounded-xl bg-[white] mt-[10px]  text-black font-[600]'>Explore Pre-Built Kits</button>
-
-            </div>
-        <div className=' h-[230px] w-[300px] sm:mt-0 mt-[50px] flex items-center justify-center text-white'>
-              <div className='w-[80px] h-[80px] border-[3px] border-[black] shadow-lg flex items-center justify-center box1 rounded-[50%]'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="font-[700]" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
-              </svg>
-              </div>
-              <div className='w-[200px] h-[200px] ml-3 p-2'>
-              <h1 className='text-[1rem] font-[400] text-black ml-2'>Planning a Party? We’ve Got You Covered!</h1>
-              <h1 className='text-[1rem] font-[400] text-black ml-2'>MaddKit ensures every event is magical, stress-free, and unforgettable.</h1>
-              <h1 className='text-[1.3rem] font-[600] text-black ml-2'>Build Your Kit Now!</h1>
-              </div>
-            </div>
-            </div>  
-            <div className='flex items-start sm:justify-evenly justify-start sm:overflow-hidden overflow-x-scroll'>
-        <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper'} off={39}/>
-        <Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding, Baby'} off={39}/>
-        <Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
-        </div>   
-        </section>
-        
+        <AnimatePresence mode="wait">
+        <motion.img
+          key={balloonImages[index]}
+          src={balloonImages[index]}
+          alt="Balloon"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          className="w-[100%] h-[100%] "
+        />
+      </AnimatePresence>
+       </div>
 
      
+        </section> 
+
       
 
-    
-    <section className='w-[100%] h-[100px] overflow-hidden sm:mt-[150px] mt-[50px]'>
+        <section className=' rotate-2 overflow-hidden sm:mt-[10px] mt-[0px]'>
     <ScrollVelocity
-  texts={['" Your celebration, your story—beautifully told with Maddkit. "', '" Transforming Gatherings into Unforgettable Memories. "']} 
-  velocity={100} 
-  className="custom-scroll-text"
+  texts={['" Your celebration, your story—beautifully told with Maddkit. "']} 
+  velocity={40} 
+  className="drop-shadow md:text-[1.2rem] md:leading-[1.2rem] p-5  text-[#e4e4e4] bg-black"
 />
     </section>
 
+
+
+    
+      
+      
+
+      {/* <Carousel/> */}
+      <section className='w-[100%]   sm:h-[650px]  bg-[#ED1C28]   select-none mt-[150px]  flex-col  flex items-center justify-start overflow-hidden'>
+       
+              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Craft Moments That Last a Lifetime.</h1>
+              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Explore Categories</h1>
+
+              <div className='flex items-center justify-center h-[550px] w-[80%]  mt-[50px] overflow-hidden '>
+                <div onClick={()=>setAnimate(-1)} className='flex items-center justify-center h-[60px] w-[60px] bg-[white] rounded-[100%] hover:bg-transparent hover:border hover:border-gray-100'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+                </div>
+                
+                <div className='flex items-center justify-start h-[550px] w-[90%]  overflow-hidden z-40 bg-[#ED1C28]'>
+                <div className={`flex items-center justify-evenly h-[550px] w-[100%] mt-[50px] z-20   ${animate === 1? 'translate-x-[-50%] duration-500 ease-in-out ':animate === -1?'translate-x-[0%] duration-500 ease-in-out ':''}`}>
+
+                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5  bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Backdrop Bliss</h1>
+                  <div className='bg-[#FEE69A] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                    <img src="disco-ball.png" alt="" />
+                  </div>
+                </div>
+                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Message Pop</h1>
+                  <div className='bg-[#FFD0F2] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                  <img src="garland (1).png" alt="" />
+                  </div>
+                </div>
+                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Light It Up</h1>
+                  <div className='bg-[#AFD6EF] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                  <img src="garland.png" alt="" />
+                  </div>
+                </div>
+                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Fun & Fillers</h1>
+                  <div className='bg-[#B7F2B7] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                  <img src="balloons.png" alt="" />
+                  </div>
+                </div>
+                
+                
+                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Party Gear</h1>
+                <div className='bg-[#FFDBC1] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                <img src="carnival-mask.png" alt="" />
+                </div>
+              </div>
+              <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Game Zone</h1>
+                <div className='bg-[#FEBCCC] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                <img src="party-whistle.png" alt="" />
+                </div>
+              </div>
+
+
+                </div>
+
+                </div>
+
+                <div onClick={()=>setAnimate(1)} className='h-[60px] w-[60px] bg-[white] rounded-[100%] flex items-center justify-center hover:bg-transparent hover:border hover:border-gray-100'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" className='' viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+                </div>
+
+              </div>
+       
+        </section>
+        
+   
+     
+      
+
+    
     
 
+    
+        <section className=' -rotate-2 relative top-[800px]  overflow-hidden sm:mt-[10px] mt-[0px]'>
+    <ScrollVelocity
+  texts={['" Your celebration, your story—beautifully told with Maddkit. "']} 
+  velocity={40} 
+  className="drop-shadow font5 md:text-[6.2rem] md:leading-[6.2rem]   text-[white] "
+/>
+    </section>
 
-    <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[50px] mt-[10px]'>
+    <section className='w-[100%] h-[140vh]  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Because memories are more than photos</h1>
+              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'> — they’re feelings worth reliving</h1>
+              <img src="p1.jpg" className='h-[60%] w-[30%] mt-[50px] z-30' alt="" />
 
-<h1 className='text-[25px] text-[black] font-[600] '>Explore Categories</h1>
+          <div className='w-[80%] mt-[120px]  h-[150px] flex items-center justify-evenly'>
+
+            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+              <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
+              <h2 className='text-white mt-3 font-[500]'>PREMADE PARTY KITS</h2>
+            </div>
+            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+              <img src="con.svg" className='h-[80px] w-[80px]' alt="" />
+              <h2 className='text-white mt-3 font-[500]'>CUSTOMIZE PARTY KITS</h2>
+            </div>
+            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+              <img src="shop.svg" className='h-[80px] w-[80px]' alt="" />
+              <h2 className='text-white mt-3 font-[500]'>CAREFULLY PACKED</h2>
+            </div>
+            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+              <img src="truck.svg" className='h-[80px] w-[80px]' alt="" />
+              <h2 className='text-white mt-3 font-[500]'>FAST DELIVERY</h2>
+            </div>
+
+
+
+          </div>    
+
+</section>  
+
+    <section className='w-[110vw] h-[190vh] bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    <h1 className='text-[3.4rem] font5 text-wrap  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
+    <div className='w-[80%] h-[160vh] bg-[white] -rotate-2  select-none mt-[30px]   flex-row flex-wrap  flex items-evenly justify-evenly'>
+    
+      <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img3.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img4.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img5.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img6.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img7.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+    </div>  
+
+    <button className='h-[50px]  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className='mr-2' viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+          Find Out More
+          </button>
+</section>  
+
+    <section className='w-[110vw] h-[90vh]  rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    
+
+</section>  
+
+<section className='w-[110vw] h-[100vh] bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    
+
 </section>  
 
 
 
-    {/* <section className='w-[90%] rounded-xl  h-[320px]   select-none   flex sm:items-center items-center justify-start sm:overflow-hidden overflow-x-scroll overflow-y-hidden sm:justify-evenly   mt-[20px] '>
-              
-        <div className='h-[300px] shadow-lg box2 border-[3px] border-[black] w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="disco-ball.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Backdrop Bliss</button>
-        </div>
+   
 
-        <div className='h-[300px]  shadow-lg box2 border-[3px] border-[black] w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="garland.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Light It Up</button>
-        </div>
-
-        <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="garland (1).png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Message Pop</button>
-        </div>
-
-        <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="balloons.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Fun & Fillers</button>
-        </div>
-
-        <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="carnival-mask.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Party Gear</button>
-        </div>
-
-        <div className='h-[300px]  shadow-lg border-[3px] border-[black] box2 w-[220px] min-w-[220px] m-3 flex items-center justify-center  flex-col rounded-[20px]'>
-          <img src="party-whistle.png" className='h-[150px] w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>Game Zone</button>
-        </div>
-
-
-        </section> */}
-
-        <div className="gallery-container">
-        <Masonry
-        breakpointCols={breakpointColumnsObj2}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {category.map((item, index) => (
-        <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
-          <div key={index}  alt={`img-${index}`} className={`gallery-image   ${index%2===0?'sm:h-[300px] h-[200px]':'sm:h-[380px] h-[250px]'}  shadow-lg border-[3px] border-[black] box2 w-[150px] sm:w-[250px] sm:min-w-[250px] min-w-[150px] flex items-center justify-center  flex-col rounded-[20px]`}>
-          <img src={item.src} className='h-[100px] w-[100px] sm:h-[150px] sm:w-[150px] rounded-[50%]' alt="" />
-          <button className='h-[35px] w-[120px] bg-[white] text-black rounded-[15px] mt-5 font-[500] shadow-lg'>{item.title}</button>
-        </div>
-        </FadeContent>
-        ))}
-      </Masonry>
-        </div>
-
-        <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[100px] mt-[50px]'>
-
-<h1 className='text-[25px] text-[black] font-[600] '>Collections</h1>
-</section>  
-        <div className="gallery-container">
-        <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {images.map((src, index) => (
-          <img key={index} src={src} alt={`img-${index}`} className="gallery-image" />
-        ))}
-      </Masonry>
-        </div>
-
-       
-     
-
-        <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[100px] mt-[50px]'>
-
-<h1 className='text-[25px] text-[black] font-[600] '>For You</h1>
-</section>  
-
-        <section className='sm:w-[80%] w-[90%] min-h-[500px]  flex items-start sm:justify-evenly sm:flex-wrap  justify-start sm:overflow-hidden overflow-x-scroll  sm:mt-[50px] mt-0'>
-
-        <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper'} off={39}/>
-        <Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding, Baby'} off={39}/>
-        <Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
-        <Card img={'img9.jpg'} price={999} ogprice={1899} title={'Happy Birthday Neon Sign – LED Wall Decor with Adapter & Hanging'} off={47}/>
-        <Card img={'img10.jpg'} price={999} ogprice={1899} title={'Better Together Neon Sign – Gold Color LED Wall Decor for Weddings & Events'} off={47}/>
-        <Card img={'img11.webp'} price={179} ogprice={399} title={'Glitter Fishtail Happy Birthday Banner (Gold / Silver / Pink) – Party Decoration'} off={55}/>
-        <Card img={'img12.jpg'} price={149} ogprice={399} title={'Bride to Be Banner – Bachelorette Party Decoration with Purple Heart and Ring'} off={63}/>
-        <Card img={'img13.jpg'} price={499} ogprice={599} title={'Glow in the Dark Neon Bands – 100 Pcs Glow Stick Set with Connectors'} off={17}/>
-        
-        </section>
-
-
-        
-
-        <br />
-        <br />
-        <br />
-        <br />
-      
-       
-        <section className='w-[85%] sm:h-[200px] h-[300px]  flex items-center justify-center flex-col  sm:mt-[50px] mt-[10px]'>
-
-<h1 className='sm:text-[3rem] text-[2rem] text-[black] font-[600] font3 '>Explore the memories ,We are creating around!</h1>
-<h3 className='sm:text-[2rem] text-[1rem] text-[#292929] font-[600]  '>“Because memories are more than photos — they’re feelings worth reliving.”</h3>
-<button className='h-[40px] flex items-center justify-evenly   w-[320px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff68]  text-black mt-[30px] border-[3px] border-black text-[18px] font-[600] shadow-md'>MADDKIT’S MEMORY VAULT 
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
-</svg>
-</button>
+<section className='w-[110vw] relative h-[70vh] bg-[black] rotate-2  select-none   flex-col  flex items-center justify-start'>
+    
 
 </section> 
-
-
-<section className='w-[100%]  bg-[#ffe7e7] mt-9  flex items-center justify-start p-3 flex-col'>
-<div className='w-[95%] flex items-center justify-start h-[120px]'>
-
-<img src="balloons.png" className='h-[100px] w-[100px] rotate-12  opacity-25'  alt="" />
-</div>
-<h1 className='sm:text-[3rem] text-[2rem] text-[black] font-[600] font3 '>About US</h1>
-<div className='w-[85%] sm:text-[19px] text-[16px]'>
-<p>At MaddKit, we believe that life is a series of celebrations, big and small. From birthdays and anniversaries to holidays and special moments, every event deserves to be memorable. But with so many dates to remember and plan for, it’s easy to feel overwhelmed</p>
-<br />
-<p>Did you know that the average person celebrates <b>12-15 major events every year? These include birthdays, anniversaries, Valentine’s Day, and more. Over a lifetime, that adds up to hundreds of celebrations</b>! Yet, many of us struggle to plan ahead, often scrambling at the last minute to find the perfect decorations, props, and supplies.</p>
-<br />
-<p>That’s where MaddKit comes in. We’re not just a supplier of event management supplies—we’re your personal celebration partner. By creating a <b>personalized event calendar</b> for you, we help you stay ahead of your celebrations. From reminding you of important dates to suggesting the perfect props and decorations, MaddKit ensures every event is magical, stress-free, and unforgettable.</p>
-
-</div>
-<div className='w-[95%] flex items-center justify-end h-[120px]'>
-
-<img src="birthday-cake.png" className='h-[100px] w-[100px] -rotate-12 opacity-25  '  alt="" />
-</div>
-</section>
 
 
 

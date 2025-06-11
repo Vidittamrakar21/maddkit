@@ -81,7 +81,8 @@ export const ScrollVelocity = ({
       return mod + min;
     }
 
-    const x = useTransform(baseX, (v) => {
+    const x = useTransform(baseX, (v) => {" Your celebration, your story—beautifully told with Maddkit. " 
+
       if (copyWidth === 0) return "0px";
       return `${wrap(-copyWidth, 0, v)}px`;
     });
@@ -119,7 +120,7 @@ export const ScrollVelocity = ({
         style={parallaxStyle}
       >
         <motion.div
-          className={`${scrollerClassName} flex whitespace-nowrap text-center font4  text-opacity-20 text-2xl font-bold tracking-[-0.02em] drop-shadow md:text-[2.5rem] md:leading-[2.5rem]   text-[black] `}
+          className={`${scrollerClassName} select-none flex whitespace-nowrap text-center   text-2xl tracking-[-0.02em] `}
           style={{ x, ...scrollerStyle }}
         >
           {spans}
