@@ -180,7 +180,7 @@ export default function Home() {
 
  
   return (
-    <div className='mt-[103px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
+    <div className='sm:mt-[103px] mt-[195px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
       
       {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
 
@@ -191,9 +191,9 @@ export default function Home() {
       Top
       </button>
 
-<section className='w-[80%] sm:w-[100%] sm:h-[100dvh]  h-[450px] select-none   bg-[#ED1C28]  flex items-start sm:justify-center justify-end sm:flex-row flex-col-reverse  overflow-hidden'>
+<section className='w-[100%] sm:w-[100%] sm:h-[100dvh]  h-[100dvh] select-none   bg-[#ED1C28]  flex sm:items-start items-center sm:justify-center justify-end sm:flex-row flex-col-reverse  overflow-hidden'>
 
-      <div className='w-[100%] sm:w-[50%]  z-30 h-[200px] p-3  sm:h-[100%] relative top-[180px]  flex items-start ml-[80px] justify-start flex-col'>
+      <div className='w-[80%] sm:w-[50%]  z-30 h-[200px] p-3  sm:h-[100%] relative sm:top-[180px] top-0  flex items-start sm:ml-[80px] ml-0 justify-start flex-col'>
           
 
 <       motion.h1
@@ -201,7 +201,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1.2 }}
           transition={{ duration: 0.3, delay: 0 }}
-          className='font-custom sm:text-[6rem] text-[3.0rem] text-center text-white p-3'
+          className='font-custom sm:text-[6rem] text-[3.0rem] text-center text-white sm:p-3 p-2' 
         >
          {content[index].title}
         </motion.h1>
@@ -211,19 +211,19 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1.2 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-           className='font5 text-[white] sm:text-[1.6rem] text-[1rem] font-[500] sm:p-3 '
+           className='font5 text-[white] sm:text-[1.6rem] mt-3 sm:mt-0 text-[1rem] font-[500] p-2 sm:p-3 '
         >
           {content[index].sub1}
         </motion.p>
 
-        <div className='flex items-start justify-start  mt-9 w-[100%] h-[50px]'>
+        <div className='flex sm:items-start sm:justify-start items-center justify-center sm:flex-row flex-col  mt-9 w-[100%] sm:h-[50px] h-[50px]'>
         <motion.div
         key={index + 3}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1.2 }}
           transition={{ duration: 0.3, delay: 0.6 }}
         >
-          <button className='h-[50px]  w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
+          <button className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
@@ -236,7 +236,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1.2 }}
           transition={{ duration: 0.3, delay: 0.9 }}
-          className=' text-[white] sm:text-[1.2rem] text-[1rem] font-[500] ml-[70px]'
+          className=' text-[white] sm:text-[1.2rem] text-[0.8rem] font-[500] sm:ml-[70px] ml-0 mt-4 sm:mt-0 '
         >
            {content[index].sub2}
            <br />
@@ -248,7 +248,7 @@ export default function Home() {
 
         </div>
         
-       <div className='h-[100%]  w-[50%] flex items-center justify-center overflow-hidden'>
+       <div className='sm:h-[100%] h-[40%]  sm:w-[50%] w-[100%] flex items-center justify-center overflow-hidden'>
 
         <AnimatePresence mode="wait">
         <motion.img
@@ -259,7 +259,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="w-[100%] h-[100%] "
+          className="sm:w-[100%] w-[250px] sm:h-[100%] h-[350px] "
         />
       </AnimatePresence>
        </div>
@@ -273,7 +273,7 @@ export default function Home() {
     <ScrollVelocity
   texts={['" Your celebration, your story—beautifully told with Maddkit. "']} 
   velocity={40} 
-  className="drop-shadow md:text-[1.2rem] md:leading-[1.2rem] p-5  text-[#e4e4e4] bg-black"
+  className="drop-shadow md:text-[1.2rem] text-[1rem] md:leading-[1.2rem] sm:p-5 p-1  text-[#e4e4e4] bg-black"
 />
     </section>
 
