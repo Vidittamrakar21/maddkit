@@ -184,11 +184,11 @@ export default function Home() {
       
       {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
 
-     <button onClick={scrollToTop} className='w-[50px] fixed bottom-5 flex text-white items-center justify-evenly flex-col right-11 z-50 h-[80px] rounded-[30px] bg-[#ED1C28]'>
+     <button onClick={scrollToTop} className='sm:w-[50px] w-[40px] fixed sm:bottom-5 bottom-2 flex text-white items-center justify-evenly flex-col sm:right-11 right-2 z-50 sm:h-[80px] h-[40px] rounded-[30px] bg-[#ED1C28]'>
      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
       </svg>
-      Top
+      <h2 className='sm:block hidden'>Top</h2>
       </button>
 
 <section className='w-[100%] sm:w-[100%] sm:h-[100dvh]  h-[100dvh] select-none   bg-[#ED1C28]  flex sm:items-start items-center sm:justify-center justify-end sm:flex-row flex-col-reverse  overflow-hidden'>
@@ -284,40 +284,40 @@ export default function Home() {
       
 
       {/* <Carousel/> */}
-      <section className='w-[100%]   sm:h-[650px]  bg-[#ED1C28]   select-none mt-[150px]  flex-col  flex items-center justify-start overflow-hidden'>
+      <section className='w-[100%]    bg-[#ED1C28]   select-none sm:mt-[150px] mt-[100px]  flex-col  flex items-center justify-start overflow-hidden'>
        
-              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Craft Moments That Last a Lifetime.</h1>
-              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Explore Categories</h1>
+              <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-center text-white break-words font-[600]'>Craft Moments That Last a Lifetime.</h1>
+              <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-white break-words font-[600]'>Explore Categories</h1>
 
-              <div className='flex items-center justify-center h-[550px] w-[80%]  mt-[50px] overflow-hidden '>
-                <div onClick={()=>setAnimate(-1)} className='flex items-center justify-center h-[60px] w-[60px] bg-[white] rounded-[100%] hover:bg-transparent hover:border hover:border-gray-100'>
+              <div className='flex items-center justify-center sm:h-[550px] h-[450px] sm:w-[80%] w-[95%]  sm:mt-[50px] mt-[10px] overflow-hidden '>
+                <div onClick={()=>setAnimate(-1)} className='flex items-center justify-center sm:h-[60px] h-[30px] w-[60px] bg-[white] sm:rounded-[100%] rounded-[15px]  hover:bg-transparent hover:border hover:border-gray-100'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                 </svg>
                 </div>
                 
-                <div className='flex items-center justify-start h-[550px] w-[90%]  overflow-hidden z-40 bg-[#ED1C28]'>
-                <div className={`flex items-center justify-evenly h-[550px] w-[100%] mt-[50px] z-20   ${animate === 1? 'translate-x-[-50%] duration-500 ease-in-out ':animate === -1?'translate-x-[0%] duration-500 ease-in-out ':''}`}>
+                <div className='flex items-center justify-start sm:h-[550px] h-[450px] w-[90%]  overflow-hidden z-40 bg-[#ED1C28]'>
+                <div className={`flex items-center justify-evenly sm:h-[550px] h-[450px] w-[100%] sm:mt-[50px] mt-[10px] z-20   ${animate === 1? 'translate-x-[-50%] duration-500 ease-in-out ':animate === -1?'translate-x-[0%] duration-500 ease-in-out ':''}`}>
 
-                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5  bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2  bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                   <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Backdrop Bliss</h1>
                   <div className='bg-[#FEE69A] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                     <img src="disco-ball.png" alt="" />
                   </div>
                 </div>
-                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                   <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Message Pop</h1>
                   <div className='bg-[#FFD0F2] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                   <img src="garland (1).png" alt="" />
                   </div>
                 </div>
-                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                   <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Light It Up</h1>
                   <div className='bg-[#AFD6EF] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                   <img src="garland.png" alt="" />
                   </div>
                 </div>
-                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                   <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Fun & Fillers</h1>
                   <div className='bg-[#B7F2B7] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                   <img src="balloons.png" alt="" />
@@ -325,13 +325,13 @@ export default function Home() {
                 </div>
                 
                 
-                <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                 <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Party Gear</h1>
                 <div className='bg-[#FFDBC1] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                 <img src="carnival-mask.png" alt="" />
                 </div>
               </div>
-              <div className='h-[450px] w-[300px] min-w-[300px] max-w-[300px] m-5 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+              <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                 <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Game Zone</h1>
                 <div className='bg-[#FEBCCC] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
                 <img src="party-whistle.png" alt="" />
@@ -343,7 +343,7 @@ export default function Home() {
 
                 </div>
 
-                <div onClick={()=>setAnimate(1)} className='h-[60px] w-[60px] bg-[white] rounded-[100%] flex items-center justify-center hover:bg-transparent hover:border hover:border-gray-100'>
+                <div onClick={()=>setAnimate(1)} className=' sm:h-[60px] h-[30px] w-[60px] bg-[white] sm:rounded-[100%] rounded-[15px]   flex items-center justify-center hover:bg-transparent hover:border hover:border-gray-100'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" className='' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
@@ -361,7 +361,7 @@ export default function Home() {
     
 
     
-        <section className=' -rotate-2 relative top-[800px]  overflow-hidden sm:mt-[10px] mt-[0px]'>
+        <section className=' -rotate-2 sm:relative sm:flex hidden top-[800px]  overflow-hidden sm:mt-[10px] mt-[0px]'>
     <ScrollVelocity
   texts={['" Your celebration, your story—beautifully told with Maddkit. "']} 
   velocity={40} 
@@ -369,26 +369,26 @@ export default function Home() {
 />
     </section>
 
-    <section className='w-[100%] h-[140vh]  select-none mt-[90px]  flex-col  flex items-center justify-start'>
-    <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'>Because memories are more than photos</h1>
-              <h1 className='text-[3.4rem] font5 text-wrap  text-white break-words font-[600]'> — they’re feelings worth reliving</h1>
-              <img src="p1.jpg" className='h-[60%] w-[30%] mt-[50px] z-30' alt="" />
+    <section className='w-[100%] sm:h-[130vh] h-[110vh]  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-center p-1 sm:p-0  text-white break-words font-[600]'>Because memories are more than photos</h1>
+              <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap  text-white break-words font-[600]'> — they’re feelings worth reliving</h1>
+              <img src="p2.jpg" className='h-[250px] w-[320px] sm:h-[600px] sm:w-[800px] mt-[50px] z-30' alt="" />
 
-          <div className='w-[80%] mt-[120px]  h-[150px] flex items-center justify-evenly'>
+          <div className='w-[80%] sm:mt-[120px] mt-[20px]  sm:h-[150px] h-[400px] flex items-center justify-evenly flex-wrap'>
 
-            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>PREMADE PARTY KITS</h2>
             </div>
-            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="con.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>CUSTOMIZE PARTY KITS</h2>
             </div>
-            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="shop.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>CAREFULLY PACKED</h2>
             </div>
-            <div className='w-[180px]  h-[100px] flex items-center justify-center flex-col'>
+            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="truck.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>FAST DELIVERY</h2>
             </div>
@@ -399,21 +399,21 @@ export default function Home() {
 
 </section>  
 
-    <section className='w-[110vw] h-[190vh] bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
-    <h1 className='text-[3.4rem] font5 text-wrap  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
-    <div className='w-[80%] h-[160vh] bg-[white] -rotate-2  select-none mt-[30px]   flex-row flex-wrap  flex items-evenly justify-evenly'>
+    <section className='sm:w-[110vw] min-w-[130vw]  min-h[150vh]  bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start sm:p-6 p-2'>
+    <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
+    <div className='sm:w-[70%] w-[80%] min-h[100vh]  bg-[white] -rotate-2  select-none mt-[30px]    flex-wrap  flex sm:items-evenly sm:justify-evenly  items-evenly justify-evenly '>
     
-      <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img3.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img4.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img5.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img6.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img7.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
-      <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans'}/>
+      <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit'}/>
+      <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img3.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img4.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img5.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img6.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img7.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
+      <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
     </div>  
 
-    <button className='h-[50px]  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
+    <button className='h-[50px] sm:mt-[40px] mt-[40px] mb-3  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className='mr-2' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>

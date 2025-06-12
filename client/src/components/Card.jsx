@@ -41,20 +41,20 @@ export default function Card({img, title, price, ogprice, off}) {
 
 
     <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
-      <div  className='sm:w-[350px] w-[200px]  select-none  m-2   bg-[white] overflow-hidden shadow-lg  flex items-start justify-center flex-col'> 
-    <div className='relative top-10 flex items-center justify-between '>
+      <div  className='sm:w-[350px] w-[160px] min-h-[200px] sm:min-h-[200px] select-none  m-2 bg-[white] overflow-hidden shadow-lg  flex items-start justify-center  flex-col'> 
+    {/* <div className='relative top-10 flex items-center justify-between '>
     <div className=' text-white bg-[#ED1C28] text-[14px] h-[30px] w-[60px] rounded-md ml-3 flex items-center justify-center'>
     <h1 className=''>{off}% off</h1>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ED1C28" className="mr-3" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"/>
     </svg>
-    </div>
-    <div className='sm:h-[350px] sm:max-h-[350px] sm:max-w-[350px]  sm:w-[350px] h-[200px] w-[200px] overflow-hidden'>
-    <img src={img} className='sm:h-[100%] sm:w-[100%] h-[200px] w-[200px] object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 ' alt="" />
+    </div> */}
+    <div className='sm:h-[350px] sm:max-h-[350px] sm:max-w-[350px]  w-[160px] h-[160px] max-h-[160px] max-w-[160px]  sm:w-[350px]  overflow-hidden'>
+    <img src={img} className='sm:h-[100%] sm:w-[100%] h-[100%] w-[100%] object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 ' alt="" />
     </div>
     
-    <h1 className='mt-2 font-bold p-2'>{title}...</h1>
+    <h1 className='mt-2 font-bold p-2 text-[14px] sm:text-[18px]'>{title}...</h1>
            <div className='text-white  w-[70px] h-[28px] ml-2 flex items-center justify-center'>
                 {/* <h5 className='text-[14px]'>3.9</h5> */}
                 <h3 className='text-[#CCCCCC] text-[18px] ml-1'>★</h3>
@@ -62,7 +62,7 @@ export default function Card({img, title, price, ogprice, off}) {
                 <h3 className='text-[#CCCCCC] text-[18px] ml-1'>★</h3>
                 <h3 className='text-[#CCCCCC] text-[18px] ml-1'>★</h3>
             </div>
-     <div className='sm:w-[350px] p-2 h-[50px] flex items-center justify-start'>
+     <div className='sm:w-[350px] p-2 sm:h-[50px] sm:flex sm:items-center sm:justify-start hidden'>
       <div onClick={()=>{setColorBox(!colorBox); setSizeBox(false)}} className='w-[100px] h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-evenly'>
             <div  className={`h-[25px] w-[25px]  rounded-[100%] shadow-lg flex items-center justify-center border border-[#3f3e3e]} `}>
              <div className={`h-[20px] w-[20px]  bg-[red] rounded-[100%] `}></div>
@@ -124,9 +124,9 @@ export default function Card({img, title, price, ogprice, off}) {
   }
 
 
-   <div className='flex items-center justify-between w-[100%] p-2'>
+   <div className='flex sm:items-center  sm:justify-between sm:flex-row flex-col items-center justify-center w-[100%] p-2'>
    <h3 className='text-[22px] text-[black] font-[600]'><span className='line-through text-[16px] text-[gray]'>₹{ogprice}</span> &nbsp;&nbsp;₹{price}</h3>
-   <button className='h-[40px] w-[200px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
+   <button className='h-[40px] sm:w-[200px] w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
       + ADD
    </button>
    </div>
