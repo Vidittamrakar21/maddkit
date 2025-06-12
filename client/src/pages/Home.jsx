@@ -180,7 +180,7 @@ export default function Home() {
 
  
   return (
-    <div className='sm:mt-[103px] mt-[195px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
+    <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
       
       {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
 
@@ -259,7 +259,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="sm:w-[100%] w-[250px] sm:h-[100%] h-[350px] "
+          className="sm:w-[100%] w-[80%] sm:h-[100%] h-[350px] "
         />
       </AnimatePresence>
        </div>

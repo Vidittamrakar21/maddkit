@@ -26,12 +26,12 @@ export default function Navbar() {
   rotationInterval={2000}
 />
     </div>
-    <nav className=' select-none w-[100%] z-50  h-[170px] sm:h-[90px] bg-black   sm:bg-[#ED1C28]  absolute sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-center sm:flex-row flex-col'>
-        <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 mt-2 '>
+    <nav className=' select-none w-[100%] z-50  h-[50px] sm:h-[90px] bg-[#ED1C28]   sm:bg-[#ED1C28]  absolute sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row'>
+        <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 '>
         {/* <img onClick={navigateHome} src="logo2.png"  className='sm:h-[60px] h-[60px] sm:w-[180px] w-[110px] sm:ml-8 ml-2' alt="" /> */}
-       <div className='flex items-center justify-center flex-col sm:ml-8 ml-0'>
-       <h1 className='font-custom text-[white] text-[2.4rem]'>MADDKIT</h1>
-       <h6 className='text-white font2 text-[2rem]'>Party Essentials</h6>
+       <div className='flex items-center justify-center flex-col sm:ml-8 ml-3'>
+       <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[1.6rem]'>MADDKIT</h1>
+       <h6 className='sm:text-white sm:font2 sm:text-[2rem] hidden'>Party Essentials</h6>
        </div>
 
       
@@ -51,11 +51,11 @@ export default function Navbar() {
         <li>All Products</li>
        </ul>
 
-        <div className='sm:w-[200px] w-[260px]  sm:mr-[60px] mr-[0px]  h-[60px]  flex items-center justify-evenly '>
+        <div className='sm:w-[200px]  w-[160px]  sm:mr-[60px] mr-[0px]  h-[50px]  flex items-center justify-evenly '>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" className='sm:hidden block' viewBox="0 0 16 16">
+        {/* <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" className='sm:hidden block' viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-      </svg>
+      </svg> */}
 
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
