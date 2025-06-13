@@ -1,13 +1,16 @@
 import React from 'react'
 import '../App.css'
 import RotatingText from './RotatingText'
-// import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
 
 export default function Navbar() {
  
   function navigateHome(){
     window.location.href = '/'
  }
+
+ const [sideBar, openSideBar] = useState(false)
 
   return (
     <>
@@ -62,7 +65,7 @@ export default function Navbar() {
         </svg>   
 
          {/* <div className='flex items-center justify-center hover:bg-[#DFDFDF] sm:w-[40px] w-[40px]   h-[35px] rounded-[25px]'> */}
-         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
+         <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
         </svg>
         {/* <h1 className='sm:ml-3 sm:block hidden text-white'>Hi! Log In</h1>   */}
@@ -85,12 +88,18 @@ export default function Navbar() {
         <h4 className='font2 text-[19px] text-[#FF9F00]'>Party Essentials</h4>
         </div> */}
     </nav>
-      {/* <div className='flex items-center bg-[white]  h-[50px] w-[100%] z-50 fixed top-[85px] justify-evenly sm:hidden  shadow-lg'>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="relative" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>   
-         <input type="text" placeholder='&nbsp;What are you looking for?' className=' h-[30px]   bg-[white] w-[300px]  rounded-[10px] placeholder:text-[#282e33]' name="" id="" />
-        </div> */}
+      
+      {sideBar && (<div className="fixed inset-0 bg-black bg-opacity-40 z-50"/>)}
+        <div  className={`fixed top-0 left-0 h-full w-64 bg-white shadow-md z-50 transform transition-transform duration-300 ${
+          sideBar ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <div className='h-[30px] select-none w-[100%] flex items-center justify-end mt-3'>
+          <svg onClick={()=>openSideBar(false)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" className='mr-3' viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+          </div>
+        </div>
+      
       
     </>
   )
