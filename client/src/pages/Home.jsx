@@ -369,12 +369,12 @@ export default function Home() {
 />
     </section>
 
-    <section className='w-[100%] sm:h-[130vh] h-[110vh]  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+    <section className='w-[100%]   select-none mt-[90px]  flex-col  flex items-center justify-start'>
     <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-center p-1 sm:p-0  text-white break-words font-[600]'>Because memories are more than photos</h1>
               <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap  text-white break-words font-[600]'> — they’re feelings worth reliving</h1>
               <img src="p2.jpg" className='h-[250px] w-[320px] sm:h-[600px] sm:w-[800px] mt-[50px] z-30' alt="" />
 
-          <div className='w-[80%] sm:mt-[120px] mt-[20px]  sm:h-[150px] h-[400px] flex items-center justify-evenly flex-wrap'>
+          <div className='w-[80%] sm:mt-[120px] mt-[20px]  sm:h-[150px] h-[400px] min-h-[400px] max-h-[400px]   flex items-center justify-evenly flex-wrap'>
 
             <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
@@ -399,9 +399,11 @@ export default function Home() {
 
 </section>  
 
-    <section className='sm:w-[110vw] min-w-[130vw]  min-h[150vh]  bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start sm:p-6 p-2'>
-    <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
-    <div className='sm:w-[70%] w-[80%] min-h[100vh]  bg-[white] -rotate-2  select-none mt-[30px]    flex-wrap  flex sm:items-evenly sm:justify-evenly  items-evenly justify-evenly '>
+    <section className='sm:w-[110vw] w-[140vw]    bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start sm:p-6 p-2'>
+   
+    <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap mr-11  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
+    
+    <div className='sm:w-[80%] w-[80%]  bg-[white] -rotate-2  select-none mt-[30px] sm:mt-[60px]   flex-wrap  flex sm:items-evenly sm:justify-evenly  items-center justify-center '>
     
       <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit'}/>
       <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
@@ -413,7 +415,7 @@ export default function Home() {
       <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
     </div>  
 
-    <button className='h-[50px] sm:mt-[40px] mt-[40px] mb-3  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
+    <button className='h-[50px] sm:mt-[40px] mt-[40px] mb-3 ml-11 sm:ml-0  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className='mr-2' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>

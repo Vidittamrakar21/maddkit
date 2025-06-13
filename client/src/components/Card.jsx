@@ -124,9 +124,9 @@ export default function Card({img, title, price, ogprice, off}) {
   }
 
 
-   <div className='flex sm:items-center  sm:justify-between sm:flex-row flex-col items-center justify-center w-[100%] p-2'>
-   <h3 className='text-[22px] text-[black] font-[600]'><span className='line-through text-[16px] text-[gray]'>₹{ogprice}</span> &nbsp;&nbsp;₹{price}</h3>
-   <button className='h-[40px] sm:w-[200px] w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
+   <div className='flex sm:items-center  sm:justify-between sm:flex-row flex-col items-center justify-start w-[100%] h-[80px]  sm:p-2 p-0'>
+   <h3 className='sm:text-[22px] text-[18px] text-[black] font-[600]'><span className='line-through sm:text-[16px] text-[14px] text-[gray]'>₹{ogprice}</span> &nbsp;₹{price} <span className='sm:text-[18] text-[14px] font-[300]'> {off}% Off</span></h3>
+   <button className='h-[35px] sm:h-[40px] sm:w-[250px] mt-2 sm:mt-0 w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
       + ADD
    </button>
    </div>
