@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Card from '../components/Card';
 import { color } from 'framer-motion';
 
-
+import Footer from '@/components/Footer';
 
 
   
@@ -41,7 +41,7 @@ export default function Product() {
       if (quantity < max) {
         const newQty = quantity + 1;
         setQuantity(newQty);
-        onChange?.(newQty);
+
       }
     };
   
@@ -49,14 +49,14 @@ export default function Product() {
       if (quantity > min) {
         const newQty = quantity - 1;
         setQuantity(newQty);
-        onChange?.(newQty);
+        
       }
     };
     
   
 
   return (
-    <div className=' w-[100%] select-none flex items-center justify-start flex-col '>
+    <div className=' w-[100%] select-none flex items-center justify-start flex-col overflow-hidden'>
         <div className='w-[100%] mt-[85px] sm:mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
             <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
                 {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
@@ -105,8 +105,8 @@ export default function Product() {
     <div className='flex items-center justify-evenly h-[40px]  w-[120px] cursor-pointer ml-4 sm:ml-0'>
         
         {activeColors.map((clr, index)=>(
-             <div onClick={()=>setActiveState(clr.color)} key={index} className={`h-[35px] w-[35px]  rounded-[100%] shadow-lg flex items-center justify-center ${activeState === clr.color?'border border-[#3f3e3e]':''} `}>
-             <div className={`h-[30px] w-[30px]  bg-[${clr.color}] rounded-[100%] `}></div>
+             <div onClick={()=>setActiveState(clr.color)} key={index} className={`h-[28px] w-[28px]  sm:h-[35px] sm:w-[35px]  rounded-[100%] shadow-lg flex items-center justify-center ${activeState === clr.color?'border border-[#3f3e3e]':''} `}>
+             <div className={`h-[23px] w-[23px] sm:h-[30px] sm:w-[30px]  bg-[${clr.color}] rounded-[100%] `}></div>
              </div>
         ))}
        
@@ -143,7 +143,7 @@ export default function Product() {
    </div>
 
      <div className='w-[100%] h-[45px] mt-3 flex sm:justify-start items-center justify-center'>
-    <button className='h-[50px]   w-[300px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[18px] font-[600] shadow-md'>ADD TO CART</button>
+    <button className='h-[50px] sm:h-[50px]   w-[320px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[15px] font-[600] shadow-md'>ADD TO CART</button>
     </div>   
 
     <div className='flex items-center justify-center mt-9 cursor-pointer  ml-4 sm:ml-0'>
@@ -223,13 +223,13 @@ Lightweight, durable, and reusable banner for multiple celebrations</p>
         <div className='w-[100%] min-h-[500px]  flex items-center justify-start flex-col'>
         <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[100px] mt-[50px]'>
 
-<h1 className='text-[25px] text-[black] font-[600] '>Related Products</h1>
+<h1 className='text-[25px] text-[black] font-[600] font5'>Related Products</h1>
 </section>  
 
         <section className='sm:w-[80%] w-[90%] min-h-[500px]  flex items-start sm:justify-evenly sm:flex-wrap  justify-start sm:overflow-hidden overflow-x-scroll  sm:mt-[50px] mt-0'>
 
-        <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper'} off={39}/>
-        <Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding, Baby'} off={39}/>
+        <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner &'} off={39}/>
+        <Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding'} off={39}/>
         <Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
         <Card img={'img9.jpg'} price={999} ogprice={1899} title={'Happy Birthday Neon Sign – LED Wall Decor with Adapter & Hanging'} off={47}/>
         <Card img={'img10.jpg'} price={999} ogprice={1899} title={'Better Together Neon Sign – Gold Color LED Wall Decor for Weddings & Events'} off={47}/>
@@ -244,7 +244,7 @@ Lightweight, durable, and reusable banner for multiple celebrations</p>
         <br />
         <br />
         <br />
-
+        <Footer/>
     </div>
   )
 }

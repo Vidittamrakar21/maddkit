@@ -53,7 +53,7 @@ export default function Stepper({
   return (
    
       <div
-        className={`mx-auto sm:w-[70%] w-[95%] mt-[140px] bg-[white] z-40  border-[2px] border-black rounded-lg sm:max-w-[70%] max-w-[95%] rounded-4xl shadow-xl ${stepCircleContainerClassName}`}
+        className={`mx-auto sm:w-[70%] w-[95%] mt-[90px] h-[210px] sm:h-[250px] sm:mt-[140px] bg-[white] z-40   rounded-lg sm:max-w-[70%] max-w-[95%] rounded-4xl  ${stepCircleContainerClassName}`}
         // style={{ border: "1px solid #222" }}
       >
         <div className={`${stepContainerClassName}  flex w-[100%] items-center justify-center sm:p-6 p-4`}>
@@ -100,7 +100,7 @@ export default function Stepper({
         {!isCompleted && (
           <div className={`px-8 pb-8 ${footerClassName}`}>
             <div
-              className={`mt-10 flex ${currentStep !== 1 ? "justify-between" : "justify-end"
+              className={`mt-3 flex ${currentStep !== 1 ? "justify-between" : "justify-end"
                 }`}
             >
               {currentStep !== 1 && (
@@ -117,7 +117,7 @@ export default function Stepper({
               )}
               <button
                 onClick={isLastStep ? handleComplete : handleNext}
-                className="duration-350 flex items-center border-[3px] border-black justify-center rounded-full bg-[#f4ff53] hover:bg-[#f5ff68] py-1.5 px-3.5 font-medium tracking-tight text-black transition  active:bg-[#f4ff53]"
+                className="duration-350 flex items-center  justify-center rounded-full bg-[#ED1C28] sm:hover:bg-[#fa4e56] py-1.5 px-3.5 font-medium tracking-tight text-white transition  active:bg-[#ED1C28]"
                 {...nextButtonProps}
               >
                 {isLastStep ? "Checkout" : nextButtonText}
@@ -213,17 +213,17 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
     >
       <motion.div
         variants={{
-          inactive: { scale: 1, backgroundColor: "#222", color: "#a3a3a3" },
-          active: { scale: 1, backgroundColor: "#00d8ff", color: "#00d8ff" },
-          complete: { scale: 1, backgroundColor: "#00d8ff", color: "#3b82f6" },
+          inactive: { scale: 1, backgroundColor: "#ED1C28", color: "#ffff" },
+          active: { scale: 1, backgroundColor: "#ED1C28", color: "black" },
+          complete: { scale: 1, backgroundColor: "#ED1C28", color: "#ffff" },
         }}
         transition={{ duration: 0.3 }}
         className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full font-semibold"
       >
         {status === "complete" ? (
-          <CheckIcon className="h-4 w-4 text-black" />
+          <CheckIcon className="h-4 w-4 text-white" />
         ) : status === "active" ? (
-          <div className="h-4 w-4 rounded-full bg-[#060606]" />
+          <div className="h-4 w-4 rounded-full bg-[black]" />
         ) : (
           <span className="text-sm">{step}</span>
         )}
@@ -235,7 +235,7 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
 function StepConnector({ isComplete }) {
   const lineVariants = {
     incomplete: { width: 0, backgroundColor: "transparent" },
-    complete: { width: "100%", backgroundColor: "#00d8ff" },
+    complete: { width: "100%", backgroundColor: "#ED1C28" },
   };
 
   return (

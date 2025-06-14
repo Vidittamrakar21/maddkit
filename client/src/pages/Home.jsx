@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 // import { CarouselSpacing } from '@/components/Carousel';
 import { useInView } from "react-intersection-observer";
 import Carousel from '@/components/Carousel';
+import Footer from '@/components/Footer';
 // import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -223,7 +224,7 @@ export default function Home() {
           animate={{ opacity: 1, scale: 1.2 }}
           transition={{ duration: 0.3, delay: 0.6 }}
         >
-          <button className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
+          <button onClick={()=>{index === 1?window.location.href = '/build-kit':''}} className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
@@ -437,7 +438,7 @@ export default function Home() {
 
    
 
-<section className='w-[110vw] text-white  mb-[-100px]  h-[90vh] sm:h-[80vh] bg-[black] rotate-2  select-none   flex-col  flex items-center justify-start'>
+{/* <section className='w-[110vw] text-white  mb-[-100px]  h-[90vh] sm:h-[80vh] bg-[black] rotate-2  select-none   flex-col  flex items-center justify-start'>
      <div className='flex items-center justify-center mt-5 flex-col h-[300px] w-[90%]'>
      <div className='flex items-center justify-center flex-col -rotate-2 mt-3'>
        <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[2.3rem] sm:mt-2 mt-0 '>MADDKIT</h1>
@@ -473,9 +474,9 @@ export default function Home() {
    
    <h5 className='-rotate-2 '>&copy; Maddkit. All Right Reserved.</h5>
 
-</section> 
+</section>  */}
 
-
+<Footer/>
 
     </div>
   )
