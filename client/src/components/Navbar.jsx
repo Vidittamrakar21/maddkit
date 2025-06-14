@@ -10,11 +10,12 @@ export default function Navbar() {
     window.location.href = '/'
  }
 
- const [sideBar, openSideBar] = useState(false)
+ const [sideBar, openSideBar] = useState(false);
+ const [shopOpen, setShopOpen] = useState(false);
 
   return (
     <>
-    <div className=' select-none absolute w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
+    <div className=' select-none fixed w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
     
       <RotatingText
   texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
@@ -29,7 +30,7 @@ export default function Navbar() {
   rotationInterval={2000}
 />
     </div>
-    <nav className=' select-none w-[100%] z-50  h-[50px] sm:h-[90px] bg-[#ED1C28]   sm:bg-[#ED1C28]  absolute sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row'>
+    <nav className=' select-none w-[100%] z-50  h-[50px] sm:h-[90px] bg-[#ED1C28]   sm:bg-[#ED1C28]  fixed sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row'>
         <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 '>
         {/* <img onClick={navigateHome} src="logo2.png"  className='sm:h-[60px] h-[60px] sm:w-[180px] w-[110px] sm:ml-8 ml-2' alt="" /> */}
        <div onClick={navigateHome} className='flex items-center justify-center flex-col sm:ml-8 ml-3'>
@@ -65,9 +66,12 @@ export default function Navbar() {
         </svg>   
 
          {/* <div className='flex items-center justify-center hover:bg-[#DFDFDF] sm:w-[40px] w-[40px]   h-[35px] rounded-[25px]'> */}
-         <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
+         {/* <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-        </svg>
+        </svg> */}
+        <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person" viewBox="0 0 16 16">
+        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+      </svg>
         {/* <h1 className='sm:ml-3 sm:block hidden text-white'>Hi! Log In</h1>   */}
         {/* </div>  */}
           
@@ -98,6 +102,53 @@ export default function Navbar() {
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
           </svg>
           </div>
+
+          <nav className="p-4 space-y-2 text-gray-700">
+          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Profile
+          </a>
+
+          {/* Shop with dropdown */}
+          <div className="px-2">
+            <button
+              onClick={() => setShopOpen(!shopOpen)}
+              className="w-full flex items-center justify-between py-2 rounded hover:bg-gray-100"
+            >
+              <span>Shop</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="gray" className={`transition-transform duration-200 ${shopOpen ? 'rotate-180' : ''}`} viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+          </svg>
+ 
+            </button>
+            {shopOpen && (
+              <div className="ml-4 mt-1 space-y-1 text-sm text-gray-600">
+                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Premade Kits
+                </a>
+                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Custom Kits
+                </a>
+                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  All Products
+                </a>
+              </div>
+            )}
+          </div>
+
+          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Orders
+          </a>
+          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Rewards
+          </a>
+          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Track Order
+          </a>
+          <a href="#" className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">
+            Sign Out
+          </a>
+        </nav>
+
         </div>
       
       
