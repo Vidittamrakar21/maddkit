@@ -16,11 +16,13 @@ export default function Product() {
 
     const [activeIMGS, setActiveIMGS] = useState(['img1.jpg','img7.jpg'])
     const [activeColors, setActiveColors] = useState([])
+    const [activeSizes, setActiveSizes] = useState([])
     const [activeState, setActiveState] = useState('black')
     const [active, setActive] = useState('img1.jpg')
 
     const [value, setValue] = React.useState(0);
-
+    let min = 1;
+    let max = 10;
     const handleChange = (event, newValue) => {
       setValue(newValue);
       console.log(newValue);
@@ -29,13 +31,33 @@ export default function Product() {
     useEffect(()=>{
         const clrs = [{color: 'black'},{color:'#E11B23'},{color:'#119411'}];
         setActiveColors(clrs)
+        const sz = [16,32,74];
+        setActiveSizes(sz);
     },[])
+
+    const [quantity, setQuantity] = useState(1);
+
+    const increment = () => {
+      if (quantity < max) {
+        const newQty = quantity + 1;
+        setQuantity(newQty);
+        onChange?.(newQty);
+      }
+    };
+  
+    const decrement = () => {
+      if (quantity > min) {
+        const newQty = quantity - 1;
+        setQuantity(newQty);
+        onChange?.(newQty);
+      }
+    };
     
   
 
   return (
     <div className=' w-[100%] select-none flex items-center justify-start flex-col '>
-        <div className='w-[100%] mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
+        <div className='w-[100%] mt-[85px] sm:mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
             <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
                 {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
                 <div className='sm:h-[500px] h-[300px] sm:w-[500px] w-[300px] mt-5 '>
@@ -58,7 +80,7 @@ export default function Product() {
 </div>
                 <div className='h-[100px] sm:h-[100px]  sm:w-[500px] w-[300px] flex items-center justify-start'>
                     {activeIMGS.map((imgsrc, index)=>(
-                        <img key={index} onClick={()=>setActive(imgsrc)} src={imgsrc}  className={`sm:h-[100px] sm:w-[100px] h-[70px] w-[70px] mt-2 sm:mt-5 ${active === imgsrc?'border border-[black]':''}`} alt="" />
+                        <img key={index} onClick={()=>setActive(imgsrc)} src={imgsrc}  className={`sm:h-[100px] m-1 sm:w-[100px] h-[70px] w-[70px] mt-2 sm:mt-5 ${active === imgsrc?'border-b-[3px] border-[#ED1C28]':''}`} alt="" />
                     ))}   
 
 
@@ -66,7 +88,7 @@ export default function Product() {
             </div>
             <div className='sm:w-[40%] w-[100%] min-h-[800px] flex items-start justify-start flex-col'>
 
-            <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem]  font-[600]'>Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans</h1>
+            <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem] font5 font-[600]'>Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans</h1>
             <div className='text-white w-[70px] h-[28px] mt-2 flex items-center justify-center ml-4 sm:ml-0'>
                 {/* <h5 className='text-[14px]'>3.9</h5> */}
                 <h3 className='text-[black] text-[18px] ml-1'>★</h3>
@@ -76,7 +98,7 @@ export default function Product() {
             </div>
     <h3 className='sm:text-[2rem] text-[1.5rem] mt-2  text-[black] font-[600] ml-4 sm:ml-0'><span className='line-through sm:text-[18px] text-[16px] text-[gray]'>₹399</span> &nbsp;₹255 </h3>
     <h3 className='sm:text-[20px] text-[17px] text-[green] font-[600] ml-4 sm:ml-0'>39% Off</h3>
-    <h2 className='text-[18px] mt-2 ml-4 sm:ml-0'>Brighten up your celebration with this 6-piece Rainbow Party Decoration Set featuring a birthday banner and colorful paper fans – perfect for first birthdays, kids’ parties, and festive occasions!</h2>
+    <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 '>Brighten up your celebration with this 6-piece Rainbow Party Decoration Set featuring a birthday banner and colorful paper fans – perfect for first birthdays, kids’ parties, and festive occasions!</h2>
     <h3 className='sm:text-[20px] text-[17px]  text-[green] font-[600] ml-4 sm:ml-0'>In Stock</h3>
 
     <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Colors</h2>
@@ -90,8 +112,38 @@ export default function Product() {
        
        
     </div>
-     <div className='w-[100%] h-[45px] flex sm:justify-start items-center justify-center'>
-    <button className='h-[40px]   w-[300px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff69]  text-black mt-[30px] border-[3px] border-black text-[18px] font-[600] shadow-md'>Add to cart</button>
+    <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Size</h2>
+    <div className='flex items-center justify-start h-[40px]  w-[90%] cursor-pointer ml-4 sm:ml-0'>
+        
+        {activeSizes.map((sz, index)=>(
+            <div key={index} className='w-[100px] mt-3 m-2  h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-start'>
+            <h1 className='ml-1'>{sz} Inches</h1>
+            </div>  
+        ))}
+       
+       
+    </div>
+
+   <div className='mt-5 flex items-center justify-center sm:justify-start  w-[95%] h-[30px]'>
+   <div className="flex items-center space-x-3  ">
+      <button
+        onClick={decrement}
+        className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded text-lg font-semibold"
+      >
+        −
+      </button>
+      <span className="min-w-[30px] text-center text-lg">{quantity}</span>
+      <button
+        onClick={increment}
+        className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded text-lg font-semibold"
+      >
+        +
+      </button>
+    </div>
+   </div>
+
+     <div className='w-[100%] h-[45px] mt-3 flex sm:justify-start items-center justify-center'>
+    <button className='h-[50px]   w-[300px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[18px] font-[600] shadow-md'>ADD TO CART</button>
     </div>   
 
     <div className='flex items-center justify-center mt-9 cursor-pointer  ml-4 sm:ml-0'>

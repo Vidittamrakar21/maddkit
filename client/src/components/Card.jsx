@@ -41,7 +41,7 @@ export default function Card({img, title, price, ogprice, off}) {
 
 
     <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
-      <div  className='sm:w-[350px] w-[160px] min-h-[200px] sm:min-h-[200px] select-none  m-2 bg-[white] overflow-hidden shadow-lg  flex items-start justify-center  flex-col'> 
+      <div  onClick={navigateProduct}  className='sm:w-[350px] w-[160px] min-h-[200px] sm:min-h-[200px] select-none  m-2 bg-[white] overflow-hidden shadow-lg  flex items-start justify-center  flex-col'> 
     {/* <div className='relative top-10 flex items-center justify-between '>
     <div className=' text-white bg-[#ED1C28] text-[14px] h-[30px] w-[60px] rounded-md ml-3 flex items-center justify-center'>
     <h1 className=''>{off}% off</h1>
@@ -63,7 +63,7 @@ export default function Card({img, title, price, ogprice, off}) {
                 <h3 className='text-[#CCCCCC] text-[18px] ml-1'>★</h3>
             </div>
      <div className='sm:w-[350px] p-2 sm:h-[50px] sm:flex sm:items-center sm:justify-start hidden'>
-      <div onClick={()=>{setColorBox(!colorBox); setSizeBox(false)}} className='w-[100px] h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-evenly'>
+      <div onClick={(e)=>{e.stopPropagation(); setColorBox(!colorBox); setSizeBox(false)}} className='w-[100px] h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-evenly'>
             <div  className={`h-[25px] w-[25px]  rounded-[100%] shadow-lg flex items-center justify-center border border-[#3f3e3e]} `}>
              <div className={`h-[20px] w-[20px]  bg-[red] rounded-[100%] `}></div>
              </div>
@@ -72,7 +72,7 @@ export default function Card({img, title, price, ogprice, off}) {
             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
           </svg>
       </div>
-      <div onClick={()=>{setColorBox(false); setSizeBox(!sizeBox)}} className='w-[120px] ml-3 h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-evenly'>
+      <div onClick={(e)=>{e.stopPropagation(); setColorBox(false); setSizeBox(!sizeBox)}} className='w-[120px] ml-3 h-[35px] border border-[#d4d4d4]  rounded-[10px] flex items-center justify-evenly'>
             
              <h1>16 Inches</h1>
              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" className=' rotate-180' viewBox="0 0 16 16">

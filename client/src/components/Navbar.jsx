@@ -32,9 +32,9 @@ export default function Navbar() {
     <nav className=' select-none w-[100%] z-50  h-[50px] sm:h-[90px] bg-[#ED1C28]   sm:bg-[#ED1C28]  absolute sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row'>
         <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 '>
         {/* <img onClick={navigateHome} src="logo2.png"  className='sm:h-[60px] h-[60px] sm:w-[180px] w-[110px] sm:ml-8 ml-2' alt="" /> */}
-       <div className='flex items-center justify-center flex-col sm:ml-8 ml-3'>
-       <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[1.6rem] sm:mt-2 mt-0 '>MADDKIT</h1>
-       <h6 className='sm:text-white font2 sm:text-[2rem] sm:block hidden'>Party Essentials</h6>
+       <div onClick={navigateHome} className='flex items-center justify-center flex-col sm:ml-8 ml-3'>
+       <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[1.6rem]  mt-0 '>MADDKIT</h1>
+       <h6 className='sm:text-white font2 sm:text-[2rem] sm:block hidden mb-4'>Party Essentials</h6>
        </div>
 
       
