@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
 import BuildKit from './pages/BuildKit';
+import PremadeKit from './pages/PremadeKit';
+import Search from './pages/Search';
 import './App.css'
 import './index.css'
 
@@ -29,6 +31,15 @@ function App() {
     {
       path: '/build-kit',
       element: <BuildKit/>
+    }, 
+    {
+      path: '/premade-kit',
+      element: <PremadeKit/>
+    }, 
+ 
+    {
+      path: '/search',
+      element: <Search/>
     }, 
  
     
