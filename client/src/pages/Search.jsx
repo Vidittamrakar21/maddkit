@@ -92,7 +92,7 @@ export default function Search() {
         </div>
       </div>
 
-      <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
+      {/* <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
 
    
 <Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner'} off={39}/>
@@ -105,7 +105,8 @@ export default function Search() {
 
 
 
-</section>
+</section> */}
+          <h1>Search Results Will Appear Here!</h1>
           <br />
           <br />
           <br />

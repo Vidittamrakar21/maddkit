@@ -72,16 +72,13 @@ export default function Navbar() {
         <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person" viewBox="0 0 16 16">
         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
       </svg>
-        {/* <h1 className='sm:ml-3 sm:block hidden text-white'>Hi! Log In</h1>   */}
-        {/* </div>  */}
+      
           
-        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white" class="rounded-xl hover:bg-[#DFDFDF] " viewBox="0 0 16 16">
+        {/* <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white" class="rounded-xl  " viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063q.068.062.132.129.065-.067.132-.129c3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3 3 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398"/>
-        </svg>
-        {/* <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#B20505" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         </svg> */}
-        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white" class="rounded-lg hover:bg-[#DFDFDF] " viewBox="0 0 16 16">
+        
+        <svg onClick={()=>{window.location.href = '/cart'}} xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white" class="rounded-lg " viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
         </svg>
 
@@ -104,7 +101,7 @@ export default function Navbar() {
           </div>
 
           <nav className="p-4 space-y-2 text-gray-700">
-          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+          <a href="/profile" className="block px-2 py-2 rounded hover:bg-gray-100">
             Profile
           </a>
 
@@ -135,13 +132,13 @@ export default function Navbar() {
             )}
           </div>
 
-          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+          <a href="/orders" className="block px-2 py-2 rounded hover:bg-gray-100">
             Orders
           </a>
-          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+          <a href="/rewards" className="block px-2 py-2 rounded hover:bg-gray-100">
             Rewards
           </a>
-          <a href="#" className="block px-2 py-2 rounded hover:bg-gray-100">
+          <a href="/trackorder" className="block px-2 py-2 rounded hover:bg-gray-100">
             Track Order
           </a>
           <a href="#" className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">
