@@ -55,7 +55,7 @@ export default function BuildKit() {
 <h1 className='text-[25px] text-[black] font-[600] font5'>{category[kitStep-1]}</h1>
 </section>  
 
-        <section className='sm:w-[80%] w-[90%] min-h-[500px]  flex items-start sm:justify-evenly sm:flex-wrap  justify-start sm:overflow-hidden overflow-x-scroll  sm:mt-[50px] mt-0'>
+        <section className='sm:w-[80%] w-[96%] min-h-[500px] grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  sm:mt-[50px] mt-0'>
 
         {kitStep === 1?
            <>

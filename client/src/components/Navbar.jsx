@@ -49,10 +49,10 @@ export default function Navbar() {
         </div>
 
         <ul className='sm:w-[400px] sm:h-[50px] sm:flex sm:items-center sm:justify-evenly sm:text-white sm:text-[16px] sm:font-[600] hidden'>
-        <li>Shop</li>
-        <li>Premade Kits</li>
-        <li>Custom Kits</li>
-        <li>All Products</li>
+       
+        <li onClick={()=>{window.location.href = '/premade-kit'}}>Premade Kits</li>
+        <li onClick={()=>{window.location.href = '/build-kit'}}>Custom Kits</li>
+        <li onClick={()=>{window.location.href = '/allproducts'}}>All Products</li>
        </ul>
 
         <div className='sm:w-[200px]  w-[160px]  sm:mr-[60px] mr-[0px]  h-[50px]  flex items-center justify-evenly '>
@@ -122,13 +122,13 @@ export default function Navbar() {
             </button>
             {shopOpen && (
               <div className="ml-4 mt-1 space-y-1 text-sm text-gray-600">
-                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                <a href="/premade-kit" className="block px-2 py-1 rounded hover:bg-gray-100">
                   Premade Kits
                 </a>
-                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                <a href="/build-kit" className="block px-2 py-1 rounded hover:bg-gray-100">
                   Custom Kits
                 </a>
-                <a href="#" className="block px-2 py-1 rounded hover:bg-gray-100">
+                <a href="/allproducts" className="block px-2 py-1 rounded hover:bg-gray-100">
                   All Products
                 </a>
               </div>

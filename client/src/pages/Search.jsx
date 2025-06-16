@@ -50,13 +50,13 @@ export default function Search() {
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
 
-<div className="max-w-[90%] min-h-[100dvh] mt-[30px] mx-auto">
+<div className="max-w-[90%] min-h-[30dvh] mt-[30px] sm:mt-[60px] mx-auto">
         {/* Search Bar */}
         <input
           type="text"
           value={query}
           onChange={handleInputChange}
-          placeholder="party kits, decorations, events..."
+          placeholder="search for party kits, decorations, events..."
           className="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ED1C28]"
         />
 
@@ -91,6 +91,25 @@ export default function Search() {
           ))}
         </div>
       </div>
+
+      <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
+
+   
+<Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner'} off={39}/>
+<Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
+<Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding'} off={39}/>
+<Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
+<Card img={'img1.jpg'} price={245} ogprice={399} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner'} off={39}/>
+<Card img={'img7.jpg'} price={499} ogprice={899} title={'Brown Paper Flowers Decorations – 9pcs Floral Backdrop & Wall Fans for Party'} off={44}/>
+<Card img={'img2.jpg'} price={245} ogprice={399} title={'Hanging Paper Fans Decoration – Set of 6 (Multicolor) for Birthday, Wedding'} off={39}/>
+
+
+
+</section>
+          <br />
+          <br />
+          <br />
+          <br />
         <Footer/>
     </div>
   )

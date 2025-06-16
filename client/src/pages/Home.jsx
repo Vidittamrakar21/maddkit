@@ -405,7 +405,7 @@ export default function Home() {
    
     <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap mr-11  text-black -rotate-2 mt-[40px] break-words font-[600]'>Products For You</h1>
     
-    <div className='sm:w-[80%] w-[80%]  bg-[white] -rotate-2  select-none mt-[30px] sm:mt-[60px]   flex-wrap  flex sm:items-evenly sm:justify-evenly  items-center justify-center '>
+    <div className='sm:w-[80%] w-[70%]  bg-[white] -rotate-2  select-none mt-[30px] sm:mt-[60px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
     
       <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit'}/>
       <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
@@ -417,7 +417,7 @@ export default function Home() {
       <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '}/>
     </div>  
 
-    <button className='h-[50px] sm:mt-[40px] mt-[40px] mb-3 ml-11 sm:ml-0  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
+    <button onClick={()=>{window.location.href = '/allproducts'}} className='h-[50px] sm:mt-[40px] mt-[40px] mb-3 ml-11 sm:ml-0  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className='mr-2' viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>

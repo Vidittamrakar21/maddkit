@@ -8,6 +8,7 @@ import Product from './pages/Product';
 import BuildKit from './pages/BuildKit';
 import PremadeKit from './pages/PremadeKit';
 import Search from './pages/Search';
+import AllProduct from './pages/AllProduct';
 import './App.css'
 import './index.css'
 
@@ -40,6 +41,10 @@ function App() {
     {
       path: '/search',
       element: <Search/>
+    }, 
+    {
+      path: '/allproducts',
+      element: <AllProduct/>
     }, 
  
     

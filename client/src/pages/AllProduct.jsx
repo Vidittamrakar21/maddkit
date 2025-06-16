@@ -2,13 +2,13 @@ import React from 'react'
 import Card from '@/components/Card'
 import Footer from '@/components/Footer'
 
-export default function PremadeKit() {
+export default function AllProduct() {
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
 
 <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[80px] mt-[20px]'>
 
-<h1 className='text-[25px] text-[black] font-[600] font5'>Premade Kits</h1>
+<h1 className='text-[25px] text-[black] font-[600] font5'>All Products</h1>
 </section>  
 
     <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]    grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  '>
