@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 import RotatingText from './RotatingText'
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 
 
 export default function Navbar() {
@@ -12,10 +12,26 @@ export default function Navbar() {
 
  const [sideBar, openSideBar] = useState(false);
  const [shopOpen, setShopOpen] = useState(false);
+ const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 50) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
 
   return (
     <>
-    <div className=' select-none fixed w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
+    <div className=' border-b border-b-[#313131] select-none fixed w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
     
       <RotatingText
   texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
@@ -30,12 +46,12 @@ export default function Navbar() {
   rotationInterval={2000}
 />
     </div>
-    <nav className=' select-none w-[100%] z-50  h-[50px] sm:h-[90px] bg-[#ED1C28]   sm:bg-[#ED1C28]  fixed sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row'>
-        <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 '>
+    <nav className={` select-none w-[100%] z-50  h-[50px] sm:h-[90px] ${scrolled ===true?'sm:bg-[black] bg-[black] transition-colors duration-700 ease-in-out':'bg-[#ED1C28] sm:bg-[#ED1C28]  transition-colors duration-700 ease-in-out'}  fixed sm:top-[28px] top-[25px]    flex sm:items-center sm:justify-between items-center justify-between sm:flex-row flex-row`}>
+        {/* <div className='flex items-center justify-center sm:ml-[60px] ml-0 sm:mt-6 border '> */}
         {/* <img onClick={navigateHome} src="logo2.png"  className='sm:h-[60px] h-[60px] sm:w-[180px] w-[110px] sm:ml-8 ml-2' alt="" /> */}
-       <div onClick={navigateHome} className='flex items-center justify-center flex-col sm:ml-8 ml-3'>
-       <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[1.6rem]  mt-0 '>MADDKIT</h1>
-       <h6 className='sm:text-white font2 sm:text-[2rem] sm:block hidden mb-4'>Party Essentials</h6>
+       <div onClick={navigateHome} className='flex items-center justify-center sm:h-[80px] sm:w-[180px] flex-col sm:ml-8 ml-3 '>
+       <h1 className='font-custom text-[white] sm:text-[2.4rem] text-[1.6rem]  sm:mb-[-10px] mb-[0px] '>MADDKIT</h1>
+       <h6 className='sm:text-white font2 sm:text-[1.5rem] sm:block hidden '>Party Essentials</h6>
        </div>
 
       
@@ -46,7 +62,7 @@ export default function Navbar() {
         </svg>   
          <input type="text" placeholder='&nbsp;What are you looking for?' className='p-7 h-[45px]   bg-[#F5F5F5] w-[350px]  rounded-[30px] placeholder:text-[#282e33]' name="" id="" />
         </div> */}
-        </div>
+        {/* </div> */}
 
         <ul className='sm:w-[400px] sm:h-[50px] sm:flex sm:items-center sm:justify-evenly sm:text-white sm:text-[16px] sm:font-[600] hidden'>
        
