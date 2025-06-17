@@ -6,21 +6,21 @@ const ordersData = [
     id: 1,
     name: "Birthday Party Kit",
     price: 2999,
-    image: "https://via.placeholder.com/100",
+    image: "img1.jpg",
     status: "Delivered",
   },
   {
     id: 2,
-    name: "Party Poper",
+    name: "Led Light",
     price: 300,
-    image: "https://via.placeholder.com/100",
+    image: "img9.jpg",
     status: "Shipped",
   },
   {
     id: 3,
     name: "Anniversary Party Kit",
     price: 4999,
-    image: "https://via.placeholder.com/100",
+    image: "img10.jpg",
     status: "Packed",
   },
 ];
@@ -56,8 +56,8 @@ const OrderCard = ({ order }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-4 border rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300 bg-white">
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col md:flex-col items-start justify-start gap-4 border rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300 bg-white">
+      <div className="flex items-center   gap-4">
         <img src={order.image} alt={order.name} className="w-24 h-24 rounded-md object-cover" />
         <div>
           <h2 className="text-lg font-semibold">{order.name}</h2>

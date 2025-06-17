@@ -25,14 +25,14 @@ export default function Home() {
     const [quizstate, setquizstate] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        setTimeout(()=>{
-            confetti({particleCount:210, spread:100})
-            setquizstate(true);
-        },1500)
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         confetti({particleCount:210, spread:100})
+    //         setquizstate(true);
+    //     },1500)
        
         
-    },[])
+    // },[])
 
 
     const ref = useRef(null);

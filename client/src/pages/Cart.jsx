@@ -1,15 +1,13 @@
 import React from "react";
 
 const cartItems = [
-  { id: 1, name: "Backdrop 1", price: 899, category: "Backdrop Bliss", image: "https://via.placeholder.com/150", qty: 1 },
-  { id: 7, name: "Backdrop 2", price: 899, category: "Backdrop Bliss", image: "https://via.placeholder.com/150", qty: 1 },
-  { id: 2, name: "Message Board", price: 299, category: "Message Pop", image: "https://via.placeholder.com/150", qty: 2 },
-  { id: 3, name: "LED Strip", price: 499, category: "Light It Up", image: "https://via.placeholder.com/150", qty: 1 },
-  { id: 4, name: "Confetti Pack", price: 199, category: "Fun & Fillers", image: "https://via.placeholder.com/150", qty: 3 },
-  { id: 5, name: "Party Hats", price: 149, category: "Party Gear", image: "https://via.placeholder.com/150", qty: 4 },
-  { id: 8, name: "Party Hats", price: 149, category: "Party Gear", image: "https://via.placeholder.com/150", qty: 4 },
-  { id: 9, name: "Party Hats", price: 149, category: "Party Gear", image: "https://via.placeholder.com/150", qty: 4 },
-  { id: 6, name: "Ring Toss", price: 699, category: "Game Zone", image: "https://via.placeholder.com/150", qty: 1 },
+  { id: 1, name: "Backdrop 1", price: 899, category: "Backdrop Bliss", image: "img1.jpg", qty: 1 },
+  { id: 7, name: "Backdrop 2", price: 899, category: "Backdrop Bliss", image: "img2.jpg", qty: 1 },
+  { id: 2, name: "Message Board", price: 299, category: "Message Pop", image: "img11.webp", qty: 1 },
+  { id: 3, name: "LED Strip", price: 499, category: "Light It Up", image: "img9.jpg", qty: 1 },
+  { id: 4, name: "Flower Pack", price: 199, category: "Fun & Fillers", image: "img5.jpg", qty: 1 },
+  { id: 5, name: "GLow Sticks", price: 149, category: "Party Gear", image: "img13.jpg", qty: 1 },
+   { id: 6, name: "UNO Cards", price: 130, category: "Game Zone", image: "https://rukminim2.flixcart.com/image/750/900/kar44280/card-game/d/g/8/mattel-uno-playing-card-game-family-card-multicolour-108-cards-original-imafs92fxfzjfyhe.jpeg?q=90&crop=false", qty: 1 },
 ];
 
 const categories = [
@@ -27,7 +25,7 @@ const Cart = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
-      <h1 className="text-3xl font-bold mb-8 text-center ">Your Cart</h1>
+      {/* <h1 className="text-3xl font-bold mb-8 text-center ">Your Cart</h1> */}
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left Side - Cart Items */}
@@ -71,7 +69,7 @@ const Cart = () => {
 
         {/* Right Side - Summary */}
         <div className="w-full lg:w-1/3">
-          <div className="bg-white shadow-md rounded-xl p-6 sticky top-20">
+          <div className="bg-white shadow-md rounded-xl p-6 sticky sm:top-[103px] top-[60px] border">
             <h3 className="text-xl font-semibold mb-4 border-b pb-2">Cart Summary</h3>
             <div className="flex justify-between mb-2">
               <span>Total Items</span>

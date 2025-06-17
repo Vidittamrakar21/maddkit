@@ -74,6 +74,10 @@ function App() {
       path: '/trackorder',
       element: <OrderTrackingPage/>
     }, 
+    {
+      path: '/login',
+      element: <LoginPage/>
+    }, 
  
     
    

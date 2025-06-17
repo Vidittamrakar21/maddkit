@@ -50,7 +50,7 @@ export default function BuildKit() {
 </Stepper>
 
 
-<section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[80px] mt-[20px]'>
+<section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[20px] mt-[20px]'>
 
 <h1 className='text-[25px] text-[black] font-[600] font5'>{category[kitStep-1]}</h1>
 </section>  

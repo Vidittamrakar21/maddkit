@@ -46,7 +46,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
-      <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
+      {/* <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1> */}
 
       <div className="flex flex-col lg:flex-row gap-10">
         {/* Billing Details */}
@@ -132,8 +132,9 @@ const CheckoutPage = () => {
                   onChange={() => setDonationChecked(!donationChecked)}
                   className="mt-1"
                 />
+                <strong>₹{DONATION_AMOUNT}</strong>
                 <label htmlFor="donation" className="text-sm cursor-pointer">
-                  Add a small donation of <strong>₹{DONATION_AMOUNT}</strong> to support our cause ❤️
+                Be a part of someone’s happiest memory — even if you never meet them.  ❤️
                 </label>
               </div>
 

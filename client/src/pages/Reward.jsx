@@ -40,7 +40,10 @@ const RewardPage = () => {
       {/* Coins Display */}
       <div className="bg-white rounded-xl shadow-sm p-6 mb-8 text-center">
         <p className="text-gray-500 text-sm">Total Coins</p>
-        <h2 className="text-4xl font-bold text-yellow-500">{userCoins} 🪙</h2>
+        <div className="flex items-center justify-center">
+        <h2 className="text-4xl font-bold text-yellow-500 mr-3">{userCoins}</h2>
+        <img src="/coin.svg" className="h-[30px] w-[30px]" alt="" />
+        </div>
       </div>
 
       {/* Coupons */}

@@ -8,9 +8,9 @@ const user = {
 
 const ProfilePage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-[50px] sm:mt-[103px]">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow p-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Your Profile</h2>
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-[50px] sm:mt-[103px] ">
+      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow p-8 border">
+        {/* <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Your Profile</h2> */}
 
         <div className="space-y-6">
           <div>
