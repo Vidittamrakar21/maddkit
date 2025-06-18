@@ -19,6 +19,9 @@ import { useInView } from "react-intersection-observer";
 import Carousel from '@/components/Carousel';
 import Footer from '@/components/Footer';
 // import { motion } from 'framer-motion';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
 
@@ -179,6 +182,37 @@ export default function Home() {
     });
   };
 
+  const cards = [
+    { id: 1, title: "Backdrop Bliss", description: "This is the first card." },
+    { id: 2, title: "Card 2", description: "This is the second card." },
+    { id: 3, title: "Card 3", description: "This is the third card." },
+    { id: 4, title: "Card 4", description: "This is the fourth card." },
+    { id: 5, title: "Card 5", description: "This is the fifth card." },
+    { id: 5, title: "Card 5", description: "This is the fifth card." },
+  ];
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
  
   return (
     <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
@@ -291,7 +325,7 @@ export default function Home() {
               <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-center text-white break-words font-[600]'>Craft Moments That Last a Lifetime.</h1>
               <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-white break-words font-[600]'>Explore Categories</h1>
 
-              <div className='flex items-center justify-center sm:h-[550px] h-[450px] sm:w-[80%] w-[95%]  sm:mt-[50px] mt-[10px] overflow-hidden '>
+              {/* <div className='flex items-center justify-center sm:h-[550px] h-[450px] sm:w-[80%] w-[95%]  sm:mt-[50px] mt-[10px] overflow-hidden '>
                 <div onClick={()=>setAnimate(-1)} className='flex items-center justify-center sm:h-[60px] h-[30px] w-[60px] bg-[white] sm:rounded-[100%] rounded-[15px]  hover:bg-transparent hover:border hover:border-gray-100'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
@@ -351,13 +385,27 @@ export default function Home() {
           </svg>
                 </div>
 
-              </div>
+              </div> */}
+ <div className="sm:w-[70%] w-[75%] px-4 py-8">
+      <Slider {...settings}>
+        {category.map((card) => (
+          <div key={card.title} className="px-1">
+             <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
+                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>{card.title}</h1>
+                  <div className='bg-[#B7F2B7] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
+                  <img src={card.src} alt="" className=' h-[250px] w-[250px]' />
+                  </div>
+                </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
+
        
         </section>
         
    
-     
-      
+       
 
     
     
@@ -378,11 +426,11 @@ export default function Home() {
 
           <div className='w-[80%] sm:mt-[120px] mt-[20px]  sm:h-[150px] h-[400px] min-h-[400px] max-h-[400px]   flex items-center justify-evenly flex-wrap'>
 
-            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
+            <div onClick={()=>{window.location.href = '/premade-kit'}} className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>PREMADE PARTY KITS</h2>
             </div>
-            <div className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
+            <div onClick={()=>{window.location.href = '/build-kit'}}  className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="con.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>CUSTOMIZE PARTY KITS</h2>
             </div>
