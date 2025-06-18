@@ -430,7 +430,7 @@ export default function Home() {
               <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>PREMADE PARTY KITS</h2>
             </div>
-            <div onClick={()=>{window.location.href = '/build-kit'}}  className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
+            <div onClick={()=>{window.location.href = '/build -kit'}}  className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
               <img src="con.svg" className='h-[80px] w-[80px]' alt="" />
               <h2 className='text-white mt-3 font-[500]'>CUSTOMIZE PARTY KITS</h2>
             </div>
