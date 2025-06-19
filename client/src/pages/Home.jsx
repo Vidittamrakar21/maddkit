@@ -217,7 +217,7 @@ export default function Home() {
   return (
     <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
       
-      {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
+     
 
      <button onClick={scrollToTop} className='sm:w-[50px] w-[40px] fixed sm:bottom-5 bottom-2 flex text-white items-center justify-evenly flex-col sm:right-11 right-2 z-50 sm:h-[80px] h-[40px] rounded-[30px] bg-[#ED1C28]'>
      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up" viewBox="0 0 16 16">

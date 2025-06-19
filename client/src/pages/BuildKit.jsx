@@ -3,13 +3,20 @@ import Stepper, { Step } from '@/components/Stepper'
 import Card from '@/components/Card';
 import { useState } from 'react';
 import Footer from '@/components/Footer';
+import QuizCard from '@/components/QuizCard';
 
 export default function BuildKit() {
   const [kitStep, setStep] = useState(1);
   const category = ['Backdrop Bliss', 'Light It Up', 'Message Pop', 'Fun & Fillers', 'Party Gear', 'Game Zone']
+  const [quizstate, setquizstate] = useState(true);
+
+  function updateState(){
+    setquizstate(false)
+  }
 
   return (
     <div className='min-h-[100vh] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
+       <QuizCard state={quizstate} updatestate={updateState}/>
       <Stepper
         initialStep={1}
         onStepChange={(step) => {

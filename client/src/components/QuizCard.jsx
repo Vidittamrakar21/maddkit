@@ -158,19 +158,22 @@ const QuizCard = ({state, updatestate}) => {
                {start === false?
                <>
                 <h2 className="text-xl font-semibold">Hey..</h2>
-              <h2 className="text-lg ">We have few questions for you so that, we can take you to the right product, you are exactly looking for. </h2>
+              <h2 className="text-lg ">We have few questions for you so that, we can help you in building the right kit for your event. </h2>
               <div className="flex justify-evenly">
-               <button onClick={updatestate}  className=" w-[48%] h-[40px] text-black rounded-lg border-[3px] border-black text-[18px] font-[600] shadow-md">Later</button>
-               <button onClick={()=>setStart(true)} className=" w-[48%] h-[40px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff68]  text-black  border-[3px] border-black text-[18px] font-[600] shadow-md">Let's Proceed</button>
+               <button onClick={updatestate}  className=" w-[48%] h-[40px] text-[#444444] rounded-lg border-[1px] border-[#adadad] text-[18px] font-[600] shadow-md">Later</button>
+               <button onClick={()=>setStart(true)} className=" w-[48%] h-[40px] rounded-lg bg-[#ED1C28] hover:bg-[#ED1C28]  text-white text-[18px] font-[600] shadow-md">Let's Proceed</button>
               </div> 
                </>:
                <>
+               <div className=''>
+
                  <Progress value={((step + 1) / questions.length) * 100} />
+               </div>
               <p className="text-sm text-gray-500"> {step === 0?"Kindly Select Options Accordingly": step === 5?'Almost done!':`You're ${Math.round(((step + 1) / questions.length) * 100)}% there!`}</p>
               {renderQuestion()}
               <div className="flex justify-between">
-                {step > 0 && <button onClick={prevStep}  className=" w-[48%] h-[40px] text-black rounded-lg border-[3px] border-black text-[18px] font-[600] shadow-md">Back</button>}
-                {step < questions.length - 1? <button onClick={nextStep} className=" w-[48%] h-[40px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff68]  text-black  border-[3px] border-black text-[18px] font-[600] shadow-md">Next</button>: <button onClick={()=>{setStart(false); updatestate()}} className=" w-[48%] h-[40px] rounded-lg bg-[#f4ff53] hover:bg-[#f5ff68]  text-black  border-[3px] border-black text-[18px] font-[600] shadow-md">Done!</button>}
+                {step > 0 && <button onClick={prevStep}  className=" w-[48%] h-[40px] text-[#444444] rounded-lg border-[1px] border-[#adadad] text-[18px] font-[600] shadow-md">Back</button>}
+                {step < questions.length - 1? <button onClick={nextStep} className=" w-[48%] h-[40px] rounded-lg bg-[#ED1C28] hover:bg-[#ED1C28]  text-white text-[18px] font-[600] shadow-md">Next</button>: <button onClick={()=>{setStart(false); updatestate()}} className=" w-[48%] h-[40px] rounded-lg bg-[#ED1C28] hover:bg-[#ED1C28]  text-white  text-[18px] font-[600] shadow-md">Done!</button>}
               </div>
                </>}   
             
