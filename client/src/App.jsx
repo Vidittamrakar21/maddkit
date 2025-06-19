@@ -25,58 +25,97 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home/>
+      element:<>
+              <Navbar/>
+              <Home/>
+              </> 
     }, 
     {
       path: '/cart',
-      element: <Cart/>
+      element:<>
+              <Navbar/>
+              <Cart/>
+              </>  
     }, 
     {
       path: '/product',
-      element: <Product/>
+      element: <>
+      <Navbar/>
+      <Product/>
+      </>
     }, 
     {
       path: '/build-kit',
-      element: <BuildKit/>
+      element: <>
+      <Navbar/>
+      <BuildKit/>
+      </>
     }, 
     {
       path: '/premade-kit',
-      element: <PremadeKit/>
+      element:<>
+      <Navbar/>
+      <PremadeKit/>
+      </> 
     }, 
  
     {
       path: '/search',
-      element: <Search/>
+      element: <>
+      <Navbar/>
+      <Search/>
+      </>
     }, 
     {
       path: '/allproducts',
-      element: <AllProduct/>
+      element:<>
+      <Navbar/>
+      <AllProduct/>
+      </> 
     }, 
     {
       path: '/checkout',
-      element: <CheckoutPage/>
+      element: <>
+      <Navbar/>
+      <CheckoutPage/>
+      </>
     }, 
  
     {
       path: '/orders',
-      element: <OrderPage/>
+      element:<>
+      <Navbar/>
+      <OrderPage/>
+      </> 
     }, 
     {
       path: '/rewards',
-      element: <RewardPage/>
+      element: <>
+      <Navbar/>
+      <RewardPage/>
+      </>
     }, 
     {
       path: '/profile',
-      element: <ProfilePage/>
+      element: <>
+      <Navbar/>
+      <ProfilePage/>
+      </>
     }, 
  
     {
       path: '/trackorder',
-      element: <OrderTrackingPage/>
+      element:<>
+      <Navbar/>
+      <OrderTrackingPage/>
+      </> 
     }, 
     {
       path: '/login',
-      element: <LoginPage/>
+      element:<>
+      <Navbar/>
+      <LoginPage/>
+      </>
     }, 
  
     
@@ -89,9 +128,8 @@ function App() {
 
 
       <>
-        <Navbar/>
         <RouterProvider router={router}/>
-        {/* <Footer/> */}
+  
       </>
     
   )
