@@ -532,7 +532,34 @@ export default function Home() {
 
       </section>
 
-      <section className='w-[110vw] h-[100vh] bg-[white] rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
+      <section className='w-[110vw]  bg-[white] rotate-2  select-none mt-[90px] sm:flex-row flex-col  flex items-center sm:justify-center justify-start'>
+        <div className='w-[90%] sm:ml-5 sm:mb-11 sm:w-[40%] mt-[30px]  flex items-center sm:items-start justify-start flex-col -rotate-2 p-2'>
+        <h1 className='sm:text-[2.5rem] text-[1.8rem] text-center font5 text-wrap mr-6  text-black  mt-[10px] break-words font-[600]'>"This is how unforgettable memories are made."</h1>
+          <h2 className='font2 sm:text-[3.1rem] text-[1.8rem] text-[#ED1C28] p-2'>Watch their eyes ligth up.Then replay that moment for a life time.</h2>
+          <h2 className=' sm:text-[2.5rem] text-[1.3rem] text-[black] p-2'>Explore Our Memory Vault, where you will find -</h2>
+          <ul className=' list-disc text-black p-3'>
+            <li>Reels & Poses</li>
+            <li>Playlists for every mood</li>
+            <li>Fun games & activity quizes</li>
+            <li>Decor Hacks</li>
+            <li>Thoughtful Gift Ideas</li>
+          </ul>
+
+
+          <button  className='h-[50px] sm:mt-[40px] mt-[20px] mb-3  sm:ml-0  w-[180px] rounded-full text-white font-[600]  flex items-center justify-center bg-[#ED1C28] '>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className='mr-2' viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+          </svg>
+            Explore Now
+        </button>
+
+        </div>
+
+        <div className='-rotate-2 flex items-center justify-center w-[70%]  sm:w-[40%] h-[410px] mb-11 sm:mb-0 '>
+            <img src="p3.jpg" className='w-[100%] sm:w-[50%] ml-3 h-[400px] sm:h-[600px]' alt="" />
+        </div>
+      
+
 
 
       </section>
