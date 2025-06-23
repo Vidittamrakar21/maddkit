@@ -4,11 +4,11 @@ import FadeContent from './Fadecontent';
 import '../App.css';
 import { useState, useEffect } from 'react';
 
-export default function Card({ img, title, price, ogprice, off }) {
+export default function Card({ img, title, price, ogprice, off , id}) {
   const navigate = useNavigate();
 
   function navigateProduct() {
-    window.location.href = '/product'
+    window.location.href = `/product?product_id=${id}`
   }
 
   const [colorBox, setColorBox] = useState(false);
@@ -126,8 +126,8 @@ export default function Card({ img, title, price, ogprice, off }) {
 
         <div className='flex sm:items-center  sm:justify-between sm:flex-row flex-col items-center justify-center w-[100%] h-[95px] sm:h-[80px]   sm:p-2 p-0'>
           <div className='flex items-start w-[100%] sm:w-[50%] justify-start flex-col'>
-            <span className='sm:text-[18] text-[12px] font-[300] ml-2'> {off}% Off</span>
-            <h3 className='sm:text-[22px] text-[18px] text-[black] font-[600] ml-2'><span className='line-through sm:text-[16px] text-[14px] text-[gray]'>₹{ogprice}</span> &nbsp;₹{price} </h3>
+            <span className='sm:text-[18] text-[12px] font-[300] ml-2'> {ogprice?`${off}% Off`:''}</span>
+            <h3 className='sm:text-[22px] text-[18px] text-[black] font-[600] ml-2'><span className='line-through sm:text-[16px] text-[14px] text-[gray]'>{ogprice?`₹${ogprice}`:''}</span> &nbsp;₹{price} </h3>
 
           </div>
           <button className='h-[35px] sm:h-[40px] sm:w-[250px] mt-1 mb-1 sm:mb-0 sm:mt-0 w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>

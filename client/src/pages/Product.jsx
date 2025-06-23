@@ -6,20 +6,25 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Card from '../components/Card';
 import { color } from 'framer-motion';
+import axios from 'axios';
 
 import Footer from '@/components/Footer';
-
+import { useSearchParams } from "react-router-dom";
 
   
 
 export default function Product() {
 
-    const [activeIMGS, setActiveIMGS] = useState(['img1.jpg','img7.jpg'])
+    const [activeIMGS, setActiveIMGS] = useState([])
     const [activeColors, setActiveColors] = useState([])
     const [activeSizes, setActiveSizes] = useState([])
     const [activeState, setActiveState] = useState('black')
     const [activeSz, setActiveSz] = useState(16);
-    const [active, setActive] = useState('img1.jpg')
+    const [active, setActive] = useState('')
+    const [product, setProduct] = useState({});
+
+    const [searchParams] = useSearchParams();
+    const productId = searchParams.get("product_id");
 
     const [value, setValue] = React.useState(0);
     let min = 1;
@@ -29,7 +34,15 @@ export default function Product() {
       console.log(newValue);
     };
 
+    async function fetchProduct(){
+      const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products/${productId}?per_page=50&consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf`)).data;
+      setProduct(data)
+      setActive(data.images[0]?.src)
+      setActiveIMGS(data.images)
+    }
+
     useEffect(()=>{
+        fetchProduct();
         const clrs = [{color: 'black'},{color:'#E11B23'},{color:'#119411'}];
         setActiveColors(clrs)
         const sz = [16,32,74];
@@ -79,9 +92,9 @@ export default function Product() {
 }} />
 
 </div>
-                <div className='h-[100px] sm:h-[100px]  sm:w-[500px] w-[300px] flex items-center justify-start'>
+                <div className='h-[100px] sm:h-[100px] sm:mt-5 mt-2  sm:w-[500px] w-[300px] flex items-center justify-start overflow-hidden overflow-x-scroll'>
                     {activeIMGS.map((imgsrc, index)=>(
-                        <img key={index} onClick={()=>setActive(imgsrc)} src={imgsrc}  className={`sm:h-[100px] m-1 sm:w-[100px] h-[70px] w-[70px] mt-2 sm:mt-5 ${active === imgsrc?'border-b-[3px] border-[#ED1C28]':''}`} alt="" />
+                        <img key={index} onClick={()=>setActive(imgsrc.src)} src={imgsrc.src}  className={`sm:h-[100px] m-1 sm:w-[100px] h-[70px] w-[70px] mt-2 sm:mt-5 ${active === imgsrc?'border-b-[3px] border-[#ED1C28]':''}`} alt="" />
                     ))}   
 
 
@@ -89,7 +102,7 @@ export default function Product() {
             </div>
             <div className='sm:w-[40%] w-[100%] min-h-[800px] flex items-start justify-start flex-col'>
 
-            <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem] font5 font-[600]'>Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit with Banner & Paper Flower Fans</h1>
+            <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem] font5 font-[600]'>{product.name}</h1>
             <div className='text-white w-[70px] h-[28px] mt-2 flex items-center justify-center ml-4 sm:ml-0'>
                 {/* <h5 className='text-[14px]'>3.9</h5> */}
                 <h3 className='text-[black] text-[18px] ml-1'>★</h3>
@@ -97,10 +110,10 @@ export default function Product() {
                 <h3 className='text-[black] text-[18px] ml-1'>★</h3>
                 <h3 className='text-[black] text-[18px] ml-1'>★</h3>
             </div>
-    <h3 className='sm:text-[2rem] text-[1.5rem] mt-2  text-[black] font-[600] ml-4 sm:ml-0'><span className='line-through sm:text-[18px] text-[16px] text-[gray]'>₹399</span> &nbsp;₹255 </h3>
-    <h3 className='sm:text-[20px] text-[17px] text-[green] font-[600] ml-4 sm:ml-0'>39% Off</h3>
-    <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 '>Brighten up your celebration with this 6-piece Rainbow Party Decoration Set featuring a birthday banner and colorful paper fans – perfect for first birthdays, kids’ parties, and festive occasions!</h2>
-    <h3 className='sm:text-[20px] text-[17px]  text-[green] font-[600] ml-4 sm:ml-0'>In Stock</h3>
+    <h3 className='sm:text-[2rem] text-[1.5rem] mt-2  text-[black] font-[600] ml-4 sm:ml-0'><span className='line-through sm:text-[18px] text-[16px] text-[gray]'>{product.regular_price?`₹${product.regular_price}`:''}</span> &nbsp;₹{product.price}</h3>
+    <h3 className='sm:text-[20px] text-[17px] text-[green] font-[600] ml-4 sm:ml-0'>{product.regular_price?`${Math.round(((Number(product.regular_price) - Number(product.price) )/Number(product.regular_price)) * 100 )}% Off`:''}</h3>
+    <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 '  dangerouslySetInnerHTML={{ __html: product.short_description }}></h2>
+    <h3 className='sm:text-[20px] text-[17px]  text-[green] font-[600] ml-4 sm:ml-0'>{product.stock_status}</h3>
 
     <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Colors</h2>
     <div className='flex items-center justify-evenly h-[40px]  w-[120px] cursor-pointer ml-4 sm:ml-0'>
@@ -171,45 +184,8 @@ export default function Product() {
       </Box>
     </Box>
 
-    {value===0? <div className='p-5'>
-        <h1 className='text-[22px] font-[600]'>Glitter Fishtail Happy Birthday Banner | Premium Cardboard Party Decoration 🎉✨</h1>
-        <p className='mt-5 '>Add elegance and sparkle to any celebration with this Glittery Fishtail Banner. With 13 glitter-coated cardboard flags and included ribbon, it’s the perfect party backdrop for birthdays of all ages.
-<br />
-Perfect For:
-
-Birthday parties for boys, girls, teens, or adults
-
-Glam, pastel, or sparkle-themed parties
-
-Baby showers, milestone birthdays, or home celebrations
-
-Indoor & outdoor decoration
-<br />
-Product Details:
-<br />
-Design: Fishtail cut glitter cardboard letters
-<br />
-Pack Includes: 13 Letter Flags (HAPPY BIRTHDAY) + Hanging Ribbon
-<br />
-Material: Thick Glitter Cardboard
-<br />
-Sizes: Each flag approx. 7 x 5 inches
-<br />
-Colors Available: Gold, Silver, Baby Pink
-<br />
-Reusable: Strong and long-lasting – reuse for multiple events
-
-Glittery cardboard Happy Birthday banner in 3 elegant color variants
-
-Includes 13 individual flags and ribbon for hanging
-
-Fishtail design adds modern touch to party décor
-
-Pre-punched holes for easy and quick setup
-
-Great for kids’ birthdays, adult parties, baby showers, and themed events
-
-Lightweight, durable, and reusable banner for multiple celebrations</p>
+    {value===0? <div className='p-5' dangerouslySetInnerHTML={{ __html: product.description }}>
+       
     </div>:<div></div>}
 
         </div>

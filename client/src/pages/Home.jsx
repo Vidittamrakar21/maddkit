@@ -22,6 +22,7 @@ import Footer from '@/components/Footer';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from 'axios';
 
 export default function Home() {
 
@@ -215,6 +216,17 @@ export default function Home() {
       },
     ],
   };
+
+  const [products, setProducts] = useState([]);
+
+  async function fetchProducts(){
+    const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf')).data;
+    setProducts(data)
+  }
+
+  useEffect(()=>{
+    fetchProducts()
+  },[])
 
   return (
     <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
@@ -457,14 +469,20 @@ export default function Home() {
 
         <div className='sm:w-[80%] w-[70%]  bg-[white] -rotate-2  select-none mt-[30px] sm:mt-[60px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
 
-          <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit'} />
+          {/* <Card img={'img1.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit'} />
           <Card img={'img2.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
           <Card img={'img3.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
           <Card img={'img4.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
           <Card img={'img5.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
           <Card img={'img6.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
           <Card img={'img7.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
-          <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} />
+          <Card img={'img8.jpg'} price={499} ogprice={699} off={20} title={'Rainbow Party Decoration Set – 6pc DIY Birthday Decor Kit '} /> */}
+         
+         {products.map((item, index)=>(
+  
+            <Card key={index} img={item.images[0].src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id}/>
+
+          ))}
         </div>
 
         <button onClick={() => { window.location.href = '/allproducts' }} className='h-[50px] sm:mt-[40px] mt-[40px] mb-3 ml-11 sm:ml-0  w-[180px] rounded-full text-white -rotate-2 font-[600]  flex items-center justify-center bg-[#ED1C28] transition'>
