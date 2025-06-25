@@ -83,7 +83,17 @@ useEffect(()=>{
 useCurrentPath();
 },[location.pathname])
 
+  const [logged, setLoggged] = useState(false);
 
+  useEffect(()=>{
+    let id = localStorage.getItem('id');
+    if(id){
+      setLoggged(true);
+    }
+    else{
+      setLoggged(false);
+    }
+  },[])
 
   return (
     <>
@@ -213,9 +223,16 @@ useCurrentPath();
           <a href="/trackorder" className="block px-2 py-2 rounded hover:bg-gray-100">
             Track Order
           </a>
-          <a href="#" className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">
-            Sign Out
+
+          {logged === true ?
+             <a href="/" onClick={()=>{localStorage.clear()}} className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">
+             Sign Out
+           </a>:
+            <a href="/login?redirects=" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Log In
           </a>
+          }
+         
         </nav>
 
         </div>

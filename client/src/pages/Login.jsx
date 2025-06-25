@@ -2,6 +2,7 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 const LoginPage = () => {
   const handleGoogleLogin = () => {
@@ -9,6 +10,8 @@ const LoginPage = () => {
     console.log("Google login clicked");
   };
 
+  const [searchParams] = useSearchParams();
+    const redirect = searchParams.get("redirects");
   const login = useGoogleLogin({
     flow: 'implicit', // IMPORTANT: enables GeneralOAuthFlow
     onSuccess: async (tokenResponse) => {
@@ -28,7 +31,7 @@ const LoginPage = () => {
       console.log(wp)
       if(wp.success === true){
         localStorage.setItem('id',wp.user.id);
-        window.location.href = "/checkout"
+        window.location.href = `/${redirect}`
       }
 
       

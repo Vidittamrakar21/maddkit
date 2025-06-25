@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const cartItems = [
   { id: 1, name: "Backdrop 1", price: 899, qty: 1 },
@@ -43,6 +43,13 @@ const CheckoutPage = () => {
   };
 
   const grandTotal = totalAmount - discountAmount + (donationChecked ? DONATION_AMOUNT : 0);
+
+  useEffect(()=>{
+    let id = localStorage.getItem('id');
+    if(!id){
+      window.location.href = '/login?redirects=checkout'
+    }
+  },[])
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
