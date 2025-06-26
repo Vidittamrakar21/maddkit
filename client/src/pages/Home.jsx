@@ -90,28 +90,34 @@ export default function Home() {
   const category = [
     {
       title: 'Backdrop Bliss',
-      src: 'disco-ball.png'
+      src: 'disco-ball.png',
+      id: 53
     },
     {
       title: 'Light It Up',
-      src: 'garland.png'
+      src: 'garland.png',
+      id: 54
     },
 
     {
       title: 'Message Pop',
-      src: 'garland (1).png'
+      src: 'garland (1).png',
+      id: 55
     },
     {
       title: 'Fun & Fillers',
-      src: 'balloons.png'
+      src: 'balloons.png',
+      id: 56
     },
     {
       title: 'Party Gear',
-      src: 'carnival-mask.png'
+      src: 'carnival-mask.png',
+      id: 57
     },
     {
       title: 'Game Zone',
-      src: 'party-whistle.png'
+      src: 'party-whistle.png',
+      id: 58
     },
   ]
 
@@ -339,71 +345,11 @@ export default function Home() {
         <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-center text-white break-words font-[600]'>Craft Moments That Last a Lifetime.</h1>
         <h1 className='sm:text-[3.4rem] text-[2.1rem] font5 text-wrap  text-white break-words font-[600]'>Explore Categories</h1>
 
-        {/* <div className='flex items-center justify-center sm:h-[550px] h-[450px] sm:w-[80%] w-[95%]  sm:mt-[50px] mt-[10px] overflow-hidden '>
-                <div onClick={()=>setAnimate(-1)} className='flex items-center justify-center sm:h-[60px] h-[30px] w-[60px] bg-[white] sm:rounded-[100%] rounded-[15px]  hover:bg-transparent hover:border hover:border-gray-100'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                </svg>
-                </div>
-                
-                <div className='flex items-center justify-start sm:h-[550px] h-[450px] w-[90%]  overflow-hidden z-40 bg-[#ED1C28]'>
-                <div className={`flex items-center justify-evenly sm:h-[550px] h-[450px] w-[100%] sm:mt-[50px] mt-[10px] z-20   ${animate === 1? 'translate-x-[-50%] duration-500 ease-in-out ':animate === -1?'translate-x-[0%] duration-500 ease-in-out ':''}`}>
-
-                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2  bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Backdrop Bliss</h1>
-                  <div className='bg-[#FEE69A] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                    <img src="disco-ball.png" alt="" />
-                  </div>
-                </div>
-                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Message Pop</h1>
-                  <div className='bg-[#FFD0F2] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                  <img src="garland (1).png" alt="" />
-                  </div>
-                </div>
-                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Light It Up</h1>
-                  <div className='bg-[#AFD6EF] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                  <img src="garland.png" alt="" />
-                  </div>
-                </div>
-                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                  <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Fun & Fillers</h1>
-                  <div className='bg-[#B7F2B7] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                  <img src="balloons.png" alt="" />
-                  </div>
-                </div>
-                
-                
-                <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Party Gear</h1>
-                <div className='bg-[#FFDBC1] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                <img src="carnival-mask.png" alt="" />
-                </div>
-              </div>
-              <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
-                <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>Game Zone</h1>
-                <div className='bg-[#FEBCCC] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
-                <img src="party-whistle.png" alt="" />
-                </div>
-              </div>
-
-
-                </div>
-
-                </div>
-
-                <div onClick={()=>setAnimate(1)} className=' sm:h-[60px] h-[30px] w-[60px] bg-[white] sm:rounded-[100%] rounded-[15px]   flex items-center justify-center hover:bg-transparent hover:border hover:border-gray-100'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" className='' viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-          </svg>
-                </div>
-
-              </div> */}
+       
         <div className="sm:w-[70%] w-[75%] px-4 py-8">
           <Slider {...settings}>
             {category.map((card) => (
-              <div key={card.title} className="px-1">
+              <div onClick={()=>{window.location.href = `/category?id=${card.id}`}} key={card.title} className="px-1">
                 <div className='sm:h-[450px] sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[350px] w-[220px] min-w-[220px] max-w-[220px]  sm:m-5 m-2 bg-[#FFFFFF] flex items-center justify-between flex-col overflow-hidden'>
                   <h1 className='font5 text-[23px] font-[600] mt-11 mr-8'>{card.title}</h1>
                   <div className='bg-[#B7F2B7] h-[350px] w-[350px] translate-x-16 translate-y-24 rounded-[100%]'>
@@ -444,7 +390,7 @@ export default function Home() {
             <img src="ball.svg" className='h-[80px] w-[80px]' alt="" />
             <h2 className='text-white mt-3 font-[500]'>PREMADE PARTY KITS</h2>
           </div>
-          <div onClick={() => { window.location.href = '/build -kit' }} className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
+          <div onClick={() => { window.location.href = '/build-kit' }} className='w-[100px]  h-[100px] sm:w-[180px]  sm:h-[100px] flex items-center justify-center flex-col'>
             <img src="con.svg" className='h-[80px] w-[80px]' alt="" />
             <h2 className='text-white mt-3 font-[500]'>CUSTOMIZE PARTY KITS</h2>
           </div>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect, use } from "react";
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
 
 const ordersData = [
   {
@@ -34,7 +35,7 @@ const StarRating = ({ onRate }) => {
       {[1, 2, 3, 4, 5].map((star) => (
         <FaStar
           key={star}
-          className={`cursor-pointer w-5 h-5 ${
+          className={`cursor-pointer sm:w-4 sm:h-4 h-3 w-3 ${
             star <= (hover || rating) ? "text-yellow-400" : "text-gray-300"
           }`}
           onClick={() => {
@@ -50,6 +51,18 @@ const StarRating = ({ onRate }) => {
 };
 
 const OrderCard = ({ order }) => {
+
+  function formatDateToMMDDYYYY(dateString) {
+    const date = new Date(dateString);
+  
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+  
+    return `${day}/${month}/${year}`;
+  }
+
+
   const handleRating = (star) => {
     // alert(`You rated "${order.name}" with ${star} star(s)!`);
     // You can make API call here to submit the rating
@@ -57,12 +70,14 @@ const OrderCard = ({ order }) => {
 
   return (
     <div className="flex flex-col md:flex-col items-start justify-start gap-4 border rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300 bg-white">
-      <div className="flex items-center   gap-4">
-        <img src={order.image} alt={order.name} className="w-24 h-24 rounded-md object-cover" />
+      {(order.line_items).map((item, index)=>(
+        <>
+        <div key={index} className="flex items-center   gap-4">
+        <img src={item.image.src} alt={''} className="w-24 h-24 min-h-24 min-w-24 max-h-24 max-w-24  rounded-md object-cover" />
         <div>
-          <h2 className="text-lg font-semibold">{order.name}</h2>
-          <p className="text-gray-600">₹{order.price}</p>
-          <p
+          <h2 className="text-lg font-semibold line-clamp-2">{item.name}</h2>
+          <p className="text-gray-600">₹{item.price}</p>
+          {/* <p
             className={`mt-1 text-sm font-medium ${
               order.status === "Delivered"
                 ? "text-green-600"
@@ -72,25 +87,75 @@ const OrderCard = ({ order }) => {
             }`}
           >
             {order.status}
-          </p>
+          </p> */}
         </div>
       </div>
-      {order.status === "Delivered" && (
-        <div className="mt-2 md:mt-0">
-          <p className="text-sm text-gray-700 mb-1">Rate this product:</p>
-          <StarRating onRate={handleRating} />
-        </div>
-      )}
+       <div className="mt-2 md:mt-0">
+       <p className="text-sm text-gray-700 mb-1">Rate this product:</p>
+       <StarRating onRate={handleRating} />
+     </div>
+     </>
+      ))
+      
+      }
+
+<p className="text-sm text-gray-700 mb-1 font-bold">Total: ₹{order.total}</p>
+<p className="text-sm text-gray-700 mb-1 font-bold">Date: {formatDateToMMDDYYYY(order.date_created)}</p>
+      
     </div>
   );
 };
 
 const OrderPage = () => {
+
+  const [orderdata, setorderdata] = useState([]);
+  const [madeorders, setmadeorder] = useState(true);
+  async function fetchOrder(){
+    let id = localStorage.getItem('id')
+    if(id){
+      const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/orders?customer=${id}&consumer_key= ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf`)).data;
+      if(data?.length !== 0){
+        setorderdata(data);
+        setmadeorder(true)
+      }
+      else{
+        setmadeorder(false)
+      }
+    }
+    else{
+      window.location.href = '/login?redirects=orders'
+    }
+  }
+
+  useEffect(()=>{
+    fetchOrder()
+  },[])
+
+  if(orderdata.length === 0 && madeorders === true){
+    return (
+      <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-12 mt-[50px] sm:mt-[103px] flex items-center justify-center">
+          <h1>Fetching Order Details...</h1>
+      </div>
+
+    )
+  }
+  else if(orderdata.length === 0 && madeorders === false){
+    return (
+      <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-12 mt-[50px] sm:mt-[103px] flex items-center justify-center">
+       <div className="flex items-center justify-center flex-col">
+       <h1>No Orders Yet!</h1>
+       <button onClick={()=>{window.location.href = '/allproducts'}} className="h-[35px] w-[110px] text-white bg-[#ED1C28] mt-4">Shop Now!</button>
+       </div>
+      </div>
+
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-12 mt-[50px] sm:mt-[103px]">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">Your Orders</h1>
       <div className="space-y-6">
-        {ordersData.map((order) => (
+        {orderdata.map((order) => (
           <OrderCard key={order.id} order={order} />
         ))}
       </div>

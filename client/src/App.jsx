@@ -15,6 +15,7 @@ import RewardPage from './pages/Reward';
 import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import OrderTrackingPage from './pages/TrackOrder';
+import Category from './pages/Category';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './App.css'
 import './index.css'
@@ -118,6 +119,13 @@ function App() {
       <LoginPage/>
       </>
     }, 
+    {
+      path: '/category',
+      element:<>
+      <Navbar/>
+      <Category/>
+      </>
+    }, 
  
     
    
@@ -130,8 +138,7 @@ function App() {
 
       <>
            <GoogleOAuthProvider clientId="848050733143-cnbakntf40ekhb93m8ek0mu10sdo26jn.apps.googleusercontent.com">
-
-        <RouterProvider router={router}/>
+            <RouterProvider router={router}/>
            </GoogleOAuthProvider>
   
       </>
