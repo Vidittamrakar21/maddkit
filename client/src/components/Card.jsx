@@ -9,6 +9,7 @@ export default function Card({ img, title, price, ogprice, off , id, variations}
   const navigate = useNavigate();
 
   function navigateProduct() {
+
     window.location.href = `/product?product_id=${id}`
   }
 
