@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+const categoryId = [53, 54, 55, 56, 57, 58]
 const categories = [
   "Backdrop Bliss",
   "Message Pop",

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const cartItems = [
-  { id: 1, name: "Backdrop 1", price: 899, qty: 1 },
-  { id: 2, name: "Message Board", price: 299, qty: 2 },
-];
+
 
 const validCoupons = {
   SAVE100: 100,
@@ -16,6 +13,8 @@ const CheckoutPage = () => {
   const [discountAmount, setDiscountAmount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [error, setError] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+
 
   const DONATION_AMOUNT = 10;
 
@@ -50,6 +49,12 @@ const CheckoutPage = () => {
       window.location.href = '/login?redirects=checkout'
     }
   },[])
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cart);
+  }, []);
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
@@ -87,7 +92,7 @@ const CheckoutPage = () => {
             <div className="space-y-2 mb-4">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex justify-between text-sm">
-                  <span>{item.name} × {item.qty}</span>
+                  <span className=" line-clamp-1">{item.name} × {item.qty}</span>
                   <span>₹{item.price * item.qty}</span>
                 </div>
               ))}

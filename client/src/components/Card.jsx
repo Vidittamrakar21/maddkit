@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-export default function Card({ img, title, price, ogprice, off , id, variations, toast}) {
+export default function Card({ img, title, price, ogprice, off , id, variations, toast , category}) {
   const navigate = useNavigate();
 
   function navigateProduct() {
@@ -25,7 +25,8 @@ export default function Card({ img, title, price, ogprice, off , id, variations,
       image: img,
       name: title,
       price: price,
-      qty: 1
+      qty: 1,
+      category: category
     }
 
     let newItem = [{
@@ -34,19 +35,27 @@ export default function Card({ img, title, price, ogprice, off , id, variations,
       name: title,
       price: price,
       qty: 1,
-      category: "Backdrop Bliss"
+      category: category
     }]
 
     let cart = JSON.parse(localStorage.getItem('cart'));
+
+    const isAlreadyInCart = cart?.some((item) => item.id === id);
 
     if(!cart){
       localStorage.setItem('cart',JSON.stringify(newItem));
       toast();
     }
     else{
-      let newarr = cart.concat(newItem);
-      localStorage.setItem('cart',JSON.stringify(newarr));
-      toast();
+      if(isAlreadyInCart){
+        alert("Product already in cart.")
+      }
+      else{
+
+        let newarr = cart.concat(newItem);
+        localStorage.setItem('cart',JSON.stringify(newarr));
+        toast();
+      }
     }
   }
 

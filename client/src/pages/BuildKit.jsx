@@ -158,7 +158,7 @@ export default function BuildKit() {
 
 {products.length!==0?products.map((item, index)=>(
   
-  <Card key={index} img={item.images[0]?.src} toast={handleToast} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
+  <Card key={index} img={item.images[0]?.src} toast={handleToast} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations} category={category[kitStep - 1]}/>
 
 )): 
 

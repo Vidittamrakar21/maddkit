@@ -48,7 +48,7 @@ export default function Stepper({
   const handleComplete = () => {
     setDirection(1);
     updateStep(totalSteps + 1);
-    window.location.href = '/checkout'
+    window.location.href = '/cart'
   };
 
   return (
