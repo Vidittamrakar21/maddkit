@@ -5,7 +5,6 @@ import Footer from '@/components/Footer'
 export default function Search() {
   const [query, setQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [timer, setTimer] = useState(null);
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -19,11 +18,11 @@ export default function Search() {
 
   const suggestions = [
     'Birthday Balloons',
-    'Anniversary Decoration',
+    'Anniversary Gifts',
     'Baby Shower Decorations',
-    'Bachelorette',
-    'Retirement Party',
-    'Confetti',
+    'Bachelorette Outfits',
+    'Retirement Cards',
+    'Party Props',
   ];
 
   const filteredSuggestions = suggestions.filter(item =>
@@ -31,20 +30,32 @@ export default function Search() {
   );
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
+    setQuery(e.target.value);
 
-    if (value.trim()) {
+    if (e.target.value.trim()) {
       setShowSuggestions(true);
-
-      if (timer) clearTimeout(timer);
-      const newTimer = setTimeout(() => {
-        setShowSuggestions(false);
-      }, 1000);
-      setTimer(newTimer);
     } else {
       setShowSuggestions(false);
-      if (timer) clearTimeout(timer);
+    }
+  };
+
+  const handleSearch = () => {
+    if (!query.trim()) {
+      setFilteredProducts([]);
+      return;
+    }
+
+    const results = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredProducts(results);
+    setShowSuggestions(false);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent form submission
+      handleSearch();
     }
   };
 
@@ -62,29 +73,26 @@ export default function Search() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    if (!query.trim()) {
-      setFilteredProducts([]);
-      return;
-    }
-
-    const filtered = allProducts.filter(product =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }, [query, allProducts]);
-
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-full flex items-center justify-start flex-col overflow-hidden'>
-      <div className="max-w-[90%] min-h-[30dvh] mt-[30px] sm:mt-[60px] mx-auto">
-        {/* Search Bar */}
-        <input
-          type="text"
-          value={query}
-          onChange={handleInputChange}
-          placeholder="Search for party kits, decorations, events..."
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ED1C28]"
-        />
+      <div className="max-w-[95%] min-h-[30dvh] mt-[30px] sm:mt-[60px] mx-auto">
+        {/* Search Input and Button */}
+        <div className=" w-[100%] flex  items-center justify-center  gap-2">
+          <input
+            type="text"
+            value={query}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
+            placeholder="Search for party kits, decorations, events..."
+            className="flex-grow px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ED1C28]"
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-[#ED1C28]  text-white px-6 py-3 rounded-lg font-semibold hover:bg-black transition-all"
+          >
+            Search
+          </button>
+        </div>
 
         {/* Suggestion Box */}
         {showSuggestions && query.trim() && (
@@ -93,7 +101,10 @@ export default function Search() {
               filteredSuggestions.map((item, index) => (
                 <div
                   key={index}
-                  onClick={() => setQuery(item)}
+                  onClick={() => {
+                    setQuery(item);
+                    setShowSuggestions(false);
+                  }}
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
                   {item}
@@ -111,7 +122,10 @@ export default function Search() {
             <button
               key={index}
               className="bg-[#ED1C28] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black"
-              onClick={() => setQuery(tag)}
+              onClick={() => {
+                setQuery(tag);
+                handleSearch();
+              }}
             >
               {tag}
             </button>
@@ -120,12 +134,11 @@ export default function Search() {
       </div>
 
       {/* Search Result Cards */}
-      <section className='sm:w-[80%] w-[96%] bg-white select-none mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6'>
+      <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]    grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  '>
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
             <Card
               key={product.id}
-              id={product.id}
               img={product.images[0]?.src || 'fallback.jpg'}
               price={product.price}
               ogprice={product.regular_price}
@@ -147,11 +160,6 @@ export default function Search() {
           )
         )}
       </section>
-
-      <br />
-      <br />
-      <br />
-      <br />
 
       {/* <Footer /> */}
     </div>
