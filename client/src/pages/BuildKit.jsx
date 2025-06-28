@@ -5,6 +5,7 @@ import { useState,useEffect } from 'react';
 import Footer from '@/components/Footer';
 import QuizCard from '@/components/QuizCard';
 import axios from 'axios';
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 
 export default function BuildKit() {
   const [kitStep, setStep] = useState(1);
@@ -26,8 +27,38 @@ export default function BuildKit() {
     fetchProduct();
   },[kitStep])
 
+
+  function handleToast(){
+    toast('Item Added To Cart!', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+  }
+
   return (
     <div className='min-h-[100vh] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
+
+<ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        />
+
        <QuizCard state={quizstate} updatestate={updateState}/>
       <Stepper
         initialStep={1}
@@ -127,7 +158,7 @@ export default function BuildKit() {
 
 {products.length!==0?products.map((item, index)=>(
   
-  <Card key={index} img={item.images[0]?.src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
+  <Card key={index} img={item.images[0]?.src} toast={handleToast} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
 
 )): 
 

@@ -3,7 +3,7 @@ import Card from '@/components/Card'
 import Footer from '@/components/Footer'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
-
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 export default function AllProduct() {
 
   const [products, setProducts] = useState([]);
@@ -18,9 +18,35 @@ export default function AllProduct() {
     fetchProducts()
   },[])
 
+  function handleToast(){
+    toast('Item Added To Cart!', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+  }
+
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
-
+        <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        />
 <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[80px] mt-[20px]'>
 
 <h1 className='text-[25px] text-[black] font-[600] font5'>All Products</h1>
@@ -32,7 +58,7 @@ export default function AllProduct() {
 
     {products.length!==0?products.map((item, index)=>(
   
-      <Card key={index} img={item.images[0]?.src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
+      <Card key={index} img={item.images[0]?.src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations} toast={handleToast}/>
    
     )): 
     

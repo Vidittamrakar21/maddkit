@@ -5,7 +5,8 @@ import '../App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function Card({ img, title, price, ogprice, off , id, variations}) {
+
+export default function Card({ img, title, price, ogprice, off , id, variations, toast}) {
   const navigate = useNavigate();
 
   function navigateProduct() {
@@ -16,6 +17,38 @@ export default function Card({ img, title, price, ogprice, off , id, variations}
   const [colorBox, setColorBox] = useState(false);
   const [sizeBox, setSizeBox] = useState(false);
   const [attributes, setAttributes] = useState([]);
+
+
+  function addToCart(){
+    let item = {
+      id: id,
+      image: img,
+      name: title,
+      price: price,
+      qty: 1
+    }
+
+    let newItem = [{
+      id: id,
+      image: img,
+      name: title,
+      price: price,
+      qty: 1,
+      category: "Backdrop Bliss"
+    }]
+
+    let cart = JSON.parse(localStorage.getItem('cart'));
+
+    if(!cart){
+      localStorage.setItem('cart',JSON.stringify(newItem));
+      toast();
+    }
+    else{
+      let newarr = cart.concat(newItem);
+      localStorage.setItem('cart',JSON.stringify(newarr));
+      toast();
+    }
+  }
 
 
   // async function fetchvariants(){
@@ -37,6 +70,7 @@ export default function Card({ img, title, price, ogprice, off , id, variations}
 
 
     <FadeContent blur={false} duration={1500} easing="ease-out" initialOpacity={0}>
+      
       <div onClick={navigateProduct} className='border  sm:w-[350px] w-[160px] min-h-[300px] sm:min-h-[200px] select-none  m-2 bg-[white] overflow-hidden shadow-lg  flex items-start justify-center  flex-col'>
         {/* <div className='relative top-10 flex items-center justify-between '>
     <div className=' text-white bg-[#ED1C28] text-[14px] h-[30px] w-[60px] rounded-md ml-3 flex items-center justify-center'>
@@ -126,7 +160,7 @@ export default function Card({ img, title, price, ogprice, off , id, variations}
             <h3 className='sm:text-[22px] text-[18px] text-[black] font-[600] ml-2'><span className='line-through sm:text-[16px] text-[14px] text-[gray]'>{ogprice?`₹${ogprice}`:''}</span> &nbsp;₹{price} </h3>
 
           </div>
-          <button className='h-[35px] sm:h-[40px] sm:w-[250px] mt-1 mb-1 sm:mb-0 sm:mt-0 w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
+          <button onClick={(e)=>{e.stopPropagation(); addToCart()}} className='h-[35px] sm:h-[40px] sm:w-[250px] mt-1 mb-1 sm:mb-0 sm:mt-0 w-[140px]  flex items-center justify-center  flex-row btn-grad text-black font-[600]'>
             + ADD
           </button>
         </div>

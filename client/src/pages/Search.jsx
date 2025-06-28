@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '@/components/Card'
 import Footer from '@/components/Footer'
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 
 export default function Search() {
   const [query, setQuery] = useState('');
@@ -73,8 +74,36 @@ export default function Search() {
     fetchProducts();
   }, []);
 
+
+  function handleToast(){
+    toast('Item Added To Cart!', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+  }
+
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-full flex items-center justify-start flex-col overflow-hidden'>
+       <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        />
       <div className="max-w-[95%] min-h-[30dvh] mt-[30px] sm:mt-[60px] mx-auto">
         {/* Search Input and Button */}
         <div className=" w-[100%] flex  items-center justify-center  gap-2">
@@ -134,20 +163,22 @@ export default function Search() {
       </div>
 
       {/* Search Result Cards */}
-      <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]    grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  '>
+      <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[10px]    grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  '>
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
             <Card
               key={product.id}
+              id={product.id}
               img={product.images[0]?.src || 'fallback.jpg'}
               price={product.price}
               ogprice={product.regular_price}
+              toast={handleToast}
               title={product.name}
               off={
                 product.regular_price && product.price
                   ? Math.round(
-                      ((product.regular_price - product.price) / product.regular_price) * 100
-                    )
+                    ((product.regular_price - product.price) / product.regular_price) * 100
+                  )
                   : 0
               }
             />
@@ -160,6 +191,11 @@ export default function Search() {
           )
         )}
       </section>
+
+      <br />
+      <br />
+      <br />
+      <br />  
 
       {/* <Footer /> */}
     </div>

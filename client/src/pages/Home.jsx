@@ -23,6 +23,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios';
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 
 export default function Home() {
 
@@ -234,9 +235,36 @@ export default function Home() {
     fetchProducts()
   },[])
 
+  function handleToast(){
+    toast('Item Added To Cart!', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+  }
+
   return (
     <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
 
+<ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        />
 
 
       <button onClick={scrollToTop} className='sm:w-[50px] w-[40px] fixed sm:bottom-5 bottom-2 flex text-white items-center justify-evenly flex-col sm:right-11 right-2 z-50 sm:h-[80px] h-[40px] rounded-[30px] bg-[#ED1C28]'>
@@ -432,7 +460,7 @@ export default function Home() {
 
          {products.length !== 0? products.map((item, index)=>(
   
-            <Card key={index} img={item.images[0].src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
+            <Card key={index} img={item.images[0].src} price={item.price} toast={handleToast} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
 
           )):
           
