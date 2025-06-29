@@ -3,7 +3,8 @@ import '../App.css'
 import RotatingText from './RotatingText'
 import { useState , useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-
+// import { FaShoppingCart } from "react-icons/fa"; 
+import { FiShoppingCart } from "react-icons/fi";
 
 export default function Navbar() {
  
@@ -14,6 +15,8 @@ export default function Navbar() {
  const [sideBar, openSideBar] = useState(false);
  const [shopOpen, setShopOpen] = useState(false);
  const [scrolled, setScrolled] = useState(false);
+ const [totalItems, setTotalItems] = useState(3);
+
 
     useEffect(() => {
       const handleScroll = () => {
@@ -95,6 +98,13 @@ useCurrentPath();
     }
   },[])
 
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.reduce((acc, item) => acc + item.qty, 0);
+    setTotalItems(count);
+  }, []);
+
   return (
     <>
     <div className=' border-b border-b-[#313131] select-none fixed w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
@@ -160,10 +170,19 @@ useCurrentPath();
         <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063q.068.062.132.129.065-.067.132-.129c3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3 3 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398"/>
         </svg> */}
         
-        <svg onClick={()=>{window.location.href = '/cart'}} xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill={path==='home'?'white':'black'} class="rounded-lg " viewBox="0 0 16 16">
+        {/* <svg onClick={()=>{window.location.href = '/cart'}} xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill={path==='home'?'white':'black'} class="rounded-lg " viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-        </svg>
+        </svg> */}
 
+
+        <div className="relative cursor-pointer" onClick={() => window.location.href = "/cart"}>
+      <FiShoppingCart className={`text-2xl  ${path === 'home'?'text-white':'text-black'}`} />
+      {totalItems > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+          {totalItems}
+        </span>
+      )}
+    </div>
        
         </div>
         

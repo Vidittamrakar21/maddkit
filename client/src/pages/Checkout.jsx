@@ -56,6 +56,37 @@ const CheckoutPage = () => {
   }, []);
 
 
+  const handlePayment = async () => {
+    const options = {
+      key: "RAZORPAY_KEY_ID", // From your Razorpay dashboard
+      amount: grandTotal * 100, // in paise
+      currency: "INR",
+      name: "Maddkit",
+      description: "Test Transaction",
+      image: "/logo.png",
+      handler: async function (response) {
+        // Create WooCommerce order
+        // await createWooOrder(response);
+        console.log(response);
+      },
+      prefill: {
+        name: "vidt",
+        email: "vidit@example.com",
+        contact: 1919191,
+      },
+      notes: {
+        address: "User billing address here"
+      },
+      theme: {
+        color: "#ED1C28"
+      }
+    };
+  
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+  
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
       {/* <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1> */}
@@ -79,7 +110,19 @@ const CheckoutPage = () => {
             </div>
             <div>
               <label className="block text-sm font-medium">Shipping Address</label>
-              <textarea className="mt-1 w-full border rounded-lg px-4 py-2" rows="3" />
+              <textarea className="mt-1 w-full border rounded-lg px-4 py-2 resize-none" rows="3" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">City</label>
+              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">State</label>
+              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Pin Code</label>
+              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
           </form>
         </div>
@@ -156,7 +199,7 @@ const CheckoutPage = () => {
               </div>
             </div>
 
-            <button className="mt-6 w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition">
+            <button onClick={handlePayment} className="mt-6 w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition">
               Confirm & Pay ₹{grandTotal}
             </button>
           </div>

@@ -53,57 +53,102 @@ const Cart = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Side - Cart Items */}
             <div className="flex-1 ">
-              {categories.map((category) => {
-                const items = cartItems?.filter(
-                  (item) => item.category === category
-                );
-                if (items?.length === 0) return null;
+            {categories.map((category) => {
+    const items = cartItems?.filter((item) => item.category === category);
+    if (items?.length === 0) return null;
 
-                return (
-                  <div key={category} className="mb-10">
-                    <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
-                      {category}
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {items?.map((item) => (
-                        <div
-                          key={item.id}
-                          className="bg-white shadow rounded-xl p-4 flex gap-4"
-                        >
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-24 h-24 object-cover rounded-lg"
-                          />
-                          <div className="flex-1 flex flex-col justify-between">
-                            <div>
-                              <h3 className="text-lg font-semibold line-clamp-2">
-                                {item.name}
-                              </h3>
-                              <p className="text-gray-600 mt-1">₹{item.price}</p>
-                            </div>
-                            <div className="mt-2 flex items-center gap-2">
-                              <button
-                                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                                onClick={() => decrementQty(item.id)}
-                              >
-                                -
-                              </button>
-                              <span>{item.qty}</span>
-                              <button
-                                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                                onClick={() => incrementQty(item.id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+    return (
+      <div key={category} className="mb-10">
+        <h2 className="text-2xl font-semibold mb-4 border-b pb-2">{category}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white shadow rounded-xl p-4 flex gap-4"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-lg"
+              />
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
+                  <p className="text-gray-600 mt-1">₹{item.price}</p>
+                </div>
+                <div className="mt-2 flex items-center gap-2">
+                  <button
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => decrementQty(item.id)}
+                  >
+                    -
+                  </button>
+                  <span>{item.qty}</span>
+                  <button
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => incrementQty(item.id)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+
+  {/* Other Items not in defined categories */}
+  {(() => {
+    const categorizedSet = new Set(categories);
+    const otherItems = cartItems.filter(
+      (item) => !categorizedSet.has(item.category)
+    );
+
+    if (otherItems.length === 0) return null;
+
+    return (
+      <div className="mb-10">
+        <h2 className="text-2xl font-semibold mb-4 border-b pb-2">Items</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {otherItems.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white shadow rounded-xl p-4 flex gap-4"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-lg"
+              />
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
+                  <p className="text-gray-600 mt-1">₹{item.price}</p>
+                </div>
+                <div className="mt-2 flex items-center gap-2">
+                  <button
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => decrementQty(item.id)}
+                  >
+                    -
+                  </button>
+                  <span>{item.qty}</span>
+                  <button
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => incrementQty(item.id)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  })()}
             </div>
 
             {/* Right Side - Summary */}
