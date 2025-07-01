@@ -16,12 +16,12 @@ export default function Footer() {
     <div className='flex items-start justify-evenly mt-5  -rotate-2    h-[250px] w-[90%] sm:w-[20%]'>
     <div className='flex items-start justify-start flex-col sm:w-[200px]    w-[100px] h-[280px]'>
    <b><h3>Categories</h3></b>
-   <h3 className='mt-1'>Bakdrop Bliss</h3>
-   <h3  className='mt-1'>Light It Up</h3>
-   <h3 className='mt-1'>Message Pop</h3>
-   <h3 className='mt-1'>Fun & Fillers</h3>
-   <h3 className='mt-1'>Party Gear</h3>
-   <h3 className='mt-1'>Game Zone</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/category?id=53'}}>Bakdrop Bliss</h3>
+   <h3  className='mt-1'onClick={()=>{window.location.href  = '/category?id=54'}}>Light It Up</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/category?id=55'}}>Message Pop</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/category?id=56'}}>Fun & Fillers</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/category?id=57'}}>Party Gear</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/category?id=58'}}>Game Zone</h3>
   </div>
 
 
@@ -29,10 +29,10 @@ export default function Footer() {
   <div className='flex items-start justify-start flex-col sm:w-[200px]  w-[100px] h-[280px] '>
   
   <b><h3>Information</h3></b>
-   <h3 className='mt-1'>Terms & Conditions</h3>
-   <h3  className='mt-1'>Privacy Policy</h3>
-   <h3 className='mt-1'>Return & Refund Policy</h3>
-   <h3  className='mt-1'>Track Order</h3>
+   <h3  className='mt-1' onClick={()=>{window.location.href  = '/privacy-policy'}}>Privacy Policy</h3>
+   <h3 className='mt-1'onClick={()=>{window.location.href  = '/refund-policy'}}>Return & Refund Policy</h3>
+   <h3 className='mt-1' onClick={()=>{window.location.href  = '/terms-of-service'}}>Terms of Service</h3>
+   <h3  className='mt-1' onClick={()=>{window.location.href  = '/trackorder'}}>Track Order</h3>
   </div>
   </div>
   

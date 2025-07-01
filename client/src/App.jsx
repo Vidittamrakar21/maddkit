@@ -16,6 +16,9 @@ import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import OrderTrackingPage from './pages/TrackOrder';
 import Category from './pages/Category';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Return from './pages/Return';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './App.css'
 import './index.css'
@@ -124,6 +127,27 @@ function App() {
       element:<>
       <Navbar/>
       <Category/>
+      </>
+    }, 
+    {
+      path: '/privacy-policy',
+      element:<>
+      <Navbar/>
+      <Privacy/>
+      </>
+    }, 
+    {
+      path: '/terms-of-service',
+      element:<>
+      <Navbar/>
+      <Terms/>
+      </>
+    }, 
+    {
+      path: '/refund-policy',
+      element:<>
+      <Navbar/>
+      <Return/>
       </>
     }, 
  

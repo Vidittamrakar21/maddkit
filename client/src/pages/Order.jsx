@@ -113,7 +113,7 @@ const OrderPage = () => {
   async function fetchOrder(){
     let id = localStorage.getItem('id')
     if(id){
-      const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/orders?customer=${id}&consumer_key= ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf`)).data;
+      const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/orders?customer=${id}&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
       if(data?.length !== 0){
         setorderdata(data);
         setmadeorder(true)

@@ -62,7 +62,7 @@ export default function Search() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('https://maddkit.com/wp-json/wc/v3/products?per_page=50&consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf');
+      const res = await fetch('https://maddkit.com/wp-json/wc/v3/products?per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009');
       const data = await res.json();
       setAllProducts(data);
     } catch (err) {

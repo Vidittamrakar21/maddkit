@@ -5,12 +5,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Card from '../components/Card';
-import { color } from 'framer-motion';
 import axios from 'axios';
 
 import Footer from '@/components/Footer';
 import { useSearchParams } from "react-router-dom";
-
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 
 
 
@@ -38,13 +37,13 @@ export default function Product() {
   };
 
   async function fetchProduct() {
-    const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products/${productId}?per_page=50&consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf`)).data;
+    const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products/${productId}?per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setProduct(data)
     console.log(data)
     setActive(data.images[0]?.src);
     setActiveIMGS(data.images);
 
-    const relatedProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data.related_ids).join(',')}&per_page=50&consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf`)).data;
+    const relatedProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data.related_ids).join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setRelated(relatedProducts)
 
 
@@ -86,10 +85,77 @@ export default function Product() {
     }
   };
 
+  function handleToast(){
+    toast('Item Added To Cart!', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+  }
+
+  function addToCart(){
+    let item ={
+      id: product.id,
+      image: active,
+      name: product.name,
+      price: product.price,
+      qty: quantity,
+      category: ""
+    }
+
+    let newItem = [{
+      id: product.id,
+      image: active,
+      name: product.name,
+      price: product.price,
+      qty: quantity,
+      category: ""
+    }]
+
+    let cart = JSON.parse(localStorage.getItem('cart'));
+
+    const isAlreadyInCart = cart?.some((item) => item.id === product.id);
+
+    if(!cart){
+      localStorage.setItem('cart',JSON.stringify(newItem));
+      handleToast();
+    }
+    else{
+      if(isAlreadyInCart){
+        alert("Product already in cart.")
+      }
+      else{
+
+        let newarr = cart.concat(newItem);
+        localStorage.setItem('cart',JSON.stringify(newarr));
+        toast('Item Added To Cart!', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          });
+      }
+    }
+  }
+
+
+
 
   if (product === '') {
     return (
       <div className=' w-[100%] mt-[85px] sm:mt-[133px] select-none flex items-center justify-center flex-col overflow-hidden'>
+          
         <div className='w-[100%]   flex sm:flex-row flex-col items-start justify-start'>
 
           <div className='sm:w-[40%] w-[100%] min-h-[400px] flex items-center sm:ml-[100px] justify-center flex-col'>
@@ -139,6 +205,20 @@ export default function Product() {
 
   return (
     <div className=' w-[100%] select-none flex items-center justify-start flex-col overflow-hidden'>
+        <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        />
+      
       <div className='w-[100%] mt-[85px] sm:mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
         <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
           {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
@@ -245,7 +325,7 @@ export default function Product() {
           </div>
 
           <div className='w-[100%] h-[45px] mt-3 flex sm:justify-start items-center justify-center'>
-            <button className='h-[50px] sm:h-[50px]   w-[320px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[15px] font-[600] shadow-md'>ADD TO CART</button>
+            <button onClick={addToCart} className='h-[50px] sm:h-[50px]   w-[320px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[15px] font-[600] shadow-md'>ADD TO CART</button>
           </div>
 
           {/* <div className='flex items-center justify-center mt-9 cursor-pointer  ml-4 sm:ml-0'>

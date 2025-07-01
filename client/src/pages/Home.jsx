@@ -140,12 +140,19 @@ export default function Home() {
       sub3: "Just click and unwrap the magic.",
       but: "SHOP NOW"
     },
+    // {
+    //   title: "Custom Party Kits",
+    //   sub1: "Build It Your Way. Pick ,Mix, Party.",
+    //   sub2: "Customize every element.",
+    //   sub3: "Your party, your story.",
+    //   but: "BUILD NOW"
+    // }
     {
-      title: "Custom Party Kits",
-      sub1: "Build It Your Way. Pick ,Mix, Party.",
-      sub2: "Customize every element.",
-      sub3: "Your party, your story.",
-      but: "BUILD NOW"
+      title: "Premade Party Kits",
+      sub1: "Too Busy To Plan? Tap A Kit & Celebrate",
+      sub2: "Pre-styled party kits.",
+      sub3: "Just click and unwrap the magic.",
+      but: "SHOP NOW"
     }
   ]
 
@@ -227,7 +234,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   async function fetchProducts(){
-    const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?consumer_key=ck_b0889e799c2d297ce09848972be70e5316b2bee7&consumer_secret=cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf')).data;
+    const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009')).data;
     setProducts(data)
   }
 
@@ -252,7 +259,7 @@ export default function Home() {
   return (
     <div className='sm:mt-[103px] mt-[75px] w-[100%] min-h-screen   bg-[#ED1C28]   flex items-center justify-start flex-col doodle overflow-hidden '>
 
-<ToastContainer
+      <ToastContainer
         position="bottom-center"
         autoClose={3000}
         hideProgressBar={true}
@@ -279,12 +286,12 @@ export default function Home() {
         <div className='w-[80%] sm:w-[50%]  z-30 h-[200px] p-3  sm:h-[100%] relative sm:top-[180px] top-0  flex items-start sm:ml-[80px] ml-0 justify-start flex-col'>
 
 
-          <       motion.h1
+          <motion.h1
             key={index + 1}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1.2 }}
             transition={{ duration: 0.3, delay: 0 }}
-            onClick={() => { index === 1 ? window.location.href = '/build-kit' : window.location.href = '/premade-kit' }}
+            onClick={() => { index === 1 ? window.location.href = '/premade-kit' : window.location.href = '/premade-kit' }}
             className='font-custom sm:text-[6rem] text-[3.0rem] text-center text-white sm:p-3 p-2'
           >
             {content[index].title}
@@ -307,7 +314,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1.2 }}
               transition={{ duration: 0.3, delay: 0.6 }}
             >
-              <button onClick={() => { index === 1 ? window.location.href = '/build-kit' : window.location.href = '/premade-kit' }} className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
+              <button onClick={() => { index === 1 ? window.location.href = '/premade-kit' : window.location.href = '/premade-kit' }} className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
                 </svg>
@@ -584,7 +591,7 @@ export default function Home() {
 
       <section className='w-[110vw]  rotate-2  select-none mt-[90px]  flex-col  flex items-center justify-start'>
         <h1 className='sm:text-[3.4rem] text-[2.1rem] text-center font5 text-wrap mr-6  text-white -rotate-2 mt-[10px] break-words font-[600]'>Premade Party Kits</h1>
-        <div className='sm:w-[70%] w-[85%]  -rotate-2  select-none mt-[30px] sm:mt-[60px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
+        {/* <div className='sm:w-[70%] w-[85%]  -rotate-2  select-none mt-[30px] sm:mt-[60px]   grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6 '>
 
           <div className='h-[250px] w-[160px] sm:h-[350px] sm:w-[290px]   flex items-center justify-start flex-col'>
             <img src="img1.jpg" alt="" className='h-[150px] w-[150px] sm:h-[230px] sm:w-[230px]  rounded-[100%]' />
@@ -635,7 +642,10 @@ export default function Home() {
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
           </svg>
             View All Kits
-        </button>
+        </button> */}
+
+        <h1 className='text-[19px] mt-5 -rotate-2  text-white'>Launching Soon!</h1>
+
 
       </section>
 
