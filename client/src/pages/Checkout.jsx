@@ -19,6 +19,7 @@ const CheckoutPage = () => {
   const DONATION_AMOUNT = 10;
 
   const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const totalItems = cartItems?.reduce((acc, item) => acc + item.qty, 0);
 
   const handleApplyCoupon = () => {
     const trimmedCode = couponCode.trim().toUpperCase();
@@ -58,7 +59,7 @@ const CheckoutPage = () => {
 
   const handlePayment = async () => {
     const options = {
-      key: "RAZORPAY_KEY_ID", // From your Razorpay dashboard
+      key: "rzp_test_E1IAZRqwdEpoFT", // From your Razorpay dashboard
       amount: grandTotal * 100, // in paise
       currency: "INR",
       name: "Maddkit",
@@ -68,6 +69,9 @@ const CheckoutPage = () => {
         // Create WooCommerce order
         // await createWooOrder(response);
         console.log(response);
+        localStorage.setItem('cart','[]')
+        window.location.href = `/success?items=${totalItems}`
+        
       },
       prefill: {
         name: "vidt",
