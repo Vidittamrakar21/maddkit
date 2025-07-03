@@ -14,6 +14,7 @@ export default function Navbar() {
 
  const [sideBar, openSideBar] = useState(false);
  const [shopOpen, setShopOpen] = useState(false);
+ const [OrderOpen, setOrderOpen] = useState(false);
  const [scrolled, setScrolled] = useState(false);
  const [totalItems, setTotalItems] = useState(3);
 
@@ -142,9 +143,9 @@ useCurrentPath();
 
         <ul className={`sm:w-[400px] sm:h-[50px] sm:flex sm:items-center sm:justify-evenly ${path === 'home'? 'text-white':'text-[black]'} sm:text-[16px] sm:font-[600] hidden`}>
        
-        <li onClick={()=>{window.location.href = '/premade-kit'}}>Premade Kits</li>
-        <li onClick={()=>{window.location.href = '/build-kit'}}>Custom Kits</li>
-        <li onClick={()=>{window.location.href = '/allproducts'}}>All Products</li>
+        <li onClick={()=>{window.location.href = '/'}} className={path === 'home'? 'underline':''}>Home</li>
+        <li onClick={()=>{window.location.href = '/premade-kit'}} className={path === 'premade-kit'? 'underline':''}>Party Kits</li>
+        <li onClick={()=>{window.location.href = '/allproducts'}} className={path === 'allproducts'? 'underline':''}>All Products</li>
        </ul>
 
         <div className='sm:w-[200px]  w-[160px]  sm:mr-[60px] mr-[0px]  h-[50px]  flex items-center justify-evenly '>
@@ -161,7 +162,7 @@ useCurrentPath();
          {/* <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
         </svg> */}
-        <svg onClick={()=>openSideBar(true)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill={path==='home'?'white':'black'} class="bi bi-person" viewBox="0 0 16 16">
+        <svg onClick={()=>{if(logged === true){window.location.href = '/account'} else{window.location.href = '/login?redirects=account'}}} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill={path==='home'?'white':'black'} class="bi bi-person" viewBox="0 0 16 16">
         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
       </svg>
       
@@ -221,11 +222,9 @@ useCurrentPath();
             {shopOpen && (
               <div className="ml-4 mt-1 space-y-1 text-sm text-gray-600">
                 <a href="/premade-kit" className="block px-2 py-1 rounded hover:bg-gray-100">
-                  Premade Kits
+                  Party Kits
                 </a>
-                <a href="/build-kit" className="block px-2 py-1 rounded hover:bg-gray-100">
-                  Custom Kits
-                </a>
+              
                 <a href="/allproducts" className="block px-2 py-1 rounded hover:bg-gray-100">
                   All Products
                 </a>
@@ -233,15 +232,37 @@ useCurrentPath();
             )}
           </div>
 
-          <a href="/orders" className="block px-2 py-2 rounded hover:bg-gray-100">
-            Orders
-          </a>
+
+            {/* Order with dropdown */}
+            <div className="px-2">
+            <button
+              onClick={() => setOrderOpen(!OrderOpen)}
+              className="w-full flex items-center justify-between py-2 rounded hover:bg-gray-100"
+            >
+              <span>Orders</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="gray" className={`transition-transform duration-200 ${shopOpen ? 'rotate-180' : ''}`} viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+          </svg>
+ 
+            </button>
+            {OrderOpen && (
+              <div className="ml-4 mt-1 space-y-1 text-sm text-gray-600">
+                <a href="/orders" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  My Orders
+                </a>
+              
+                <a href="/trackorder" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Track Order
+                </a>
+              </div>
+            )}
+          </div>
+
+        
           <a href="/rewards" className="block px-2 py-2 rounded hover:bg-gray-100">
             Rewards
           </a>
-          <a href="/trackorder" className="block px-2 py-2 rounded hover:bg-gray-100">
-            Track Order
-          </a>
+         
 
           {logged === true ?
              <a href="/" onClick={()=>{localStorage.clear()}} className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">

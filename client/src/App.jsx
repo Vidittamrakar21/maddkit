@@ -20,6 +20,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Return from './pages/Return';
 import OrderSuccessPage from './pages/OrderSuccess';
+import Account from './pages/Account';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import './App.css'
@@ -157,6 +158,13 @@ function App() {
       element:<>
       <Navbar/>
       <OrderSuccessPage/>
+      </>
+    }, 
+    {
+      path: '/account',
+      element:<>
+      <Navbar/>
+      <Account/>
       </>
     }, 
  
