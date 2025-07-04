@@ -1,4 +1,4 @@
-import { LogOut, ShoppingCart, Truck, Gift, Store ,HeadphonesIcon , BoxIcon , PhoneCall ,CakeIcon , LogIn ,User, PartyPopper , SearchIcon ,} from 'lucide-react';
+import { LogOut, ShoppingCart, Truck, Gift, Store ,HeadphonesIcon , BoxIcon , PhoneCall ,CakeIcon , LogIn ,User, PartyPopper ,ChevronRight} from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 export default function Account() {
@@ -84,7 +84,7 @@ function Option({ icon, label, color = "text-gray-800" , nxt}) {
         {icon}
         <span className="text-sm sm:text-base">{label}</span>
       </div>
-      <span className="text-black">{'>'}</span>
+     <ChevronRight className='text-black' size={19}/>
     </div>
   );
 }

@@ -59,7 +59,7 @@ export default function BuildKit() {
         transition={Bounce}
         />
 
-       <QuizCard state={quizstate} updatestate={updateState}/>
+       {/* <QuizCard state={quizstate} updatestate={updateState}/> */}
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
@@ -67,34 +67,34 @@ export default function BuildKit() {
           setStep(step);
         }}
         onFinalStepCompleted={() => console.log("All steps completed!")}
-        backButtonText="Previous"
+        backButtonText="Prev"
         nextButtonText="Next"
         stepCircleContainerClassName=''
       >
         <Step>
           <h2>Let's Build Your Kit In Just 6 Steps!</h2>
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>1. Backdrop Bliss</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>1. Backdrop Bliss</h1>
           <p>"Set the stage for your story."</p>
         </Step>
         <Step>
 
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>2. Light It Up</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>2. Light It Up</h1>
           <p>"Illuminate the moments that matter."</p>
         </Step>
         <Step>
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>3. Message Pop</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>3. Message Pop</h1>
           <p>"Say it loud, say it proud."</p>
         </Step>
         <Step>
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>4. Fun & Fillers</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>4. Fun & Fillers</h1>
           <p>"Add the sparkles of joy."</p>
         </Step>
         <Step>
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>5. Party Gear</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>5. Party Gear</h1>
           <p>"Dress the part, play the part."</p>
         </Step>
         <Step>
-          <h1 className='font-[600] mt-3 sm:text-[19px] text-[17px] font5'>6. Game Zone</h1>
+          <h1 className='font-[600] mt-3 sm:text-[22px] text-[22px] font5'>6. Game Zone</h1>
           <p>"Engage, laugh, and bond."</p>
 
         </Step>
@@ -103,7 +103,7 @@ export default function BuildKit() {
 
       <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[10px] mt-[0px]'>
 
-        <h1 className='text-[25px] text-[black] font-[600] font5'>{category[kitStep - 1]}</h1>
+        {/* <h1 className='text-[25px] text-[black] font-[600] font5'>{category[kitStep - 1]}</h1> */}
       </section>
 
       <section className='sm:w-[80%] w-[96%] min-h-[500px] grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  sm:mt-[50px] mt-0'>

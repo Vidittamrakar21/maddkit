@@ -107,18 +107,19 @@ export default function Stepper({
               {currentStep !== 1 && (
                 <button
                   onClick={handleBack}
-                  className={`duration-350 rounded px-2 py-1 transition ${currentStep === 1
-                    ? "pointer-events-none opacity-50 text-neutral-700"
-                    : "text-neutral-700 hover:text-neutral-700"
-                    }`}
+                  className={`duration-350 fixed bottom-3  sm:bottom-7 left-3 sm:left-[5%] flex items-center  justify-center rounded-full bg-[#ED1C28] sm:hover:bg-[#fa4e56] py-1.5 px-3.5 font-medium tracking-tight text-white transition  active:bg-[#ED1C28]`}
                   {...backButtonProps}
                 >
+
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className=' rotate-180 mr-2' viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                </svg>
                   {backButtonText}
                 </button>
               )}
               <button
                 onClick={isLastStep ? handleComplete : handleNext}
-                className="duration-350 fixed bottom-3 right-3 flex items-center  justify-center rounded-full bg-[#ED1C28] sm:hover:bg-[#fa4e56] py-1.5 px-3.5 font-medium tracking-tight text-white transition  active:bg-[#ED1C28]"
+                className="duration-350 fixed bottom-3 sm:bottom-7 right-3 sm:right-[5%] flex items-center  justify-center rounded-full bg-[#ED1C28] sm:hover:bg-[#fa4e56] py-1.5 px-3.5 font-medium tracking-tight text-white transition  active:bg-[#ED1C28]"
                 {...nextButtonProps}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className='mr-2' viewBox="0 0 16 16">

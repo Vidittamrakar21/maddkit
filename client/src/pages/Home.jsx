@@ -24,6 +24,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios';
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
+import {ArrowRight} from 'lucide-react'
 
 export default function Home() {
 
@@ -283,7 +284,7 @@ export default function Home() {
 
       <section className='w-[100%] sm:w-[100%] sm:h-[100dvh]  h-[100dvh] select-none   bg-[#ED1C28]  flex sm:items-start items-center sm:justify-center justify-end sm:flex-row flex-col-reverse  overflow-hidden'>
 
-        <div className='w-[80%] sm:w-[50%]  z-30 h-[200px] p-3  sm:h-[100%] relative sm:top-[180px] top-0  flex items-start sm:ml-[80px] ml-0 justify-start flex-col'>
+        <div className='w-[80%] sm:w-[50%]   z-30 h-[200px] p-3  sm:h-[100%] relative sm:top-[180px] top-0   flex items-start sm:ml-[80px] ml-0 justify-start flex-col'>
 
 
           <motion.h1
@@ -307,20 +308,16 @@ export default function Home() {
             {content[index].sub1}
           </motion.p>
 
-          <div className='flex sm:items-start sm:justify-start items-center justify-center sm:flex-row flex-col  mt-9 w-[100%] sm:h-[50px] h-[50px]'>
-            <motion.div
-              key={index + 3}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1.2 }}
-              transition={{ duration: 0.3, delay: 0.6 }}
-            >
-              <button onClick={() => { index === 1 ? window.location.href = '/premade-kit' : window.location.href = '/premade-kit' }} className='sm:h-[50px] h-[40px]  sm:w-[150px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
+          <div className='flex sm:items-start sm:justify-start  items-center justify-center sm:flex-row flex-col  mt-9 w-[100%] sm:h-[70px] h-[60px]'>
+           
+              <button onClick={() => { index === 1 ? window.location.href = '/premade-kit' : window.location.href = '/premade-kit' }} className='sm:h-[60px] sm:min-h-[60px] min-h-[50px] shadow-lg hover:bg-black hover:text-gray-300  sm:w-[180px] w-[150px] rounded-full text-black font-[600]  flex items-center justify-center bg-white transition'>
+                {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className='mr-2' viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                </svg>
+                </svg> */}
+                <ArrowRight className=' mr-3 text-gray-600' size={19}/>
                 {content[index].but}
               </button>
-            </motion.div>
+          
 
             <motion.p
               key={index + 4}
