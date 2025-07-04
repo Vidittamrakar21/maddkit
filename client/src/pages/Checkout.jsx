@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 
 
 const validCoupons = {
@@ -74,9 +74,9 @@ const CheckoutPage = () => {
         
       },
       prefill: {
-        name: "vidt",
-        email: "vidit@example.com",
-        contact: 1919191,
+        name: user?.shipping?.first_name + " " + user?.shipping?.last_name || "",
+        email: user?.email || "",
+        contact: user?.shipping?.phone || "",
       },
       notes: {
         address: "User billing address here"
@@ -89,6 +89,24 @@ const CheckoutPage = () => {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+
+
+  const [user, setUser] = useState('');
+
+  async function fetchUser (){
+    const id = localStorage.getItem('id')
+    if(id){
+
+      const data = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/customers/${id}?consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+      setUser(data);
+    }
+   
+  }
+
+  useEffect(()=>{
+    fetchUser();
+  },[])
+
   
 
   return (
@@ -102,31 +120,31 @@ const CheckoutPage = () => {
           <form className="space-y-4">
             <div>
               <label className="block text-sm font-medium">Full Name</label>
-              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="text" defaultValue={user?.shipping?.first_name +  user?.shipping?.last_name || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium">Email Address</label>
-              <input type="email" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="email" defaultValue={user?.email || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium">Phone Number</label>
-              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="text" defaultValue={user?.shipping?.phone || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium">Shipping Address</label>
-              <textarea className="mt-1 w-full border rounded-lg px-4 py-2 resize-none" rows="3" />
+              <textarea defaultValue={user?.shipping?.address_1 || ''} className="mt-1 w-full border rounded-lg px-4 py-2 resize-none" rows="3" />
             </div>
             <div>
               <label className="block text-sm font-medium">City</label>
-              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="text" defaultValue={user?.shipping?.city || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium">State</label>
-              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="text" defaultValue={user?.shipping?.state || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium">Pin Code</label>
-              <input type="text" className="mt-1 w-full border rounded-lg px-4 py-2" />
+              <input type="text" defaultValue={user?.shipping?.postcode || ''} className="mt-1 w-full border rounded-lg px-4 py-2" />
             </div>
           </form>
         </div>

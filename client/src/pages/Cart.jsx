@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 const categoryId = [53, 54, 55, 56, 57, 58]
 const categories = [
   "Backdrop Bliss",
-  "Message Pop",
   "Light It Up",
+  "Message Pop",
   "Fun & Fillers",
   "Party Gear",
   "Game Zone",
@@ -69,11 +69,11 @@ const Cart = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-24 h-24 object-cover rounded-lg"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg"
               />
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
+                  <h3 className="text-sm font-semibold line-clamp-2">{item.name}</h3>
                   <p className="text-gray-600 mt-1">₹{item.price}</p>
                 </div>
                 <div className="mt-2 flex items-center gap-2">

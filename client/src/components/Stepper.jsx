@@ -48,6 +48,7 @@ export default function Stepper({
   const handleComplete = () => {
     setDirection(1);
     updateStep(totalSteps + 1);
+    localStorage.setItem('buildKitStep', 1);
     window.location.href = '/cart'
   };
 

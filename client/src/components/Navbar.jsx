@@ -5,7 +5,7 @@ import { useState , useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 // import { FaShoppingCart } from "react-icons/fa"; 
 import { FiShoppingCart } from "react-icons/fi";
-import {User ,Search , ShoppingBag} from 'lucide-react'
+import {User ,Search , ShoppingBag , MenuIcon} from 'lucide-react'
 
 export default function Navbar() {
  
@@ -158,6 +158,8 @@ useCurrentPath();
           </span>
         )}
       </div>
+
+        <MenuIcon onClick={()=>{openSideBar(true)}}  className={`  ${path === 'home'?'text-white':'text-black'}`} size={22} />
        
         </div>
      
@@ -174,8 +176,8 @@ useCurrentPath();
           </div>
 
           <nav className="p-4 space-y-2 text-gray-700">
-          <a href="/profile" className="block px-2 py-2 rounded hover:bg-gray-100">
-            Profile
+          <a href="/" className="block px-2 py-2 rounded hover:bg-gray-100">
+            Home
           </a>
 
           {/* Shop with dropdown */}
@@ -210,7 +212,7 @@ useCurrentPath();
               onClick={() => setOrderOpen(!OrderOpen)}
               className="w-full flex items-center justify-between py-2 rounded hover:bg-gray-100"
             >
-              <span>Orders</span>
+              <span>Categories</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="gray" className={`transition-transform duration-200 ${shopOpen ? 'rotate-180' : ''}`} viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
           </svg>
@@ -218,26 +220,37 @@ useCurrentPath();
             </button>
             {OrderOpen && (
               <div className="ml-4 mt-1 space-y-1 text-sm text-gray-600">
-                <a href="/orders" className="block px-2 py-1 rounded hover:bg-gray-100">
-                  My Orders
+                <a href="/category?id=53" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Backdrop Bliss
+                </a>
+                <a href="/category?id=54" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Light It Up
+                </a>
+                <a href="/category?id=55" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Message Pop
+                </a>
+                <a href="/category?id=56" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Fun & Fillers
+                </a>
+                <a href="/category?id=57" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Party Gear
+                </a>
+                <a href="/category?id=58" className="block px-2 py-1 rounded hover:bg-gray-100">
+                  Game Zone
                 </a>
               
-                <a href="/trackorder" className="block px-2 py-1 rounded hover:bg-gray-100">
-                  Track Order
-                </a>
+              
               </div>
             )}
           </div>
 
         
-          <a href="/rewards" className="block px-2 py-2 rounded hover:bg-gray-100">
-            Rewards
-          </a>
+          
          
 
           {logged === true ?
              <a href="/" onClick={()=>{localStorage.clear()}} className="block px-2 py-2 rounded hover:bg-red-100 text-red-600">
-             Sign Out
+             Log Out
            </a>:
             <a href="/login?redirects=" className="block px-2 py-2 rounded hover:bg-gray-100">
             Log In
