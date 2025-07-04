@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import QuizCard from '@/components/QuizCard';
 import axios from 'axios';
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
-
+// Find bug
 export default function BuildKit() {
   const [kitStep, setStep] = useState(1);
   const category = ['Backdrop Bliss', 'Light It Up', 'Message Pop', 'Fun & Fillers', 'Party Gear', 'Game Zone']
@@ -43,9 +43,9 @@ export default function BuildKit() {
   }
 
   return (
-    <div className='min-h-[100vh] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
+    <div className='min-h-[100vh] w-[100%] flex items-center justify-start flex-col overflow-hidden select-none'>
 
-<ToastContainer
+        <ToastContainer
         position="bottom-center"
         autoClose={3000}
         hideProgressBar={true}
