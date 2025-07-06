@@ -69,7 +69,7 @@ const Cart = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg"
+                className="w-14 h-14 rounded object-cover border"
               />
               <div className="flex-1 flex flex-col justify-between">
                 <div>
@@ -120,7 +120,7 @@ const Cart = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg"
+                className="w-14 h-14 rounded object-cover border"
               />
               <div className="flex-1 flex flex-col justify-between">
                 <div>
@@ -169,7 +169,7 @@ const Cart = () => {
                   onClick={() => {
                     window.location.href = "/checkout";
                   }}
-                  className="w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
+                  className="w-full bg-black text-white py-3  hover:bg-gray-800 transition"
                 >
                   Proceed to Checkout
                 </button>
