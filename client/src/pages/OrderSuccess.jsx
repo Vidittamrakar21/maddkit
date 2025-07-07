@@ -8,6 +8,7 @@ const OrderSuccessPage = () => {
 
     const [searchParams] = useSearchParams();
     const items = searchParams.get("items");
+    const orderid = searchParams.get("orderid");
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-4 py-10">
@@ -24,7 +25,7 @@ const OrderSuccessPage = () => {
         <div className="bg-gray-50 border rounded-xl p-4 text-left mb-6">
           <h2 className="font-semibold text-gray-700 mb-2">Order Summary</h2>
           <ul className="text-sm text-gray-600 space-y-1">
-            <li>📦 Order ID: <span className="font-medium">#ORD123456</span></li>
+            <li>📦 Order ID: <span className="font-medium">#{orderid}</span></li>
             <li>🛒 Items: <span className="font-medium">{items} products</span></li>
             <li>💳 Payment: <span className="font-medium">Online (Paid)</span></li>
             <li>🚚 Delivery by: <span className="font-medium">July 7, 2025</span></li>

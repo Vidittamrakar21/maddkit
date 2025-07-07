@@ -234,7 +234,7 @@
 // export default CheckoutPage;
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef } from 'react';
 import axios from 'axios';
 
 const validCoupons = {
@@ -252,6 +252,15 @@ const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState('');
   const [related, setRelated] = useState([]);
+  const [loader, setLoader] = useState(false);
+
+  const firstname = useRef(null);
+  const lastname = useRef(null);
+  const phonenumber =useRef(null);
+  const state =useRef(null);
+  const city =useRef(null);
+  const postcode =useRef(null);
+  const add =useRef(null);
 
   const DONATION_AMOUNT = 10;
   const DELIVERY_CHARGE = 30;
@@ -305,21 +314,96 @@ const CheckoutPage = () => {
     }
   };
 
+  const createWooOrder = async (razorpayResponse) => {
+    setLoader(true)
+    const orderData = {
+      customer_id: user.id,
+      payment_method: "razorpay",
+      payment_method_title: "Razorpay",
+      set_paid: true, // mark as paid since payment was done
+      billing: {
+        first_name:  firstname.current.value,
+        last_name: lastname.current.value,
+        email: user.email,
+        phone: phonenumber.current.value,
+        address_1: add.current.value,
+        city: city.current.value,
+        state: state.current.value,
+        postcode: postcode.current.value,
+        country: "India",
+      },
+      shipping: {
+        first_name:  firstname.current.value,
+        last_name: lastname.current.value,
+        phone: phonenumber.current.value,
+        address_1: add.current.value,
+        city: city.current.value,
+        state: state.current.value,
+        postcode: postcode.current.value,
+        country: "India",
+      },
+      line_items: cartItems.map(item => ({
+        product_id: item.id,
+        quantity: item.quantity
+      })),
+      fee_lines: [
+        {
+          name: "Total Discount",
+          total: `-${discountAmount}`
+        }
+      ],
+      meta_data: [
+        {
+          key: 'razorpay_payment_id',
+          value: razorpayResponse.razorpay_payment_id
+        },
+        {
+          key: "final_checkout_amount",
+          value: grandTotal
+        },
+        {
+          key: "discount_applied",
+          value: discountAmount
+        }
+      ]
+    };
+  
+    const auth = btoa("ck_b0889e799c2d297ce09848972be70e5316b2bee7:cs_68bfdeba8afd2aae06dab5816ac7088d0e6586bf"); // use a key pair with write access
+  
+    const res = await fetch("https://maddkit.com/wp-json/wc/v3/orders", {
+      method: "POST",
+      headers: {
+        "Authorization": `Basic ${auth}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderData)
+    });
+  
+    const order = await res.json();
+    console.log("WooCommerce Order Created:", order);
+    setLoader(false)
+     window.location.href = `/success?items=${totalItems}&orderid=${order.id}`;
+  };
+  
+
   const handlePayment = async () => {
     const options = {
       key: 'rzp_test_E1IAZRqwdEpoFT',
+      // key: 'rzp_live_GyzsSD6XQ1rTJv',
       amount: grandTotal * 100,
       currency: 'INR',
       name: 'Maddkit',
       image: '/logo.png',
-      handler: function (response) {
+      handler: async function (response) {
         localStorage.setItem('cart', '[]');
-        window.location.href = `/success?items=${totalItems}`;
+        // console.log(response);
+        await createWooOrder(response);
+       
       },
       prefill: {
-        name: user?.shipping?.first_name + ' ' + user?.shipping?.last_name,
+        name: firstname.current.value + ' ' + lastname.current.value,
         email: user?.email,
-        contact: user?.shipping?.phone,
+        contact: phonenumber.current.value,
       },
       theme: {
         color: '#ED1C28',
@@ -331,7 +415,12 @@ const CheckoutPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 mt-[50px] sm:mt-[103px]">
-
+      {loader ===true ?
+      <div className='fixed z-40 top-0 bottom-0 left-0 right-0 bg-white flex items-center justify-center'>
+      <h1>Proccessing Your Order....</h1>
+      
+    </div>:<></>
+      }
       {/* Special Deal Section */}
       {specialChecked=== false?
       <div className="bg-white p-4 rounded-xl shadow mb-6 flex items-center justify-between">
@@ -376,13 +465,14 @@ const CheckoutPage = () => {
         <div className="lg:col-span-2  bg-white p-4 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4">Billing Details</h2>
           <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" defaultValue={user?.shipping?.first_name} placeholder="Full Name" className="border px-4 py-2 rounded w-full" />
+            <input ref={firstname} type="text" defaultValue={user?.shipping?.first_name} placeholder="First Name" className="border px-4 py-2 rounded w-full" />
+            <input ref={lastname} type="text" defaultValue={user?.shipping?.last_name} placeholder="Last Name" className="border px-4 py-2 rounded w-full" />
             <input type="email" defaultValue={user?.email || ''} placeholder="Email Address" className="border px-4 py-2 rounded w-full" />
-            <input type="text" defaultValue={user?.shipping?.phone || ''} placeholder="Phone Number" className="border px-4 py-2 rounded w-full" />
-            <input type="text" defaultValue={user?.shipping?.city || ''} placeholder="City" className="border px-4 py-2 rounded w-full" />
-            <input type="text" defaultValue={user?.shipping?.state || ''} placeholder="State" className="border px-4 py-2 rounded w-full" />
-            <input type="text" defaultValue={user?.shipping?.postcode || ''} placeholder="Pin Code" className="border px-4 py-2 rounded w-full" />
-            <textarea defaultValue={user?.shipping?.address_1 || ''} placeholder="Shipping Address" className="border px-4 py-2 rounded w-full md:col-span-2 resize-none" rows="3" />
+            <input ref={phonenumber} type="number" defaultValue={user?.shipping?.phone || ''} placeholder="Phone Number" className="border px-4 py-2 rounded w-full" />
+            <input ref={city} type="text" defaultValue={user?.shipping?.city || ''} placeholder="City" className="border px-4 py-2 rounded w-full" />
+            <input ref={state} type="text" defaultValue={user?.shipping?.state || ''} placeholder="State" className="border px-4 py-2 rounded w-full" />
+            <input ref={postcode} type="text" defaultValue={user?.shipping?.postcode || ''} placeholder="Pin Code" className="border px-4 py-2 rounded w-full" />
+            <textarea ref={add} defaultValue={user?.shipping?.address_1 || ''} placeholder="Shipping Address" className="border px-4 py-2 rounded w-full md:col-span-2 resize-none" rows="3" />
           </form>
         </div>
 

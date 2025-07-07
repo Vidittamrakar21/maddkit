@@ -51,7 +51,7 @@ const ProfilePage = () => {
             <div>
               <label className="block text-sm font-medium text-gray-600">Full Name</label>
               <p className="mt-1 text-base font-medium text-gray-900 bg-gray-100 px-4 py-2 rounded-md">
-                {user?.shipping?.first_name + user?.shipping?.last_name}
+                {user?.username}
               </p>
             </div>
   

@@ -73,9 +73,9 @@ const OrderCard = ({ order }) => {
       {(order.line_items).map((item, index)=>(
         <>
         <div key={index} className="flex items-center   gap-4">
-        <img src={item.image.src} alt={''} className="w-24 h-24 min-h-24 min-w-24 max-h-24 max-w-24  rounded-md object-cover" />
+        <img src={item.image.src} alt={''} className="w-14 h-14 min-h-14 min-w-14 max-h-14 max-w-14  rounded-md object-cover" />
         <div>
-          <h2 className="text-lg font-semibold line-clamp-2">{item.name}</h2>
+          <h2 className="text-sm font-semibold line-clamp-2">{item.name}</h2>
           <p className="text-gray-600">₹{item.price}</p>
           {/* <p
             className={`mt-1 text-sm font-medium ${

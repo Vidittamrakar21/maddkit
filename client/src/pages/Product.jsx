@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactImageMagnify from 'react-image-magnify';
-import { useState } from 'react';
+import { useState ,useRef} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -27,6 +27,11 @@ export default function Product() {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("product_id");
   // const productId = 6752;
+
+ 
+  
+
+
 
   const [value, setValue] = React.useState(0);
   let min = 1;
