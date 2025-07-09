@@ -237,6 +237,7 @@ export default function Home() {
   async function fetchProducts(){
     const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009')).data;
     setProducts(data)
+  
   }
 
   useEffect(()=>{
@@ -464,7 +465,7 @@ export default function Home() {
 
          {products.length !== 0? products.map((item, index)=>(
   
-            <Card key={index} img={item.images[0].src} price={item.price} toast={handleToast} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
+            <Card key={index} img={item?.images[0]?.src} price={item.price} toast={handleToast} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations}/>
 
           )):
           

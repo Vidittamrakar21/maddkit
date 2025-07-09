@@ -112,7 +112,7 @@ useCurrentPath();
     <div className=' border-b border-b-[#313131] select-none fixed w-[100%] z-50  h-[25px] sm:h-[28px] flex top-0 items-center justify-center bg-[black] text-white'>
     
       <RotatingText
-  texts={['FREE SHIPPING ON ORDERS OVER ₹1999', 'Sale is LIVE Flat 50% OFF']}
+  texts={['FREE SHIPPING ON ORDERS OVER ₹999', 'SALE IS LIVE !', 'FLAT 30% OFF ON PARTY KITS']}
   mainClassName="px-2 sm:px-2 md:px-3   text-white text-[0.7rem] sm:text-[0.9rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
   staggerFrom={"last"}
   initial={{ y: "100%" }}

@@ -9,7 +9,7 @@ export default function AllProduct() {
   const [products, setProducts] = useState([]);
 
   async function fetchProducts(){
-    const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009')).data;
+    const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009')).data;
     setProducts(data)
     console.log(data)
   }

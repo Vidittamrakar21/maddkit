@@ -264,9 +264,8 @@ const CheckoutPage = () => {
 
   const DONATION_AMOUNT = 10;
   const DELIVERY_CHARGE = 30;
-  const SPECIAL_PRODUCT = 49;
-  const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)+  (specialChecked ? SPECIAL_PRODUCT : 0);
-  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0) + (specialChecked ? 1 : 0);
+  const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
   const grandTotal = totalAmount - discountAmount + (donationChecked ? DONATION_AMOUNT : 0) ;
   const totalSavings = discountAmount + DELIVERY_CHARGE;
 
@@ -296,6 +295,8 @@ const CheckoutPage = () => {
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     setCartItems(cart);
+
+    setspecialChecked(cart?.some(item=> item.id === '#'))
   }, []);
 
   const handleApplyCoupon = () => {
@@ -413,8 +414,17 @@ const CheckoutPage = () => {
     rzp.open();
   };
 
+
+
+  function addMoreProduct(obj){
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    cart.push(obj)
+    localStorage.setItem('cart',JSON.stringify(cart));
+    setCartItems((prev)=> prev.concat(obj))
+  }
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 mt-[50px] sm:mt-[103px]">
+    <div className="max-w-6xl mx-auto px-4 py-6 mt-[50px] sm:mt-[103px] select-none">
       {loader ===true ?
       <div className='fixed z-40 top-0 bottom-0 left-0 right-0 bg-white flex items-center justify-center'>
       <h1>Proccessing Your Order....</h1>
@@ -432,7 +442,14 @@ const CheckoutPage = () => {
           <p className="text-xs text-purple-600 mt-1">🎉 Special deal unlocked. Add this item to your cart</p>
         </div>
       </div>
-      <button onClick={()=>{ alert("Product Added!"); setspecialChecked(true)}} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg">Add</button>
+      <button onClick={()=>{ alert("Product Added!"); setspecialChecked(true); addMoreProduct({
+      id: '#',
+      image: "https://www.bluestarempire.com/files/product/large/519934.jpg",
+      name: "Mulicolour Balloon Packet - Big Size(50 pcs)",
+      price: 49,
+      qty: 1,
+      category: ""
+    })}} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg">Add</button>
     </div>:<></>}
 
       {/* You Might Also Like */}
@@ -442,12 +459,22 @@ const CheckoutPage = () => {
         <h2 className="text-lg font-semibold mb-3">You might also like</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {related?.map((item, idx) => (
-            <div key={idx} className="border p-2 rounded-lg">
+            <div key={idx} onClick={()=> { window.location.href = `/product?product_id=${item.id}`}}  className="border p-2 rounded-lg">
               <img src={item.images[0]?.src} alt={item.name} className="h-24 w-full object-cover rounded" />
               <p className="text-sm font-medium mt-2 line-clamp-1">{item.name}</p>
               <p className="text-xs text-gray-500 line-through">₹{item.regular_price}</p>
               <p className="text-sm text-green-700 font-semibold">₹{item.price}</p>
-              <button className="mt-1 w-full text-sm bg-green-600 text-white py-1 rounded hover:bg-green-700">Add</button>
+              <button onClick={(e)=>{
+              e.stopPropagation();
+              addMoreProduct({
+                id: item.id,
+                image: item.images[0]?.src,
+                name: item.name,
+                price: item.price,
+                qty: 1,
+                category: ""
+              });
+            }} className="mt-1 w-full text-sm bg-green-600 text-white py-1 rounded hover:bg-green-700">Add</button>
             </div>
           ))}
         </div>
@@ -494,18 +521,7 @@ const CheckoutPage = () => {
               </li>
             ))}
 
-            {specialChecked?
-              <li className="flex items-center gap-3 border-b pb-3">
-              <img src="https://www.bluestarempire.com/files/product/large/519934.jpg" alt="" className="w-14 h-14 rounded object-cover border" />
-              <div className="flex-1">
-                <p className="text-sm font-medium line-clamp-1">Mulicolour Balloon Packet - Big Size(50 pcs)</p>
-                <p className="text-xs text-gray-500">Qty:1</p>
-                {/* {item.sale && (
-                  <p className="text-xs text-red-500 font-semibold">SALE: {item.sale}</p>
-                )} */}
-              </div>
-              <p className="text-sm">₹49</p>
-            </li>:<></>}
+        
           </ul>
 
           

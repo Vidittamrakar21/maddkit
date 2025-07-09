@@ -47,7 +47,7 @@ const Cart = () => {
   const totalItems = cartItems?.reduce((acc, item) => acc + item.qty, 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px]">
+    <div className="max-w-7xl mx-auto px-4 py-10 mt-[50px] sm:mt-[103px] select-none">
       {cartItems.length !== 0 ? (
         <>
           <div className="flex flex-col lg:flex-row gap-8">
@@ -59,7 +59,10 @@ const Cart = () => {
 
     return (
       <div key={category} className="mb-10">
-        <h2 className="text-2xl font-semibold mb-4 border-b pb-2">{category}</h2>
+        <div className="  mb-4 border-b  pb-2 flex items-center justify-between">
+        <h2 className="text-2xl font-semibold">{category}</h2>
+        <button onClick={()=> window.location.href = `category?id=${categoryId[categories.indexOf(category)]}`}  className=" px-3 py-1 bg-[#cac9c986] ml-3 text-[14px]">View More</button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {items.map((item) => (
             <div
@@ -110,7 +113,10 @@ const Cart = () => {
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-semibold mb-4 border-b pb-2">Items</h2>
+         <div className="  mb-4 border-b  pb-2 flex items-center justify-between">
+        <h2 className="text-2xl font-semibold">Items</h2>
+        <button onClick={()=> window.location.href = '/allproducts'} className=" px-3 py-1 bg-[#cac9c986] ml-3 text-[14px]">View More</button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {otherItems.map((item) => (
             <div
