@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Card from '../components/Card';
 import axios from 'axios';
+import { ShoppingBag } from 'lucide-react';
 
 import Footer from '@/components/Footer';
 import { useSearchParams } from "react-router-dom";
@@ -23,6 +24,10 @@ export default function Product() {
   const [active, setActive] = useState('')
   const [product, setProduct] = useState('');
   const [related, setRelated] = useState([]);
+  const [variations, setVariations] = useState([]);
+  const [crossProduct, setCrossProduct] = useState([]);
+  const [crosssell, setCrosssell] = useState(false);
+
 
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("product_id");
@@ -48,8 +53,21 @@ export default function Product() {
     setActive(data.images[0]?.src);
     setActiveIMGS(data.images);
 
-    const relatedProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data.related_ids).join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+    const relatedProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data?.related_ids)?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setRelated(relatedProducts)
+
+    if((data?.upsell_ids)?.length !==0){
+    const VariationProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data?.upsell_ids)?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+    setVariations(VariationProducts)
+    console.log("var", VariationProducts)
+    }
+
+    if((data?.cross_sell_ids)?.length !==0){
+      const crossProd = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data?.cross_sell_ids)?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+    setCrossProduct(crossProd)
+    console.log("crs", crossProd)
+    }
+    
 
 
     data.attributes.forEach(att => {
@@ -104,6 +122,17 @@ export default function Product() {
         });
   }
 
+  const [cart, setCart] = useState([]);
+
+  function fetchCart(){
+    let crt = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(crt);
+  }
+
+  useEffect(()=>{
+    fetchCart()
+  },[])
+
   function addToCart(){
     let item ={
       id: product.id,
@@ -130,6 +159,8 @@ export default function Product() {
     if(!cart){
       localStorage.setItem('cart',JSON.stringify(newItem));
       handleToast();
+      fetchCart();
+      setCrosssell(true);
     }
     else{
       if(isAlreadyInCart){
@@ -150,10 +181,30 @@ export default function Product() {
           theme: "light",
           transition: Bounce,
           });
+          fetchCart();
+          setCrosssell(true);
       }
     }
   }
 
+  function addMoreProduct(obj){
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    cart.push(obj)
+    localStorage.setItem('cart',JSON.stringify(cart));
+    toast('Item Added To Cart!', {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      });
+    fetchCart()
+
+  }
 
 
 
@@ -205,7 +256,7 @@ export default function Product() {
     )
   }
 
-
+  
 
 
   return (
@@ -224,6 +275,53 @@ export default function Product() {
         transition={Bounce}
         />
       
+      {cart.length!==0 ?<div onClick={()=>{window.location.href = '/cart'}} className='select-none w-[95%] h-[50px] bg-[#ED1C28] sm:hidden flex items-center justify-between fixed bottom-3  z-40 rounded-[10px]'>
+       <div className='flex items-center justify-center ml-2'>
+       <div className='h-[35px] w-[35px] rounded-[10px] flex items-center justify-center bg-[#f8737a]'>
+          <ShoppingBag className='text-white' size={24}/>
+        </div>
+        <h1 className='text-white font-bold ml-3'>{cart.length} Items</h1>
+       </div>
+        <h1 className='text-white text-[19px] mr-2'>View Cart ►</h1>
+      </div>:<></>}
+
+    {crossProduct.length!==0?
+        <div  className={`flex rounded-t-3xl border-t p-2  overflow-hidden overflow-y-auto items-center justify-start flex-col fixed bottom-0 left-0 right-0 h-[40vh] w-[100%] bg-black shadow-md z-50 transform transition-transform duration-300 ${
+          crosssell ? 'translate-y-0' : 'translate-y-full'
+        }`}>
+
+          <div onClick={(e)=>{e.stopPropagation(); setCrosssell(false)}} className='h-[40px] w-[40px] rounded-full z-50 border flex items-center justify-center text-white m-3'>
+          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className='' viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+          </div>
+
+             {crossProduct?.map((item, index)=>(
+              <div key={index} className="bg-white p-4 rounded-xl shadow mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <img src={item?.images[0]?.src} alt="deal" className="w-16 h-16 object-cover rounded border" />
+                <div>
+                  <p className="text-sm font-semibold line-clamp-2">{item.name}</p>
+                  <p className="text-xs text-gray-500">1 unit <span className="line-through ml-2">₹{item.regular_price}</span> <span className="font-bold text-green-600 ml-1">₹{item.price}</span></p>
+                </div>
+              </div>
+              <button onClick={()=>{
+                addMoreProduct({
+                  id: item.id,
+                  image: item?.images[0]?.src,
+                  name: item.name,
+                  price: item.price,
+                  qty: 1,
+                  category: ""
+                })
+              }} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg">Add</button>
+            </div>
+             ))}
+
+        </div>:<></>
+    }
+
+
       <div className='w-[100%] mt-[85px] sm:mt-[133px] flex sm:flex-row flex-col items-start justify-start'>
         <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
           {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
@@ -310,6 +408,22 @@ export default function Product() {
             </> : <></>
 
           }
+
+         {variations.length!==0?
+          <div className='mt-5 flex items-start justify-start sm:justify-start p-2 sm:p-0  w-[95%] h-[250px] overflow-hidden overflow-x-auto'>
+          
+          {variations.map((item, index)=>(
+            <div key={index} onClick={()=>{setProduct(item);  setActive(item.images[0]?.src);
+              setActiveIMGS(item.images);}} className={`h-[230px]  ${item.id === product.id?'border-b-[2px] border-[red]':''} w-[120px] m-2 flex items-start justify-start flex-col`}>
+            <img src={item?.images[0]?.src} className='min-h-[120px] min-w-[120px]' alt="" />
+            <h1 className='font-bold line-clamp-2  text-black text-sm ml-2'>{item.name}</h1>
+            <h1 className='font-bold ml-2'>₹ {item.price}</h1>
+            <h5 className={`${item.stock_status === "outofstock" ? "text-red-600" : "text-[green]"} ml-2`}>{item.stock_status}</h5>
+           </div>
+          ))}
+        
+         </div>:<></>
+          } 
 
           <div className='mt-5 flex items-center justify-center sm:justify-start  w-[95%] h-[30px]'>
             <div className="flex items-center space-x-3  ">

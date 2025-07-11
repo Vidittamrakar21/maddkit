@@ -5,6 +5,7 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
+import { ShoppingBag } from 'lucide-react'
 
 export default function Category() {
 
@@ -24,6 +25,18 @@ export default function Category() {
     fetchProducts()
   },[])
 
+
+  const [cart, setCart] = useState([]);
+  
+  function fetchCart(){
+    let crt = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(crt);
+  }
+
+  useEffect(()=>{
+    fetchCart()
+  },[])
+
   function handleToast(){
     toast('Item Added To Cart!', {
         position: "bottom-center",
@@ -36,6 +49,7 @@ export default function Category() {
         theme: "light",
         transition: Bounce,
         });
+        fetchCart()
   }
 
   return (
@@ -53,6 +67,17 @@ export default function Category() {
         theme="light"
         transition={Bounce}
         />
+
+{cart.length!==0 ?<div onClick={()=>{window.location.href = '/cart'}} className='select-none w-[95%] h-[50px] bg-[#ED1C28] sm:hidden flex items-center justify-between fixed bottom-3  z-40 rounded-[10px]'>
+       <div className='flex items-center justify-center ml-2'>
+       <div className='h-[35px] w-[35px] rounded-[10px] flex items-center justify-center bg-[#f8737a]'>
+          <ShoppingBag className='text-white' size={24}/>
+        </div>
+        <h1 className='text-white font-bold ml-3'>{cart.length} Items</h1>
+       </div>
+        <h1 className='text-white text-[19px] mr-2'>View Cart ►</h1>
+      </div>:<></>}
+
 <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[80px] mt-[20px]'>
 
 <h1 className='text-[25px] text-[black] font-[600] font5'>{category[categoryId.indexOf(Number(catId))]}</h1>

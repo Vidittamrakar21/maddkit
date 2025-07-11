@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Card from '@/components/Card'
 import Footer from '@/components/Footer'
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
+import { ShoppingBag } from 'lucide-react';
 
 export default function Search() {
   const [query, setQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
 
   const quickTags = [
     'Birthday',
@@ -74,6 +76,17 @@ export default function Search() {
     fetchProducts();
   }, []);
 
+  const [cart, setCart] = useState([]);
+  
+  function fetchCart(){
+    let crt = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(crt);
+  }
+
+  useEffect(()=>{
+    fetchCart()
+  },[])
+
 
   function handleToast(){
     toast('Item Added To Cart!', {
@@ -87,6 +100,7 @@ export default function Search() {
         theme: "light",
         transition: Bounce,
         });
+        fetchCart()
   }
 
   return (
@@ -104,16 +118,27 @@ export default function Search() {
         theme="light"
         transition={Bounce}
         />
+
+{cart.length!==0 ?<div onClick={()=>{window.location.href = '/cart'}} className='select-none w-[95%] h-[50px] bg-[#ED1C28] sm:hidden flex items-center justify-between fixed bottom-3  z-40 rounded-[10px]'>
+       <div className='flex items-center justify-center ml-2'>
+       <div className='h-[35px] w-[35px] rounded-[10px] flex items-center justify-center bg-[#f8737a]'>
+          <ShoppingBag className='text-white' size={24}/>
+        </div>
+        <h1 className='text-white font-bold ml-3'>{cart.length} Items</h1>
+       </div>
+        <h1 className='text-white text-[19px] mr-2'>View Cart ►</h1>
+      </div>:<></>}
+
       <div className="max-w-[95%] min-h-[30dvh] mt-[30px] sm:mt-[60px] mx-auto">
         {/* Search Input and Button */}
-        <div className=" w-[100%] flex  items-center justify-center  gap-2">
+        <div className=" w-[100%] h-[70px]  flex   items-center justify-center ">
           <input
             type="text"
             value={query}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
             placeholder="Search for party kits, decorations, events..."
-            className="flex-grow px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ED1C28]"
+            className=" px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ED1C28]"
           />
           <button
             onClick={handleSearch}

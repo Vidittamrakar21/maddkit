@@ -4,6 +4,7 @@ import Card from '@/components/Card';
 import Footer from '@/components/Footer';
 import axios from 'axios';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { ShoppingBag } from 'lucide-react';
 
 export default function BuildKit() {
   const category = ['Backdrop Bliss', 'Light It Up', 'Message Pop', 'Fun & Fillers', 'Party Gear', 'Game Zone'];
@@ -15,6 +16,17 @@ export default function BuildKit() {
   });
 
   const [products, setProducts] = useState([]);
+
+  const [cart, setCart] = useState([]);
+  
+  function fetchCart(){
+    let crt = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(crt);
+  }
+
+  useEffect(()=>{
+    fetchCart()
+  },[])
 
   function handleToast() {
     toast('Item Added To Cart!', {
@@ -48,6 +60,9 @@ export default function BuildKit() {
   return (
     <div className='min-h-[100vh] w-[100%] flex items-center justify-start flex-col overflow-hidden select-none'>
       <ToastContainer />
+
+   
+
 
       <Stepper
         initialStep={kitStep}
