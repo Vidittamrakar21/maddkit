@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Card from '../components/Card';
 import axios from 'axios';
 import { ShoppingBag } from 'lucide-react';
+import { Share } from "lucide-react";
 
 import Footer from '@/components/Footer';
 import { useSearchParams } from "react-router-dom";
@@ -33,7 +34,16 @@ export default function Product() {
   const productId = searchParams.get("product_id");
   // const productId = 6752;
 
- 
+  const [cart, setCart] = useState([]);
+
+  function fetchCart(){
+    let crt = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(crt);
+  }
+
+  useEffect(()=>{
+    fetchCart()
+  },[])
   
 
 
@@ -96,6 +106,11 @@ export default function Product() {
     if (quantity < max) {
       const newQty = quantity + 1;
       setQuantity(newQty);
+      const updatedCart = cart.map((item) =>
+        item.id === Number(productId) ? { ...item, qty: item.qty + 1 } : item
+      );
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+
 
     }
   };
@@ -104,7 +119,10 @@ export default function Product() {
     if (quantity > min) {
       const newQty = quantity - 1;
       setQuantity(newQty);
-
+      const updatedCart = cart.map((item) =>
+        item.id === Number(productId) ? { ...item, qty: item.qty - 1 } : item
+      );
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
     }
   };
 
@@ -122,15 +140,28 @@ export default function Product() {
         });
   }
 
-  const [cart, setCart] = useState([]);
+ 
 
-  function fetchCart(){
-    let crt = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(crt);
+
+  const [presentCart , setPresentCart] = useState(false);
+
+  function chk(){
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    let isAlreadyInCart = cart.find((item) => item.id === Number(productId));
+    console.log("presentt", isAlreadyInCart)
+    if(isAlreadyInCart){
+    
+      setPresentCart(true);
+      setQuantity(isAlreadyInCart.qty)
+    }
+    else{
+      setPresentCart(false);
+    }
   }
 
   useEffect(()=>{
-    fetchCart()
+   chk();
   },[])
 
   function addToCart(){
@@ -164,25 +195,27 @@ export default function Product() {
     }
     else{
       if(isAlreadyInCart){
+       
         alert("Product already in cart.")
       }
       else{
 
         let newarr = cart.concat(newItem);
         localStorage.setItem('cart',JSON.stringify(newarr));
-        toast('Item Added To Cart!', {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-          });
+        // toast('Item Added To Cart!', {
+        //   position: "bottom-center",
+        //   autoClose: 3000,
+        //   hideProgressBar: true,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        //   transition: Bounce,
+        //   });
           fetchCart();
           setCrosssell(true);
+          setPresentCart(true)
       }
     }
   }
@@ -326,7 +359,7 @@ export default function Product() {
         <div className='sm:w-[40%]  w-[100%]  sm:min-h-[800px] min-h-[400px] flex sm:items-end items-center sm:mr-[50px] mr-0 justify-start flex-col '>
           {/* <img src="img1.jpg" className='h-[500px] w-[500px] mt-5' alt="" /> */}
           <div className='sm:h-[500px]   sm:min-h-[500px] min-h-[300px]  sm:w-[500px] w-[300px] mt-5 '>
-
+      
 
             <ReactImageMagnify enlargedImagePosition='beside' lensStyle={{ height: '400px', width: '400px', overflow: 'hidden' }} enlargedImageContainerStyle={{ backgroundColor: "white", zIndex: '30' }} enlargedImageContainerDimensions={{ width: '180%', height: '150%' }}  {...{
               smallImage: {
@@ -342,7 +375,9 @@ export default function Product() {
               }
             }} />
 
+
           </div>
+          
           <div className='h-[100px] sm:h-[100px] sm:mt-5 mt-2  sm:w-[500px] w-[300px] flex items-center justify-start overflow-hidden overflow-x-scroll     sm:[&::-webkit-scrollbar]:h-[7px]
                   sm:[&::-webkit-scrollbar-track]:rounded-full
                 sm:[&::-webkit-scrollbar-track]:bg-gray-100
@@ -357,9 +392,33 @@ export default function Product() {
 
           </div>
         </div>
+        
         <div className='sm:w-[40%] w-[100%] min-h-[800px] flex items-start justify-start flex-col'>
-
+       
           <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem] font5 font-[600]'>{product.name}</h1>
+          <div className='w-[95%] h-[20px] flex items-center justify-start'>
+          <button
+            onClick={() => {
+              if (navigator.share) {
+                navigator
+                  .share({
+                    title: product.name,
+                    text: `Check out this product: ${product.name}`,
+                    url: `${window.location.origin}/product/?product_id=${product.id}`,
+                  })
+                  .catch((err) => console.error("Share failed:", err));
+              } else {
+                alert("Sharing not supported in your browser.");
+              }
+            }}
+            className=" z-20 ml-3 p-2 rounded-full bg-white shadow hover:bg-gray-100"
+            aria-label="Share product"
+          >
+            <Share size={16} className="text-gray-600" />
+         </button>
+          </div>
+
+
           <div className='text-white w-[70px] h-[28px] mt-2 flex items-center justify-center ml-4 sm:ml-0'>
             {/* <h5 className='text-[14px]'>3.9</h5> */}
             <h3 className='text-[black] text-[18px] ml-1'>★</h3>
@@ -372,6 +431,7 @@ export default function Product() {
           <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 ' dangerouslySetInnerHTML={{ __html: product.short_description }}></h2>
           <h3 className={`sm:text-[20px] text-[17px]   ${product.stock_status === "outofstock" ? "text-red-600" : "text-[green]"} font-[600] ml-4 sm:ml-0`}>{product.stock_status}</h3>
 
+            
           {activeColors.length !== 0 ?
 
             <>
@@ -410,6 +470,7 @@ export default function Product() {
           }
 
          {variations.length!==0?
+
           <div className='mt-5 flex items-start justify-start sm:justify-start p-2 sm:p-0  w-[95%] h-[250px] overflow-hidden overflow-x-auto'>
           
           {variations.map((item, index)=>(
@@ -425,27 +486,29 @@ export default function Product() {
          </div>:<></>
           } 
 
-          <div className='mt-5 flex items-center justify-center sm:justify-start  w-[95%] h-[30px]'>
+          {presentCart ===true?
+            <div className='mt-5 flex items-center justify-center sm:justify-start  w-[95%] h-[30px]'>
             <div className="flex items-center space-x-3  ">
               <button
                 onClick={decrement}
-                className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded text-lg font-semibold"
+                className="w-8 h-8 flex items-center justify-center bg-[#44FE42] hover:bg-gray-300 rounded text-lg font-semibold"
               >
                 −
               </button>
               <span className="min-w-[30px] text-center text-lg">{quantity}</span>
               <button
                 onClick={increment}
-                className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded text-lg font-semibold"
+                className="w-8 h-8 flex items-center justify-center bg-[#44FE42] hover:bg-gray-300 rounded text-lg font-semibold"
               >
                 +
               </button>
             </div>
-          </div>
+          </div>:
 
           <div className='w-[100%] h-[45px] mt-3 flex sm:justify-start items-center justify-center'>
             <button onClick={addToCart} className='h-[50px] sm:h-[50px]   w-[320px] sm:w-[400px] bg-[#ED1C28] hover:bg-[#194A33]  text-white mt-[30px]  rounded-[50px] text-[15px] font-[600] shadow-md'>ADD TO CART</button>
-          </div>
+          </div>  
+        }
 
           {/* <div className='flex items-center justify-center mt-9 cursor-pointer  ml-4 sm:ml-0'>
     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#4F5B66" class="bi bi-balloon-heart" viewBox="0 0 16 16">

@@ -33,17 +33,17 @@ export default function AllProduct() {
 
 
   function handleToast(){
-    toast('Item Added To Cart!', {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-        });
+    // toast('Item Added To Cart!', {
+    //     position: "bottom-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: true,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     transition: Bounce,
+    //     });
 
         fetchCart();
   }

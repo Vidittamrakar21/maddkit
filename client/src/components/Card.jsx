@@ -119,7 +119,7 @@ export default function Card({ img, title, price, ogprice, off, id, variations, 
                 e.stopPropagation();
                 addToCart();
               }}
-              className="h-[35px] sm:h-[40px] sm:w-[250px] mt-1 mb-1 sm:mb-0 sm:mt-0 w-[140px] flex items-center justify-center flex-row btn-grad text-black font-[600]"
+              className="h-[35px] sm:h-[40px] sm:w-[250px] rounded-[8px] mt-1 mb-1 sm:mb-0 sm:mt-0 w-[140px] flex items-center justify-center flex-row bg-[#44FE42] text-black font-[600]"
             >
               + ADD
             </button>
