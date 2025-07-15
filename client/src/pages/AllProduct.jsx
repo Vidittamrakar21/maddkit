@@ -5,20 +5,52 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 import { ShoppingBag } from 'lucide-react'
+
+import FilterSortPanel from '@/components/FilterSortPanel'
+
 export default function AllProduct() {
 
   const [products, setProducts] = useState([]);
+  const [availableFilters, setAvailableFilters] = useState({});
+
 
   async function fetchProducts(){
     const data = await (await axios.get('https://maddkit.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009')).data;
     setProducts(data)
     console.log(data)
+    setAvailableFilters(getFilterOptions(data));
   }
 
   useEffect(()=>{
     fetchProducts()
   },[])
 
+  function getFilterOptions(products) {
+    const options = {
+      color: new Set(),
+      age: new Set(),
+      gender: new Set(),
+      event: new Set(),
+    };
+  
+    products.forEach((product) => {
+      product.attributes?.forEach((attr) => {
+        const key = attr.name.toLowerCase();
+        if (options[key]) {
+          attr.options.forEach((val) => options[key].add(val));
+        }
+      });
+    });
+  
+    // Convert Set to Array
+    return {
+      color: Array.from(options?.color),
+      age: Array.from(options?.age),
+      gender: Array.from(options?.gender),
+      event: Array.from(options?.event) ,
+    };
+  }
+  
 
   const [cart, setCart] = useState([]);
   
@@ -48,6 +80,66 @@ export default function AllProduct() {
         fetchCart();
   }
 
+
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+const [filters, setFilters] = useState({
+  color: '',
+  age: '',
+  gender: '',
+  event: '',
+});
+const [sortOption, setSortOption] = useState(''); // 'lowToHigh', 'highToLow', 'az'
+
+useEffect(() => {
+  if (products.length > 0) {
+    applyFiltersAndSort();
+  }
+}, [products, filters, sortOption]);
+
+function applyFiltersAndSort() {
+  let filtered = [...products];
+
+  filtered = filtered.filter((product) => {
+    const attrs = product.attributes || [];
+
+    const getValue = (key) => {
+      return (
+        attrs.find((a) => a.name.toLowerCase() === key.toLowerCase())?.options?.[0] || ''
+      );
+    };
+
+    return (
+      (!filters.color || getValue('color') === filters?.color) &&
+      (!filters.age || getValue('age') === filters?.age) &&
+      (!filters.gender || getValue('gender') === filters?.gender) &&
+      (!filters.event || getValue('event') === filters?.event)
+    );
+  });
+
+  if (sortOption === 'lowToHigh') {
+    filtered.sort((a, b) => Number(a.price) - Number(b.price));
+  } else if (sortOption === 'highToLow') {
+    filtered.sort((a, b) => Number(b.price) - Number(a.price));
+  } else if (sortOption === 'az') {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  setFilteredProducts(filtered);
+}
+
+const handleFilterChange = (key, value) => {
+  setFilters({ ...filters, [key]: value });
+};
+
+const handleSortChange = (option) => {
+  setSortOption(option);
+};
+
+
+
+
+
   return (
     <div className='min-h-[100vh] sm:mt-[103px] mt-[80px] w-[100%] flex items-center justify-start flex-col overflow-hidden'>
         <ToastContainer
@@ -64,6 +156,17 @@ export default function AllProduct() {
         transition={Bounce}
         />
 
+<FilterSortPanel
+  filterOptions={availableFilters}
+  filters={filters}
+  setFilter={handleFilterChange}
+  sortOption={sortOption}
+  setSort={handleSortChange}
+/>
+
+
+
+
 {cart.length!==0 ?<div onClick={()=>{window.location.href = '/cart'}} className='select-none w-[95%] h-[50px] bg-[#ED1C28] sm:hidden flex items-center justify-between fixed bottom-3  z-40 rounded-[10px]'>
        <div className='flex items-center justify-center ml-2'>
        <div className='h-[35px] w-[35px] rounded-[10px] flex items-center justify-center bg-[#f8737a]'>
@@ -73,16 +176,23 @@ export default function AllProduct() {
        </div>
         <h1 className='text-white text-[19px] mr-2'>View Cart ►</h1>
       </div>:<></>}
-<section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[80px] mt-[20px]'>
+<section className='sm:w-[85%] sm:h-[50px] sm:flex sm:items-center sm:justify-start  sm:mt-[40px] hidden'>
 
 <h1 className='text-[25px] text-[black] font-[600] font5'>All Products</h1>
 </section>  
+
+
+{/* 
+<FilterBar filters={filters} setFilter={handleFilterChange} attributes={products} />
+<SortBar sortOption={sortOption} setSort={handleSortChange} /> */}
+
+
 
     <section className='sm:w-[80%] w-[96%]  bg-[white]  select-none mt-[0px] sm:mt-[50px]    grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 sm:gap-6  '>
 
    
 
-    {products.length!==0?products.map((item, index)=>(
+    {filteredProducts.length !== 0 ? filteredProducts.map((item, index)=>(
   
       <Card key={index} img={item.images[0]?.src} price={item.price} ogprice={item.regular_price} title={item.name} off={Math.round(((Number(item.regular_price) - Number(item.price) )/Number(item.regular_price)) * 100 )} id={item.id} variations={item.variations} toast={handleToast} category={""}/>
    
