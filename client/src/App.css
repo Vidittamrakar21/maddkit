@@ -146,16 +146,12 @@ background: linear-gradient(333deg, rgba(255, 190, 133, 1) 10%, rgba(114, 226, 2
    text-decoration: none;
  }
 
- .doodle {
-  /* background-image: url('../public/tl.webp');
-  background-position: center;
-  background-size: contain;
-  background-color: rgba(236, 236, 236, 0.5);
-  background-blend-mode: overlay; */
 
- /* background-color: #ED1C28; */
- }
- 
+
+ .responsive-table table {
+  width: 100%;
+  text-wrap: wrap;
+}
 
 
 

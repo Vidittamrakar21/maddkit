@@ -8,7 +8,7 @@ import Card from '../components/Card';
 import axios from 'axios';
 import { ShoppingBag } from 'lucide-react';
 import { Share } from "lucide-react";
-
+import '../App.css'
 import Footer from '@/components/Footer';
 import { useSearchParams } from "react-router-dom";
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
@@ -27,6 +27,7 @@ export default function Product() {
   const [related, setRelated] = useState([]);
   const [variations, setVariations] = useState([]);
   const [crossProduct, setCrossProduct] = useState([]);
+  const [variationID, setVariationId] = useState('');
   const [crosssell, setCrosssell] = useState(false);
 
 
@@ -48,7 +49,7 @@ export default function Product() {
 
 
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(false);
   let min = 1;
   let max = 10;
   const handleChange = (event, newValue) => {
@@ -62,12 +63,22 @@ export default function Product() {
     console.log(data)
     setActive(data.images[0]?.src);
     setActiveIMGS(data.images);
+    let ee = ''
+    data?.attributes?.forEach(e=>  {
+      if(e.name === 'variations'){
+        ee = JSON.stringify(e.options[0])
+        console.log("ee",e.options[0])
+     
+      }
+  
 
+    })
     const relatedProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data?.related_ids)?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setRelated(relatedProducts)
 
-    if((data?.upsell_ids)?.length !==0){
-    const VariationProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${(data?.upsell_ids)?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+    if(ee){
+      console.log("heell",variationID )
+    const VariationProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${ee}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setVariations(VariationProducts)
     console.log("var", VariationProducts)
     }
@@ -393,10 +404,28 @@ export default function Product() {
           </div>
         </div>
         
-        <div className='sm:w-[40%] w-[100%] min-h-[800px] flex items-start justify-start flex-col'>
+        <div className='sm:w-[40%] w-[100%] min-h-[500px] flex items-start justify-start flex-col'>
        
           <h1 className='mt-0 p-4 sm:p-0 sm:mt-5 sm:text-[2rem] text-[1.5rem] font5 font-[600]'>{product.name}</h1>
-          <div className='w-[95%] h-[20px] flex items-center justify-start'>
+         
+
+
+          <div className='text-white w-[70px] h-[10px] mt-0 flex items-center justify-center ml-4 sm:ml-0'>
+            {/* <h5 className='text-[14px]'>3.9</h5> */}
+            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
+          </div>
+         
+          <div className='flex items-center justify-center mt-2 sm:mt-2'>
+          <h3 className='sm:text-[2rem] text-[1.5rem]  text-[black] font-[600] ml-4 sm:ml-0'><span className='line-through sm:text-[18px] text-[16px] text-[gray]'>{product.regular_price ? `₹${product.regular_price}` : ''}</span> &nbsp;₹{product.price}</h3>
+          <h3 className='sm:text-[20px] text-[17px] text-[green] font-[600] ml-4 sm:ml-4'>{product.regular_price ? `${Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}% Off` : ''}</h3>
+          {/* <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 ' dangerouslySetInnerHTML={{ __html: product.short_description }}></h2> */}
+
+          </div>
+          <h3 className={`sm:text-[20px] text-[17px]   ${product.stock_status === "outofstock" ? "text-red-600" : "text-[green]"} font-[600] ml-4 sm:ml-0`}>{product.stock_status}</h3>
+          <div className='w-[95%] h-[20px] flex items-center justify-start  mt-3 sm:hidden'>
           <button
             onClick={() => {
               if (navigator.share) {
@@ -414,25 +443,11 @@ export default function Product() {
             className=" z-20 ml-3 p-2 rounded-full bg-white shadow hover:bg-gray-100"
             aria-label="Share product"
           >
-            <Share size={16} className="text-gray-600" />
+            <Share size={19} className="text-gray-600" />
          </button>
           </div>
-
-
-          <div className='text-white w-[70px] h-[28px] mt-2 flex items-center justify-center ml-4 sm:ml-0'>
-            {/* <h5 className='text-[14px]'>3.9</h5> */}
-            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
-            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
-            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
-            <h3 className='text-[black] text-[18px] ml-1'>★</h3>
-          </div>
-          <h3 className='sm:text-[2rem] text-[1.5rem] mt-2  text-[black] font-[600] ml-4 sm:ml-0'><span className='line-through sm:text-[18px] text-[16px] text-[gray]'>{product.regular_price ? `₹${product.regular_price}` : ''}</span> &nbsp;₹{product.price}</h3>
-          <h3 className='sm:text-[20px] text-[17px] text-[green] font-[600] ml-4 sm:ml-0'>{product.regular_price ? `${Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}% Off` : ''}</h3>
-          <h2 className='text-[18px] mt-2 ml-4 sm:ml-0 ' dangerouslySetInnerHTML={{ __html: product.short_description }}></h2>
-          <h3 className={`sm:text-[20px] text-[17px]   ${product.stock_status === "outofstock" ? "text-red-600" : "text-[green]"} font-[600] ml-4 sm:ml-0`}>{product.stock_status}</h3>
-
             
-          {activeColors.length !== 0 ?
+          {/* {activeColors.length !== 0 ?
 
             <>
               <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Colors</h2>
@@ -449,10 +464,10 @@ export default function Product() {
 
             </> : <></>
 
-          }
+          } */}
 
 
-          {activeSizes.length !== 0 ?
+          {/* {activeSizes.length !== 0 ?
             <>
               <h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Size</h2>
               <div className='flex items-center justify-start h-[40px]  w-[90%] cursor-pointer ml-4 sm:ml-0'>
@@ -467,16 +482,16 @@ export default function Product() {
               </div>
             </> : <></>
 
-          }
+          } */}
 
+{variations.length!==0?<h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Colors</h2>:<></>}
          {variations.length!==0?
 
-          <div className='mt-5 flex items-start justify-start sm:justify-start p-2 sm:p-0  w-[95%] h-[250px] overflow-hidden overflow-x-auto'>
-          
+          <div className='mt-5 flex items-start justify-start sm:justify-start p-2 sm:p-0   w-[95%] h-[250px] overflow-hidden overflow-x-auto'>
           {variations.map((item, index)=>(
             <div key={index} onClick={()=>{setProduct(item);  setActive(item.images[0]?.src);
-              setActiveIMGS(item.images);}} className={`h-[230px]  ${item.id === product.id?'border-b-[2px] border-[red]':''} w-[120px] m-2 flex items-start justify-start flex-col`}>
-            <img src={item?.images[0]?.src} className='min-h-[120px] min-w-[120px]' alt="" />
+              setActiveIMGS(item.images);}} className={`h-[230px]  ${item.id === product.id?'border-[2px] rounded-[15px] border-[black]':''} w-[120px]  rounded-[15px] m-2 flex items-start justify-start flex-col`}>
+            <img src={item?.images[0]?.src} className='min-h-[120px] max-h-[120px]  rounded-t-[15px] min-w-[110px] max-w-[110px]' alt="" />
             <h1 className='font-bold line-clamp-2  text-black text-sm ml-2'>{item.name}</h1>
             <h1 className='font-bold ml-2'>₹ {item.price}</h1>
             <h5 className={`${item.stock_status === "outofstock" ? "text-red-600" : "text-[green]"} ml-2`}>{item.stock_status}</h5>
@@ -517,26 +532,21 @@ export default function Product() {
         <h1 className='ml-2'>Add To Favourite</h1>
     </div> */}
 
-          <div className='sm:w-[100%] w-[100%] min-h-[400px] bg-[#ffdedf81] mt-[60px] flex items-center justify-start flex-col'>
-            {/* <div className='flex items-center justify-evenly h-[30px] w-[500px] mt-5'>
-                <h1 className='text-[19px] font-[600] '>Description</h1>
-                <h1 className='text-[19px] font-[600] '>Additional Information</h1>
-            </div> */}
+          <div className='sm:w-[100%] w-[95%] p-4 min-h-[100px] bg-[white]  mt-[60px] flex items-start justify-start flex-col'>
+           
 
-            <Box sx={{ width: '100%' }}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} centered textColor='secondary' indicatorColor='secondary' aria-label="basic tabs example">
-                  <Tab label="Description" />
-                  <Tab label="Additional Info" />
-                  {/* <Tab label="Reviews" /> */}
+           <h1 className='font-bold text-lg'>Product Details</h1>
 
-                </Tabs>
-              </Box>
-            </Box>
 
-            {value === 0 ? <div className='p-5' dangerouslySetInnerHTML={{ __html: product.description }}>
+        <div className={`responsive-table max-w-none overflow-x-auto transition-all duration-300 ${
+          value === true ? "max-h-full" : "max-h-16 overflow-hidden"
+        }`} dangerouslySetInnerHTML={{ __html: product.description }}>
 
-            </div> : <div></div>}
+         
+
+          </div> 
+            <h5 onClick={()=>setValue(!value)} className='text-sm mt-3 text-[green]'>{value=== true?'View Less Details ▲' : 'View More Details ▼'}</h5>
+            
 
           </div>
 
@@ -547,8 +557,8 @@ export default function Product() {
 
 
 
-      <div className='w-[100%] min-h-[500px]  flex items-center justify-start flex-col'>
-        <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[100px] mt-[50px]'>
+      <div className='w-[100%] min-h-[500px]   flex items-center justify-start flex-col'>
+        <section className='w-[85%] h-[50px] flex items-center justify-start  sm:mt-[10px] mt-[50px]'>
 
           <h1 className='text-[25px] text-[black] font-[600] font5'>Related Products</h1>
         </section>
