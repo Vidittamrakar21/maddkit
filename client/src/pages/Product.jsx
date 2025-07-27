@@ -63,12 +63,11 @@ export default function Product() {
     console.log(data)
     setActive(data.images[0]?.src);
     setActiveIMGS(data.images);
-    let ee = ''
+    let ee = [];
     data?.attributes?.forEach(e=>  {
       if(e.name === 'variations'){
-        ee = JSON.stringify(e.options[0])
-        console.log("ee",e.options[0])
-     
+        ee = e.options
+        
       }
   
 
@@ -78,7 +77,7 @@ export default function Product() {
 
     if(ee){
       console.log("heell",variationID )
-    const VariationProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${ee}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
+    const VariationProducts = await (await axios.get(`https://maddkit.com/wp-json/wc/v3/products?include=${ee?.join(',')}&per_page=50&consumer_key=ck_093af7accbe95ac38eadfed5c75e3e9b3baa82e6&consumer_secret=cs_97b91a6da87365fe251f05434dba14a10c02a009`)).data;
     setVariations(VariationProducts)
     console.log("var", VariationProducts)
     }
@@ -484,7 +483,7 @@ export default function Product() {
 
           } */}
 
-{variations.length!==0?<h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Colors</h2>:<></>}
+      {variations.length!==0?<h2 className='text-[18px]  text-[balck] font-[600] cursor-pointer mt-2 ml-4 sm:ml-0'>Variations</h2>:<></>}
          {variations.length!==0?
 
           <div className='mt-5 flex items-start justify-start sm:justify-start p-2 sm:p-0   w-[95%] h-[250px] overflow-hidden overflow-x-auto'>
